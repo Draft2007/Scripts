@@ -1,0 +1,31 @@
+{% extends "base_.html" %}
+{% load bootstrap3 %}
+{% load tags %}
+
+{% block initializer %}
+
+{% endblock %}
+
+{% block title %}
+El Jefe - Client Setup
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Client Setup</h3>
+    <div class="well well-lg">
+    
+        <div class="input-group input-group-lg">
+            <form class="form-horizontal" action="{% url "home.views.client_setup" %}" method="post">
+                {% csrf_token %}
+                <input class="form-control" id="id_username" maxlength="64" name="username" placeholder="Username" required="required" title="" type="text" />
+                <input type="password" class="form-control" id="id_password" maxlength="64" name="password" placeholder="Password" required="required" title="" type="text" />
+                <input class="form-control" id="id_host" name="host" placeholder="Host" required="required" title="" type="text" />
+                <input class="form-control" id="id_port" max="65535" min="0" name="port" placeholder="Port" required="required" title="" type="number" />
+              <button type="submit" class="btn btn-danger">Download</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+

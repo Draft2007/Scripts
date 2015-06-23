@@ -1,0 +1,1 @@
+SECRET_KEY = "4+@-()ey11j83+8w65w91wgv9iz43e7m8g51tvmc6a!xv$#@77"

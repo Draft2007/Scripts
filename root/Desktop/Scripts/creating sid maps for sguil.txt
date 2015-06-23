@@ -1,0 +1,1 @@
+create-sidmap.pl /etc/snort/rules > /etc/snort/sid-msg.map

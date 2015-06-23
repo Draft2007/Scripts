@@ -1,0 +1,6 @@
+#!/bin/bash
+echo $1 > /tmp/ipaddr
+IP=$1
+IPpat=`sed 's/\./\\\./g' /tmp/ipaddr`
+gawk "BEGIN {FS=\"\n\";RS=\"\n\n\"} /$IPpat/ {print \$1}" alert > summary$IP.txt
+gawk "BEGIN {FS=\"\n\";RS=\"\n\n\"} /$IPpat/ {print \$0,\"\n\n\"}" alert > detail$IP.txt

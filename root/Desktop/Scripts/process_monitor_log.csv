@@ -1,0 +1,356 @@
+Time,User,Executable,CommandLine,PID,Parent PID,Privileges
+20150413164857.402379-420,Brian-HP\Brian,None,"C:\Program Files (x86)\Windows Media Player\wmplayer.exe" /prefetch:1,11684,4068,N/A
+
+20150413164906.216395-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,3920,588,N/A
+
+20150413164906.387995-420,Brian-HP\Brian,C:\Windows\SysWOW64\DllHost.exe,C:\Windows\SysWOW64\DllHost.exe /Processid:{AB8902B4-09CA-4BB6-B78D-A8F59079A8D5},42228,700,N/A
+
+20150413164928.274834-420,Brian-HP\Brian,C:\Windows\system32\DllHost.exe,C:\Windows\system32\DllHost.exe /Processid:{AB8902B4-09CA-4BB6-B78D-A8F59079A8D5},8420,700,N/A
+
+20150413165308.204020-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,6596,588,N/A
+
+20150413165337.220071-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,7180,700,N/A
+
+20150413165455.360608-420,Brian-HP\Brian,C:\Users\Brian\Downloads\putty.exe,"C:\Users\Brian\Downloads\putty.exe" ,11992,4068,N/A
+
+20150413165605.997532-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,2936,700,N/A
+
+20150413165610.193940-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,20296,588,N/A
+
+20150413165728.552877-420,Brian-HP\Brian,None,"C:\Program Files\Windows Media Player\wmpnscfg.exe",3604,4068,N/A
+
+20150413165838.597000-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,12088,700,N/A
+
+20150413170120.915285-420,NT AUTHORITY\LOCAL SERVICE,None,None,9516,872,N/A
+
+20150413170127.492897-420,NT AUTHORITY\SYSTEM,C:\Windows\system32\PrintIsolationHost.exe,C:\Windows\system32\PrintIsolationHost.exe -Embedding,9764,700,N/A
+
+20150413170258.207057-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,14132,700,N/A
+
+20150413170438.858434-420,NT AUTHORITY\LOCAL SERVICE,C:\Windows\system32\taskhost.exe,taskhost.exe $(Arg0),4864,588,N/A
+
+20150413170517.515301-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,6504,700,N/A
+
+20150413170834.193266-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,12464,588,N/A
+
+20150413171610.197667-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,6512,588,N/A
+
+Time,User,Executable,CommandLine,PID,Parent PID,Privileges
+20150413172302.680894-420,Brian-HP\Brian,C:\Users\Brian\Downloads\putty.exe,"C:\Users\Brian\Downloads\putty.exe" ,42624,4068,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413172346.204970-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,42400,588,N/A
+
+20150413172400.010994-420,NT AUTHORITY\SYSTEM,C:\Windows\system32\taskeng.exe,taskeng.exe {140ADDE6-9AE8-434B-A98E-0A1D09CECE29},42800,956,N/A
+
+20150413172522.223139-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,55716,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413173800.010070-420,NT AUTHORITY\SYSTEM,C:\Windows\system32\taskeng.exe,taskeng.exe {3381E6FC-B31A-44F3-9BC3-F2E787401ECD},15404,956,N/A
+
+20150413173830.055722-420,Brian-HP\Brian,C:\Windows\system32\msfeedssync.exe,C:\Windows\system32\msfeedssync.exe sync,16324,588,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174037.819947-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,14296,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174048.802366-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,23352,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174057.023581-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18672,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174111.063605-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18364,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174125.072430-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18076,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174133.200044-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,16804,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174141.405659-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,15584,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174149.548873-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,21556,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174157.660887-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,17172,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174226.444752-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,6780,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174246.350387-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,11704,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174321.029248-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18400,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174332.058468-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,26476,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174357.829713-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,11952,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174408.905732-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18608,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174431.681772-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,16988,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174442.851392-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18064,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174500.011422-420,NT AUTHORITY\SYSTEM,C:\Windows\system32\taskeng.exe,taskeng.exe {CDA1D1CC-E8F9-4FF3-B363-3494DD431FD0},22912,956,N/A
+
+20150413174502.772627-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,28936,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174528.668673-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,17788,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174539.760292-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,16152,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174602.551932-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,27472,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174613.674752-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,17548,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174633.580387-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,23160,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174647.526811-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,28488,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174707.371932-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,21252,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174712.548806-420,Brian-HP\Brian,C:\Windows\system32\DllHost.exe,C:\Windows\system32\DllHost.exe /Processid:{AB8902B4-09CA-4BB6-B78D-A8F59079A8D5},12456,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174721.596822-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18248,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174726.198830-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,28248,588,N/A
+
+20150413174756.163888-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,23660,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174807.230307-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,29036,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174818.399927-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,16576,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174832.361952-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,16632,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174836.090358-420,Brian-HP\Brian,C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\AdobeARM.exe,"C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\AdobeARM.exe" ,6560,2832,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174846.292776-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20464,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174906.198411-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,29360,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174920.285236-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,4492,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174928.490850-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,5728,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174936.524864-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18324,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174944.668079-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18300,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413174952.795693-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,31272,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175000.954507-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,25432,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175009.144522-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18268,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175017.334536-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,6264,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175025.508950-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18420,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175033.496164-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20136,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175041.826579-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20420,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175049.954193-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,19580,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175109.750628-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20180,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175117.925042-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,19700,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175129.141462-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,19880,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175137.191076-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,26424,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175147.565094-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18816,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175155.755109-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20208,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175203.726723-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20148,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175214.178741-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18048,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175224.615160-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,19888,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175234.833178-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,21904,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175234.193576-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,27212,588,N/A
+
+20150413175245.269596-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,19548,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175255.674814-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,21928,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175302.694826-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,13140,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175308.342036-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,22496,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175318.575654-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20788,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175325.580067-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,22512,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175331.211677-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,18128,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175338.278489-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,44260,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175343.722899-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,56464,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175353.051715-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,16584,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175358.652125-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,16404,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175405.656537-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20244,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175411.132147-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,55492,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175418.230159-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,61968,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175426.825774-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,62028,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175435.889390-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,61436,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175441.630200-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,20596,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175450.927817-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,60324,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175456.434626-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,15556,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175505.716643-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,5584,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175511.176652-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,35920,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175520.458668-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48032,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175526.090278-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48252,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175537.447098-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,45392,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175543.047508-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,55680,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175554.591528-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,31680,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175600.191938-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,45304,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175611.657958-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,26280,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175620.128773-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,45484,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175631.703994-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,49052,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175637.288803-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,45556,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175651.110428-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,45320,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175656.445637-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47204,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175708.083257-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,46700,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175716.569672-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,39748,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175734.774904-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,45100,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175740.266114-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47412,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175742.200517-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,63188,588,N/A
+
+20150413175756.131342-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48444,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175801.778552-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48588,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175819.952584-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,43884,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175828.657399-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47160,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175848.968635-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47820,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175854.397444-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47760,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175912.649476-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,49656,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175918.249886-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,41072,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175938.670322-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47636,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413175944.177132-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,46868,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180004.566367-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,46832,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180010.213577-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,46340,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180037.201625-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,49056,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180042.864435-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,40268,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180112.223686-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,50092,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180117.855296-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,56412,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180125.936110-420,NT AUTHORITY\LOCAL SERVICE,C:\Windows\system32\taskhost.exe,taskhost.exe $(Arg0),45788,588,N/A
+
+20150413180149.211351-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,44904,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180154.811761-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47432,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180233.203429-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47752,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180238.647838-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,43520,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180316.899105-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,51356,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180322.483915-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48564,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180405.134390-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,57216,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180410.766000-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48300,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180455.616079-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,44340,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180501.232088-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,46804,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180555.023811-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,35328,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180600.593021-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,47816,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180645.489899-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,46728,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180651.074709-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48012,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180802.730842-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,49660,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180811.123657-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,50108,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180916.284972-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,49168,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413180916.191371-420,NT AUTHORITY\SYSTEM,C:\Windows\System32\svchost.exe,C:\Windows\System32\svchost.exe -k WerSvcGroup,49428,588,N/A
+
+20150413180921.932181-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,49584,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181040.369119-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,50168,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181045.750357-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48868,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181110.055200-420,NT AUTHORITY\LOCAL SERVICE,None,None,48972,872,N/A
+
+20150413181109.946000-420,Brian-HP\Brian,C:\Windows\system32\DllHost.exe,C:\Windows\system32\DllHost.exe /Processid:{AB8902B4-09CA-4BB6-B78D-A8F59079A8D5},50360,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181112.287604-420,Brian-HP\Brian,None,"C:\Program Files (x86)\Adobe\Reader 10.0\Reader\AcroRd32.exe" "Z:\Optimum InfoSec\Training\Black Hat Python, Python Programming for Hackers.pdf",48516,4068,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181113.364006-420,Brian-HP\Brian,None,"C:\Program Files (x86)\Adobe\Reader 10.0\Reader\AcroRd32.exe" --channel=48516.0014F8DC.373856892 --type=renderer "Z:\Optimum InfoSec\Training\Black Hat Python, Python Programming for Hackers.pdf",51132,48516,SeChangeNotifyPrivilege|
+
+20150413181136.951248-420,Brian-HP\Brian,C:\Windows\system32\DllHost.exe,C:\Windows\system32\DllHost.exe /Processid:{AB8902B4-09CA-4BB6-B78D-A8F59079A8D5},54548,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181138.043249-420,Brian-HP\Brian,C:\Program Files (x86)\Adobe\Reader 10.0\Reader\AcroRd32.exe,"C:\Program Files (x86)\Adobe\Reader 10.0\Reader\AcroRd32.exe" --channel=53884.001EF774.1293914450 --type=renderer "Z:\Optimum InfoSec\Training\Black Hat Python, Python Programming for Hackers.pdf",51472,53884,SeChangeNotifyPrivilege|
+
+20150413181137.934049-420,Brian-HP\Brian,C:\Program Files (x86)\Adobe\Reader 10.0\Reader\AcroRd32.exe,"C:\Program Files (x86)\Adobe\Reader 10.0\Reader\AcroRd32.exe" "Z:\Optimum InfoSec\Training\Black Hat Python, Python Programming for Hackers.pdf",53884,4068,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181215.140115-420,Brian-HP\Brian,C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\AdobeARM.exe,"C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\AdobeARM.exe" /PRODUCT:Reader /VERSION:10.0 /MODE:2,51176,53884,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181215.280515-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,51288,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181220.896525-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,51748,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181337.071459-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,54104,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181342.625068-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,52420,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181547.815288-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,51616,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181553.415698-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,51228,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181756.437514-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,53096,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413181802.069124-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,53068,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413182036.194560-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,51280,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+
+20150413182041.810570-420,Brian-HP\Brian,C:\Windows\system32\igfxsrvc.exe,C:\Windows\system32\igfxsrvc.exe -Embedding,48608,700,SeChangeNotifyPrivilege|SeImpersonatePrivilege|SeCreateGlobalPrivilege|
+

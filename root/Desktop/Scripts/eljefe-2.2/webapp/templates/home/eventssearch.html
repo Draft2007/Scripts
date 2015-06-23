@@ -1,0 +1,116 @@
+{% extends "base_.html" %}
+{% load tags %}
+
+{% block initializer %}
+<script language="javascript">
+    select_change = function(){
+            var name = $('#id_select').val();
+            $('.value_field').hide();
+            $('.value_field').children().attr("disabled","disabled");
+            $('#select_'+name).show();
+            $('#input_'+name).show();
+            $('#select_'+name).children().attr("disabled", false);
+            $('#input_'+name).children().attr("disabled", false);
+        }
+        
+    $(function() {
+        {% get_search_info request sessid as search_info %}
+        {% if sessid %}
+            $('#id_select').val("{{search_info.field}}");
+            select_change();
+            $('#id_{{search_info.field}}').val("{{search_info.value}}");
+            $('#op_{{search_info.field}}').val("{{search_info.operator|safe}}");
+        {% else %}
+            select_change();
+
+        {% endif %}
+        $('#id_select').change(select_change);
+    });
+</script>
+{% endblock %}
+
+{% block title %}
+El Jefe - Events
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Search Events</h3>
+<div class="well well-lg">
+    <div class="input-group">
+        <form action="" method="post">{% csrf_token %}
+            <div class="col-lg-12">
+                <select id="id_select" name="field" class="form-control" autofocus/>
+                {% for input in inputs|dictsort:"name" %}
+                    <option value="{{input.name}}">{{input.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            {% for input in inputs|dictsort:"name" %}
+                {% if input.type == 'FloatField' or input.type == 'DateTimeField' %}
+                    {% ifequal input.name 'event_timestamp' %}
+                        <div id="input_{{input.name}}" style="display:none" class="col-lg-8 value_field">
+                            <input id="id_{{input.name}}" name="{{input.name}}" type="text" class="form-control" placeholder="Insert datetime in format m/d/Y H:M:S" disabled="disabled"/>
+                        </div>
+                    {% else %}
+                        <div id="input_{{input.name}}" style="display:none" class="col-lg-8 value_field">
+                            <input id="id_{{input.name}}" name="{{input.name}}" type="text" class="form-control" placeholder="Insert {{input.name}}" disabled="disabled"/>
+                        </div>
+                    {% endifequal %}
+                    <div id="select_{{input.name}}" style="display:none" class="col-lg-4 value_field">
+                        <select  id="op_{{input.name}}"name="operator" class="form-control" disabled="disabled">
+                        {% for symbol,value in numeric_symbols.items %}
+                            <option value="{{value}}">{{symbol}}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                {% elif input.type == 'event' %}
+                    <div id="input_{{input.name}}" style="display:none" class="col-lg-12 value_field">
+                        <input id="id_{{input.name}}" name="{{input.name}}" type="hidden" class="form-control" placeholder="Insert {{input.name}}" disabled="disabled"/>
+                    </div>
+                {% else %}
+                    <div id="input_{{input.name}}" style="display:none" class="col-lg-12 value_field">
+                        <input id="id_{{input.name}}" name="{{input.name}}" type="text" class="form-control" placeholder="Insert {{input.name}}" disabled="disabled"/>
+                    </div>
+                {% endif %}
+
+            {% endfor %}                
+
+            <div class="col-lg-12">
+                <button class="btn btn-danger" type="submit"/>Query</button>
+            </div>
+        </form>
+        
+    </div>
+</div>
+{% if sessid %}
+<div id="tablecontent">
+</div>
+
+<center>
+<script language="javascript">
+
+CallWeb('/home/content/{{ sessid }}', 'tablecontent');
+</script>
+</center>
+{% endif %}
+
+<div style="display:none">
+<form id="search_inside" action="{% url "home.views.stations_page" %}" method="POST"> {% csrf_token %}
+    <input type="hidden" name="configuration__ownerversion__software__name"
+           value="{{configuration.ownerversion.software.name}}" />
+    <input type="hidden" name="configuration__ownerversion__version"
+           value="{{configuration.ownerversion.version}}" />
+    <input type="hidden" name="configuration__name"
+           value="{{configuration.name}}" />
+    <input type="submit" value="Search on this project" />
+</form>
+</div>
+
+{% endblock %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block quick_links %}
+{% endblock %}

@@ -1,0 +1,8 @@
+'.'	Matches any character except a newline
+'[ab]'	Matches either the charater a or b
+'[0-9]'	Matches any digits 0-9
+'^'	Matches start of the string 
+'*'	Causes the regular expression to match 0 or more repetitions of the previous regular expression
+'+'	Causes the regular expression to match 1 or more repetitions
+'?'	Causes the regular expression to match 0 or 1 repetitions of the preceding regular expression
+{n}	Matches exactly n copies of the previous regular expression

@@ -1,0 +1,50 @@
+{% extends "base_.html" %}
+
+{% block initializer %}
+<link rel="stylesheet" href="/imedia/css/cuckoo.css" media="screen"/>
+{% endblock %}
+
+{% block content %}
+<div class="well well-lg">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#machines" data-toggle="tab">Virtual Machines</a></li>
+        <li><a href="#conf" data-toggle="tab">Virtualization Conf</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="machines">
+                {% include "analysis/conf/machines.html" %}
+        </div>
+        <div class="tab-pane fade" id="conf">
+            <div class="form-group">
+                <table class="table">
+                <tbody>
+                   <tr>
+                      <td><b>Virtualization product</b></td><td>{{machinery}}</td>
+                   </tr>
+                   <tr>
+                      <td><b>Type</b></td><td>{{options.remote_type}}</td>
+                   </tr>
+                   <tr>
+                      <td><b>Remote</b></td><td>{% if options.remote %} yes {%else%} no {%endif%}</td>
+                   </tr>
+                   {% if options.remote %}
+                   <tr>
+                      <td><b>IP Address</b></td><td>{{options.remote_host}}</td>
+                   </tr>
+                   <tr>
+                      <td><b>Port</b></td><td>{{options.remote_port}}</td>
+                   </tr>
+                        {% if options.remote_datastore %}
+                        <tr>
+                            <td><b>Datastore</b></td><td>{{options.remote_datastore}}</td>
+                        </tr>
+                        {% endif %}
+                   {% endif %}
+                </table>
+                <tbody>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

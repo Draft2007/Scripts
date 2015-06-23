@@ -1,0 +1,97 @@
+{% load tags %}
+
+   <table class="table">
+
+   {% if  objlist.paginator.count > 0 %}
+        {% get_pagination_range objlist.paginator.num_pages objlist.number as range %}
+
+        <ul class="pagination">
+	    <li><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ 1  }}', 'tablecontent');">First</a></li>	    
+
+	    {% if objlist.has_previous %}
+		  <li><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ objlist.previous_page_number  }}', 'tablecontent');">&laquo;</a></li>	    
+	    {% else %}
+		  <li class="disabled"><a href="#">&laquo;</a></li>
+	    {% endif %}
+	    {% for i in  range %}
+		  {% if i == objlist.number %}
+			<li class="active"><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ i }}', 'tablecontent');">{{ i }} <span class="sr-only">(current)</span></a></li>
+		  {% else %}
+			<li><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ i }}', 'tablecontent');">{{i}}</a></li>
+		  {% endif %}
+	    {% endfor %}
+	    
+	    {% if objlist.has_next %}
+		  <li><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ objlist.next_page_number  }}', 'tablecontent');">&raquo;</a></li>	    
+	    {% else %}
+		  <li class="disabled"><a href="#">&raquo;</a></li>
+	    {% endif %}
+	    <li><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ objlist.paginator.num_pages  }}', 'tablecontent');">Last</a></li>	    
+
+	</ul>
+
+      {% endif %}
+
+   <tr>
+   {% if uniqueip %}
+     <td> Search Results : {{ objlist.paginator.count }} - Uniques: {{ uniqueip }}  </td>
+   {% else %}
+     <td> Search Results : {{ objlist.paginator.count }} </td>
+   {% endif %}
+   </tr>
+
+
+ {% if  objlist.paginator.count > 0 %}
+    <tr>
+      {% for fld in display %}
+        <td> {{ fld }} </td>
+      {% endfor %}
+   </tr>
+   
+   {% for (dummy, id, nshow,) in content %}
+    <tr onMouseOver="this.className='highlight'" onMouseOut="this.classname='normal'">
+      
+      {% ifequal object_type "process" %}
+	    <td><a href="/home/display/binary/{{id.0}}"> {{ nshow.0 }}</a></td>
+	    <td><a href="/home/display/binary/{{id.0}}"> {{ nshow.1 }}</a></td>
+	    <td><a href="/home/display/binary/{{id.0}}"> {{ nshow.2 }}</a></td>
+      {% if 'NETWORK' in nshow.3 %} 
+	    <td><a href="/home/display/binary/{{id.0}}"> <img src="/imedia/images/glyphicons_032_wifi_alt.png"> {{ nshow.3 }} </a></td>
+      {% elif 'SYSTEM' in nshow.3 %}
+      	    <td><a href="/home/display/binary/{{id.0}}"> <img src="/imedia/images/glyphicons_044_keys.png"> {{ nshow.3 }} </a></td>
+      {% else%}
+      	    <td><a href="/home/display/binary/{{id.0}}"> <img src="/imedia/images/glyphicons_264_vcard.png">  {{ nshow.3 }}</a></td>
+      {% endif %}
+	    <!-- <td><a href="/home/graphs/event_inspection/{{id.0}}/{{ id.3 }}"><img src="/imedia/images/glyphicons_041_charts.png"></a></td>-->
+      {% endifequal %}
+
+    </tr>
+   {% endfor %}
+
+</table>
+
+        <ul class="pagination">
+	    {% if objlist.has_previous %}
+		  <li><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ objlist.previous_page_number  }}', 'tablecontent');">&laquo;</a></li>	    
+	    {% else %}
+		  <li class="disabled"><a href="#">&laquo;</a></li>
+	    {% endif %}
+
+	    {% for i in  range %}
+		  {% if i == objlist.number%}
+			<li class="active"><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ i }}', 'tablecontent');">{{ i }} <span class="sr-only">(current)</span></a></li>
+		  {% else %}
+			<li><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ i }}', 'tablecontent');">{{i}}</a></li>
+		  {% endif %}
+	    {% endfor %}
+	    
+	    {% if objlist.has_next %}
+		  <li><a href="javascript:CallWeb('/home/content/{{ sessid }}/page{{ objlist.next_page_number  }}', 'tablecontent');">&raquo;</a></li>	    
+	    {% else %}
+		  <li class="disabled"><a href="#">&raquo;</a></li>
+	    {% endif %}
+	</ul>
+{% endif %}
+
+
+

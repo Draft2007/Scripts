@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.maec.maec11.fieldDataEntry</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.maec-module.html">Package&nbsp;maec</a> ::
+        <a href="lib.maec.maec11-module.html">Module&nbsp;maec11</a> ::
+        Class&nbsp;fieldDataEntry
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.maec.maec11.fieldDataEntry-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class fieldDataEntry</h1><p class="nomargin-top"><span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+    
+              |    
+<a href="lib.maec.maec11.GeneratedsSuper-class.html" onclick="show_private();">GeneratedsSuper</a> --+
+                  |
+                 <strong class="uidshort">fieldDataEntry</strong>
+</pre>
+
+<hr />
+<p>Data structure to hold prevalence information. The data includes a 
+  reference to another object (which is an xpath expression pointing to an 
+  object inside the 'ref' element), together with a time period (startDate 
+  -&gt; endDate), an origin - where the object came from, and various 
+  location tags. This allows rich information on prevalence to be recorded.
+  By convention, time periods should be wherever possible standard time 
+  periods, e.g. minute, hour, 24 hours, week, month, quarter, year. This 
+  will facilitate combination of data from multiple sources. To represent a
+  single entry, make startDate == endDate. Commonality is calculated from 
+  the sightings of malware objects (and so such calculation is easier to 
+  automate). Importance is reserved for cases when &#8220;commonality&#8221; is not 
+  available or if there is a need to communicate the importance when 
+  commonality is low. We define the commonality on a scale 0 to 100 (0 
+  means &#8220;never found in the field&#8221; and 100 means &#8220;found very frequently&#8221;). 
+  Scaling commonality to 0..100 range instead of using actual sample counts
+  is to avoid the effect of the user base size on the commonality. We 
+  derive commonality from the number of affected computers &#8211; not from the 
+  number of samples (for example, a hundred parasitic infections of the 
+  same virus on a single computer are to be counted as one). To calculate 
+  the commonality we use two-stage approach and logarithmic scale: - If the
+  number of affected users exceeds 0.1% of your user base (more frequent 
+  than 1 in a 1000) set commonality to &#8220;100&#8221; - Otherwise, calculate the 
+  ratio of infected computers amongst your user base by dividing the real 
+  number of affected computers &#8216;n&#8217; by the total number &#8216;N&#8217; - Apply the 
+  following formula to get the commonality &#8211;( log2(1+n*1000/N) ) * 100 - 
+  Round to the closest integer Obviously, the calculation above can only be
+  applied to counting of malware sightings on desktops. If telemetry is 
+  collected from a fraction of such desktops then an appropriate correction
+  should be used. For all other cases (e.g. sighting on gateways, in some 
+  network security appliance, on an ISP level, etc.) please exercise your 
+  best judgment and apply provided desktop guideline as an example to make 
+  sure the commonality factor is as comparable as possible. For a URL 
+  object the commonality could reflect, for example, how widely it was 
+  spammed. &#8220;Importance&#8221; should not be used together with &#8220;commonality&#8221; 
+  (unless commonality=&#8220;0&#8221;) to avoid possible confusion. High &#8220;importance&#8221;, 
+  for example, can be assigned to samples that are over-hyped by media when
+  their commonality is still &#8220;0&#8221;. Use the following guidelines for 
+  &#8220;importance&#8221; which is also defined on a scale 0..100: 100 &#8211; you&#8217;d expect 
+  your CEO and/or media to call you any second about this object 80 &#8211; you 
+  might get a call from your CEO and/or media 60 &#8211; you&#8217;d expect your boss 
+  to call you any second 40 &#8211; you might get a call from your boss 20 &#8211; 
+  someone is very likely to contact you about this object 10 &#8211; you might 
+  get contacted about this object 0 &#8211; you&#8217;d be surprised if anyone would 
+  ever contact you about this object</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lib.maec.maec11.fieldDataEntry-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">references</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">startDate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">endDate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">firstSeenDate</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">origin</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">commonality</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">volume</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">importance</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">location</span>=<span class="summary-sig-default">None</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_references"></a><span class="summary-sig-name">get_references</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_references">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_references"></a><span class="summary-sig-name">set_references</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">references</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_references">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_startDate"></a><span class="summary-sig-name">get_startDate</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_startDate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_startDate"></a><span class="summary-sig-name">set_startDate</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">startDate</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_startDate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_endDate"></a><span class="summary-sig-name">get_endDate</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_endDate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_endDate"></a><span class="summary-sig-name">set_endDate</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">endDate</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_endDate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_firstSeenDate"></a><span class="summary-sig-name">get_firstSeenDate</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_firstSeenDate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_firstSeenDate"></a><span class="summary-sig-name">set_firstSeenDate</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">firstSeenDate</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_firstSeenDate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_origin"></a><span class="summary-sig-name">get_origin</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_origin">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_origin"></a><span class="summary-sig-name">set_origin</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">origin</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_origin">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="validate_OriginTypeEnum"></a><span class="summary-sig-name">validate_OriginTypeEnum</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.validate_OriginTypeEnum">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_commonality"></a><span class="summary-sig-name">get_commonality</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_commonality">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_commonality"></a><span class="summary-sig-name">set_commonality</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">commonality</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_commonality">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="validate_intBetween0and100"></a><span class="summary-sig-name">validate_intBetween0and100</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.validate_intBetween0and100">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_volume"></a><span class="summary-sig-name">get_volume</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_volume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_volume"></a><span class="summary-sig-name">set_volume</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">volume</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_volume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="add_volume"></a><span class="summary-sig-name">add_volume</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.add_volume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="insert_volume"></a><span class="summary-sig-name">insert_volume</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.insert_volume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_importance"></a><span class="summary-sig-name">get_importance</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_importance">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_importance"></a><span class="summary-sig-name">set_importance</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">importance</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_importance">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_location"></a><span class="summary-sig-name">get_location</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.get_location">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_location"></a><span class="summary-sig-name">set_location</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">location</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.set_location">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="export"></a><span class="summary-sig-name">export</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outfile</span>,
+        <span class="summary-sig-arg">level</span>,
+        <span class="summary-sig-arg">namespace_</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">maec:</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">name_</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">fieldDataEntry</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">namespacedef_</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.export">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="exportAttributes"></a><span class="summary-sig-name">exportAttributes</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outfile</span>,
+        <span class="summary-sig-arg">level</span>,
+        <span class="summary-sig-arg">already_processed</span>,
+        <span class="summary-sig-arg">namespace_</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">maec:</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">name_</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">fieldDataEntry</code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.exportAttributes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="exportChildren"></a><span class="summary-sig-name">exportChildren</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outfile</span>,
+        <span class="summary-sig-arg">level</span>,
+        <span class="summary-sig-arg">namespace_</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">maec:</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">name_</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">fieldDataEntry</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">fromsubclass_</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.exportChildren">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="hasContent_"></a><span class="summary-sig-name">hasContent_</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.hasContent_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="exportLiteral"></a><span class="summary-sig-name">exportLiteral</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outfile</span>,
+        <span class="summary-sig-arg">level</span>,
+        <span class="summary-sig-arg">name_</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">fieldDataEntry</code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.exportLiteral">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="exportLiteralAttributes"></a><span class="summary-sig-name">exportLiteralAttributes</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outfile</span>,
+        <span class="summary-sig-arg">level</span>,
+        <span class="summary-sig-arg">already_processed</span>,
+        <span class="summary-sig-arg">name_</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.exportLiteralAttributes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="exportLiteralChildren"></a><span class="summary-sig-name">exportLiteralChildren</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">outfile</span>,
+        <span class="summary-sig-arg">level</span>,
+        <span class="summary-sig-arg">name_</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.exportLiteralChildren">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="build"></a><span class="summary-sig-name">build</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">node</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.build">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="buildAttributes"></a><span class="summary-sig-name">buildAttributes</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">node</span>,
+        <span class="summary-sig-arg">attrs</span>,
+        <span class="summary-sig-arg">already_processed</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.buildAttributes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="buildChildren"></a><span class="summary-sig-name">buildChildren</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">child_</span>,
+        <span class="summary-sig-arg">node</span>,
+        <span class="summary-sig-arg">nodeName_</span>,
+        <span class="summary-sig-arg">fromsubclass_</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.buildChildren">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.maec.maec11.GeneratedsSuper-class.html" onclick="show_private();">GeneratedsSuper</a></code></b>:
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_build_any">gds_build_any</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_boolean">gds_format_boolean</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_boolean_list">gds_format_boolean_list</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_double">gds_format_double</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_double_list">gds_format_double_list</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_float">gds_format_float</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_float_list">gds_format_float_list</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_integer">gds_format_integer</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_integer_list">gds_format_integer_list</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_format_string">gds_format_string</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_str_lower">gds_str_lower</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_boolean">gds_validate_boolean</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_boolean_list">gds_validate_boolean_list</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_double">gds_validate_double</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_double_list">gds_validate_double_list</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_float">gds_validate_float</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_float_list">gds_validate_float_list</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_integer">gds_validate_integer</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_integer_list">gds_validate_integer_list</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#gds_validate_string">gds_validate_string</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#get_class_obj_">get_class_obj_</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#get_path_">get_path_</a></code>,
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#get_path_list_">get_path_list_</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="factory"></a><span class="summary-sig-name">factory</span>(<span class="summary-sig-arg">*args_</span>,
+        <span class="summary-sig-arg">**kwargs_</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.factory">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="subclass"></a><span class="summary-name">subclass</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="superclass"></a><span class="summary-name">superclass</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.maec.maec11.GeneratedsSuper-class.html" onclick="show_private();">GeneratedsSuper</a></code></b>:
+      <code><a href="lib.maec.maec11.GeneratedsSuper-class.html#Tag_strip_pattern_">Tag_strip_pattern_</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">references</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">startDate</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">endDate</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">firstSeenDate</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">origin</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">commonality</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">volume</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">importance</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">location</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.maec.maec11-pysrc.html#fieldDataEntry.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jan  9 16:03:54 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

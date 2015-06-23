@@ -1,0 +1,75 @@
+{% load tags %}
+
+   <table class="table">
+
+   {% if  objlist.paginator.count > 0 %}
+        {% get_pagination_range objlist.paginator.num_pages objlist.number as range %}
+
+        <ul class="pagination">
+	    <li><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ 1  }}', 'tablecontent');">First</a></li>	    
+
+	    {% if objlist.has_previous %}
+		  <li><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ objlist.previous_page_number  }}', 'tablecontent');">&laquo;</a></li>	    
+	    {% else %}
+		  <li class="disabled"><a href="#">&laquo;</a></li>
+	    {% endif %}
+	    {% for i in  range %}
+		  {% if i == objlist.number %}
+			<li class="active"><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ i }}', 'tablecontent');">{{ i }} <span class="sr-only">(current)</span></a></li>
+		  {% else %}
+			<li><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ i }}', 'tablecontent');">{{i}}</a></li>
+		  {% endif %}
+	    {% endfor %}
+	    
+	    {% if objlist.has_next %}
+		  <li><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ objlist.next_page_number  }}', 'tablecontent');">&raquo;</a></li>	    
+	    {% else %}
+		  <li class="disabled"><a href="#">&raquo;</a></li>
+	    {% endif %}
+	    <li><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ objlist.paginator.num_pages  }}', 'tablecontent');">Last</a></li>	    
+
+	</ul>
+
+      {% endif %}
+   <tr>
+   {% if uniqueip %}
+     <td> Search Results : {{ objlist.paginator.count }} - Uniques: {{ uniqueip }}  </td>
+   {% else %}
+     <td> Search Results : {{ objlist.paginator.count }} </td>
+   {% endif %}
+   </tr>
+
+
+      {% if  objlist.paginator.count > 0 %}
+
+      {% block tabledata %}
+      {% endblock %}
+      </table>
+
+        <ul class="pagination">
+	    {% if objlist.has_previous %}
+		  <li><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ objlist.previous_page_number  }}', 'tablecontent');">&laquo;</a></li>	    
+	    {% else %}
+		  <li class="disabled"><a href="#">&laquo;</a></li>
+	    {% endif %}
+
+	    {% for i in  range %}
+		  {% if i == objlist.number%}
+			<li class="active"><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ i }}', 'tablecontent');">{{ i }} <span class="sr-only">(current)</span></a></li>
+		  {% else %}
+			<li><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ i }}', 'tablecontent');">{{i}}</a></li>
+		  {% endif %}
+	    {% endfor %}
+	    
+	    {% if objlist.has_next %}
+		  <li><a href="javascript:CallWeb('/home/usb_content/{{ sessid }}/page{{ objlist.next_page_number  }}', 'tablecontent');">&raquo;</a></li>	    
+	    {% else %}
+		  <li class="disabled"><a href="#">&raquo;</a></li>
+	    {% endif %}
+	</ul>
+      {% else %}
+	    </table>
+      {% endif %}
+
+
+

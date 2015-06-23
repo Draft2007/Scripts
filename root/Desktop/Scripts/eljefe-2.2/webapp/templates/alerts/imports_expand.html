@@ -1,0 +1,85 @@
+{% extends "base_.html" %}
+{% load bootstrap3 %}
+{% load alert_tags %}
+
+{% block initializer %}
+<script>
+
+$(function(){
+    $('#tables').html($('span[id="'+ $('#selectbasic').val() +'"]').html());
+
+    $('#selectbasic').change(function(){
+                                $('#tables').html($('span[id="'+ $(this).val() +'"]').html());
+                                });
+    $('#select_all').click(function(){
+                                $('input[type="checkbox"]').prop('checked',true);
+                            });
+    $('#select_none').click(function(){
+                                $('input[type="checkbox"]').prop('checked',false);
+                            });            
+    $('#import').click(function(event){
+                                var selected = [];
+                                $('input:checked').each(function() {
+                                    selected.push($(this).attr('id'));
+                                });
+				data =  {'filter_ids'  : selected ,
+					 'filename' : "{{ filename }}"
+					}
+				window.location.href = '{% url "alerts.views.import_selected_filters"%}' + '?'+  jQuery.param(data);
+
+                            });       
+    $('td').on('focusout', function(){ 
+														    
+						});			    
+  });
+
+
+
+</script>
+
+{% endblock %}
+
+{% block title %}
+El Jefe - Filters
+{% endblock %}
+
+{% block content %}
+
+{% csrf_token %}
+
+<h3 class="title">Filters</h3>
+
+    <div class="well well-lg">        
+        <span id="{{ filter_type }}">
+            <table class="table" >
+                <thead>
+                    <tr>
+                            <th>  </th>
+                        {% for field  in field_names %}
+                            <th> {{ field|capfirst }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+            
+                <tbody>
+                {% for flt in objects %}
+                    <tr> 
+                        <td> <input type="checkbox" id="{{ flt.id }}"> </td>
+                        {% for field  in field_names %}
+                                 <td> {{ flt|get:field }} </td>
+                            {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </span>
+
+        <div style="text-align: center;margin-top:5%">
+            <button id="select_all" class="btn btn-danger">Select All</button>
+            <button id="select_none" class="btn btn-danger">Select None</button>
+            <button id="import" class="btn btn-danger">Import </button>
+        </div>
+   </div> 
+   
+{% endblock %}
+

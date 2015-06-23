@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.cuckoo.common.utils</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.cuckoo-module.html">Package&nbsp;cuckoo</a> ::
+        <a href="lib.cuckoo.common-module.html">Package&nbsp;common</a> ::
+        Module&nbsp;utils
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.cuckoo.common.utils-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.cuckoo.common.utils-module.html">Module lib.cuckoo.common.utils</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2014 Cuckoo Sandbox Developers.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">shutil</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">ntpath</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">string</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">tempfile</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">xmlrpclib</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">datetime</tt> <tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-3', 'exceptions', 'link-3');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooOperationalError=lib.cuckoo.common.exceptions.CuckooOperationalError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooOperationalError" class="py-name" href="#" onclick="return doclink('link-4', 'CuckooOperationalError', 'link-4');">CuckooOperationalError</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">chardet</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Variable lib.cuckoo.common.utils.HAVE_CHARDET=lib.cuckoo.common.utils-module.html#HAVE_CHARDET"><a title="lib.cuckoo.common.utils.HAVE_CHARDET" class="py-name" href="#" onclick="return doclink('link-5', 'HAVE_CHARDET', 'link-5');">HAVE_CHARDET</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt id="link-6" class="py-name"><a title="lib.cuckoo.common.utils.HAVE_CHARDET" class="py-name" href="#" onclick="return doclink('link-6', 'HAVE_CHARDET', 'link-5');">HAVE_CHARDET</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="create_folders"></a><div id="create_folders-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="create_folders-toggle" onclick="return toggle('create_folders');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#create_folders">create_folders</a><tt class="py-op">(</tt><tt class="py-param">root</tt><tt class="py-op">=</tt><tt class="py-string">"."</tt><tt class="py-op">,</tt> <tt class="py-param">folders</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="create_folders-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="create_folders-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-docstring">"""Create directories.</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">    @param root: root path.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    @param folders: folders list to be created.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    @raise CuckooOperationalError: if fails to create folder.</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">folder</tt> <tt class="py-keyword">in</tt> <tt class="py-name">folders</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">,</tt> <tt class="py-name">folder</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">            <tt class="py-keyword">continue</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">            <tt id="link-7" class="py-name" targets="Function lib.cuckoo.common.utils.create_folder()=lib.cuckoo.common.utils-module.html#create_folder"><a title="lib.cuckoo.common.utils.create_folder" class="py-name" href="#" onclick="return doclink('link-7', 'create_folder', 'link-7');">create_folder</a></tt><tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">,</tt> <tt class="py-name">folder</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="create_folder"></a><div id="create_folder-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="create_folder-toggle" onclick="return toggle('create_folder');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#create_folder">create_folder</a><tt class="py-op">(</tt><tt class="py-param">root</tt><tt class="py-op">=</tt><tt class="py-string">"."</tt><tt class="py-op">,</tt> <tt class="py-param">folder</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="create_folder-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="create_folder-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-docstring">"""Create directory.</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">    @param root: root path.</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">    @param folder: folder name to be created.</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">    @raise CuckooOperationalError: if fails to create folder.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">,</tt> <tt class="py-name">folder</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">folder</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">folder_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">,</tt> <tt class="py-name">folder</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">folder_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">makedirs</tt><tt class="py-op">(</tt><tt class="py-name">folder_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">OSError</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-8" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooOperationalError" class="py-name" href="#" onclick="return doclink('link-8', 'CuckooOperationalError', 'link-4');">CuckooOperationalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to create folder: %s"</tt> <tt class="py-op">%</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                                             <tt class="py-name">folder_path</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="delete_folder"></a><div id="delete_folder-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="delete_folder-toggle" onclick="return toggle('delete_folder');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#delete_folder">delete_folder</a><tt class="py-op">(</tt><tt class="py-param">folder</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="delete_folder-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="delete_folder-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-docstring">"""Delete a folder and all its subdirectories.</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">    @param folder: path to delete.</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    @raise CuckooOperationalError: if fails to delete folder.</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">folder</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt class="py-name">shutil</tt><tt class="py-op">.</tt><tt class="py-name">rmtree</tt><tt class="py-op">(</tt><tt class="py-name">folder</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">OSError</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-9" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooOperationalError" class="py-name" href="#" onclick="return doclink('link-9', 'CuckooOperationalError', 'link-4');">CuckooOperationalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to delete folder: "</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                                         <tt class="py-string">"{0}"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">folder</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-comment"># don't allow all characters in "string.printable", as newlines, carriage</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-comment"># returns, tabs, \x0b, and \x0c may mess up reports</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable lib.cuckoo.common.utils.PRINTABLE_CHARACTERS=lib.cuckoo.common.utils-module.html#PRINTABLE_CHARACTERS"><a title="lib.cuckoo.common.utils.PRINTABLE_CHARACTERS" class="py-name" href="#" onclick="return doclink('link-10', 'PRINTABLE_CHARACTERS', 'link-10');">PRINTABLE_CHARACTERS</a></tt> <tt class="py-op">=</tt> <tt class="py-name">string</tt><tt class="py-op">.</tt><tt class="py-name">letters</tt> <tt class="py-op">+</tt> <tt class="py-name">string</tt><tt class="py-op">.</tt><tt class="py-name">digits</tt> <tt class="py-op">+</tt> <tt class="py-name">string</tt><tt class="py-op">.</tt><tt class="py-name">punctuation</tt> <tt class="py-op">+</tt> <tt class="py-string">" \t\r\n"</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="convert_char"></a><div id="convert_char-def"><a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="convert_char-toggle" onclick="return toggle('convert_char');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#convert_char">convert_char</a><tt class="py-op">(</tt><tt class="py-param">c</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="convert_char-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="convert_char-expanded"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-docstring">"""Escapes characters.</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">    @param c: dirty char.</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">    @return: sanitized char.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-11" class="py-name"><a title="lib.cuckoo.common.utils.PRINTABLE_CHARACTERS" class="py-name" href="#" onclick="return doclink('link-11', 'PRINTABLE_CHARACTERS', 'link-10');">PRINTABLE_CHARACTERS</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">c</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"\\x%02x"</tt> <tt class="py-op">%</tt> <tt class="py-name">ord</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="is_printable"></a><div id="is_printable-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="is_printable-toggle" onclick="return toggle('is_printable');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#is_printable">is_printable</a><tt class="py-op">(</tt><tt class="py-param">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="is_printable-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="is_printable-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-docstring">""" Test if a string is printable."""</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">s</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-12" class="py-name"><a title="lib.cuckoo.common.utils.PRINTABLE_CHARACTERS" class="py-name" href="#" onclick="return doclink('link-12', 'PRINTABLE_CHARACTERS', 'link-10');">PRINTABLE_CHARACTERS</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="convert_to_printable"></a><div id="convert_to_printable-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="convert_to_printable-toggle" onclick="return toggle('convert_to_printable');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#convert_to_printable">convert_to_printable</a><tt class="py-op">(</tt><tt class="py-param">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="convert_to_printable-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="convert_to_printable-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-docstring">"""Convert char to printable.</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">    @param s: string.</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">    @return: sanitized string.</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-13" class="py-name" targets="Function lib.cuckoo.common.utils.is_printable()=lib.cuckoo.common.utils-module.html#is_printable"><a title="lib.cuckoo.common.utils.is_printable" class="py-name" href="#" onclick="return doclink('link-13', 'is_printable', 'link-13');">is_printable</a></tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">""</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name" targets="Function lib.cuckoo.common.utils.convert_char()=lib.cuckoo.common.utils-module.html#convert_char"><a title="lib.cuckoo.common.utils.convert_char" class="py-name" href="#" onclick="return doclink('link-14', 'convert_char', 'link-14');">convert_char</a></tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">s</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="datetime_to_iso"></a><div id="datetime_to_iso-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="datetime_to_iso-toggle" onclick="return toggle('datetime_to_iso');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#datetime_to_iso">datetime_to_iso</a><tt class="py-op">(</tt><tt class="py-param">timestamp</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="datetime_to_iso-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="datetime_to_iso-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-docstring">"""Parse a datatime string and returns a datetime in iso format.</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">    @param timestamp: timestamp string</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">    @return: ISO datetime</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt>   </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">strptime</tt><tt class="py-op">(</tt><tt class="py-name">timestamp</tt><tt class="py-op">,</tt> <tt class="py-string">"%Y-%m-%d %H:%M:%S"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">isoformat</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="get_filename_from_path"></a><div id="get_filename_from_path-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="get_filename_from_path-toggle" onclick="return toggle('get_filename_from_path');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#get_filename_from_path">get_filename_from_path</a><tt class="py-op">(</tt><tt class="py-param">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="get_filename_from_path-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="get_filename_from_path-expanded"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-docstring">"""Cross-platform filename extraction from path.</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">    @param path: file path.</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">    @return: filename.</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-name">dirpath</tt><tt class="py-op">,</tt> <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">ntpath</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">filename</tt> <tt class="py-keyword">if</tt> <tt class="py-name">filename</tt> <tt class="py-keyword">else</tt> <tt class="py-name">ntpath</tt><tt class="py-op">.</tt><tt class="py-name">basename</tt><tt class="py-op">(</tt><tt class="py-name">dirpath</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="store_temp_file"></a><div id="store_temp_file-def"><a name="L110"></a><tt class="py-lineno">110</tt> <a class="py-toggle" href="#" id="store_temp_file-toggle" onclick="return toggle('store_temp_file');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#store_temp_file">store_temp_file</a><tt class="py-op">(</tt><tt class="py-param">filedata</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="store_temp_file-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="store_temp_file-expanded"><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-docstring">"""Store a temporary file.</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">    @param filedata: content of the original file.</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">    @param filename: name of the original file.</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">    @return: path to the temporary file.</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name" targets="Function lib.cuckoo.common.utils.get_filename_from_path()=lib.cuckoo.common.utils-module.html#get_filename_from_path"><a title="lib.cuckoo.common.utils.get_filename_from_path" class="py-name" href="#" onclick="return doclink('link-15', 'get_filename_from_path', 'link-15');">get_filename_from_path</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-comment"># reduce length (100 is arbitrary)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">100</tt><tt class="py-op">]</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-name">tmppath</tt> <tt class="py-op">=</tt> <tt class="py-name">tempfile</tt><tt class="py-op">.</tt><tt class="py-name">gettempdir</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-name">targetpath</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">tmppath</tt><tt class="py-op">,</tt> <tt class="py-string">"cuckoo-tmp"</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">targetpath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">mkdir</tt><tt class="py-op">(</tt><tt class="py-name">targetpath</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-name">tmp_dir</tt> <tt class="py-op">=</tt> <tt class="py-name">tempfile</tt><tt class="py-op">.</tt><tt class="py-name">mkdtemp</tt><tt class="py-op">(</tt><tt class="py-name">prefix</tt><tt class="py-op">=</tt><tt class="py-string">"upload_"</tt><tt class="py-op">,</tt> <tt class="py-name">dir</tt><tt class="py-op">=</tt><tt class="py-name">targetpath</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-name">tmp_file_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">tmp_dir</tt><tt class="py-op">,</tt> <tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">tmp_file_path</tt><tt class="py-op">,</tt> <tt class="py-string">"wb"</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">tmp_file</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-comment"># if filedata is file object, do chunked copy</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">filedata</tt><tt class="py-op">,</tt> <tt class="py-string">"read"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">            <tt class="py-name">chunk</tt> <tt class="py-op">=</tt> <tt class="py-name">filedata</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method lib.cuckoo.core.resultserver.Resulthandler.read()=lib.cuckoo.core.resultserver.Resulthandler-class.html#read,Method modules.processing.behavior.ParseProcessLog.read()=modules.processing.behavior.ParseProcessLog-class.html#read"><a title="lib.cuckoo.core.resultserver.Resulthandler.read
+modules.processing.behavior.ParseProcessLog.read" class="py-name" href="#" onclick="return doclink('link-16', 'read', 'link-16');">read</a></tt><tt class="py-op">(</tt><tt class="py-number">1024</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-keyword">while</tt> <tt class="py-name">chunk</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">                <tt class="py-name">tmp_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">chunk</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">                <tt class="py-name">chunk</tt> <tt class="py-op">=</tt> <tt class="py-name">filedata</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="lib.cuckoo.core.resultserver.Resulthandler.read
+modules.processing.behavior.ParseProcessLog.read" class="py-name" href="#" onclick="return doclink('link-17', 'read', 'link-16');">read</a></tt><tt class="py-op">(</tt><tt class="py-number">1024</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-name">tmp_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">filedata</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">tmp_file_path</tt> </tt>
+</div><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="TimeoutServer"></a><div id="TimeoutServer-def"><a name="L140"></a><tt class="py-lineno">140</tt> <a class="py-toggle" href="#" id="TimeoutServer-toggle" onclick="return toggle('TimeoutServer');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.cuckoo.common.utils.TimeoutServer-class.html">TimeoutServer</a><tt class="py-op">(</tt><tt class="py-base-class">xmlrpclib</tt><tt class="py-op">.</tt><tt class="py-base-class">ServerProxy</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TimeoutServer-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TimeoutServer-expanded"><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-docstring">"""Timeout server for XMLRPC.</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">    XMLRPC + timeout - still a bit ugly - but at least gets rid of setdefaulttimeout</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">    inspired by http://stackoverflow.com/questions/372365/set-timeout-for-xmlrpclib-serverproxy</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">    (although their stuff was messy, this is cleaner)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">    @see: http://stackoverflow.com/questions/372365/set-timeout-for-xmlrpclib-serverproxy</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="TimeoutServer.__init__"></a><div id="TimeoutServer.__init__-def"><a name="L147"></a><tt class="py-lineno">147</tt> <a class="py-toggle" href="#" id="TimeoutServer.__init__-toggle" onclick="return toggle('TimeoutServer.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils.TimeoutServer-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TimeoutServer.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TimeoutServer.__init__-expanded"><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt id="link-18" class="py-name" targets="Variable lib.cuckoo.core.database.Task.timeout=lib.cuckoo.core.database.Task-class.html#timeout"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-18', 'timeout', 'link-18');">timeout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">kwargs</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-string">"timeout"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-name">kwargs</tt><tt class="py-op">[</tt><tt class="py-string">"transport"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name" targets="Class lib.cuckoo.common.utils.TimeoutTransport=lib.cuckoo.common.utils.TimeoutTransport-class.html"><a title="lib.cuckoo.common.utils.TimeoutTransport" class="py-name" href="#" onclick="return doclink('link-19', 'TimeoutTransport', 'link-19');">TimeoutTransport</a></tt><tt class="py-op">(</tt><tt id="link-20" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-20', 'timeout', 'link-18');">timeout</a></tt><tt class="py-op">=</tt><tt id="link-21" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-21', 'timeout', 'link-18');">timeout</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-name">xmlrpclib</tt><tt class="py-op">.</tt><tt class="py-name">ServerProxy</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method lib.cuckoo.common.abstracts.Auxiliary.__init__()=lib.cuckoo.common.abstracts.Auxiliary-class.html#__init__,Method lib.cuckoo.common.abstracts.LibVirtMachinery.__init__()=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#__init__,Method lib.cuckoo.common.abstracts.Machinery.__init__()=lib.cuckoo.common.abstracts.Machinery-class.html#__init__,Method lib.cuckoo.common.abstracts.Processing.__init__()=lib.cuckoo.common.abstracts.Processing-class.html#__init__,Method lib.cuckoo.common.abstracts.Report.__init__()=lib.cuckoo.common.abstracts.Report-class.html#__init__,Method lib.cuckoo.common.abstracts.Signature.__init__()=lib.cuckoo.common.abstracts.Signature-class.html#__init__,Method lib.cuckoo.common.config.Config.__init__()=lib.cuckoo.common.config.Config-class.html#__init__,Method lib.cuckoo.common.irc.ircMessage.__init__()=lib.cuckoo.common.irc.ircMessage-class.html#__init__,Method lib.cuckoo.common.netlog.BsonParser.__init__()=lib.cuckoo.common.netlog.BsonParser-class.html#__init__,Method lib.cuckoo.common.netlog.NetlogParser.__init__()=lib.cuckoo.common.netlog.NetlogParser-class.html#__init__,Method lib.cuckoo.common.objects.File.__init__()=lib.cuckoo.common.objects.File-class.html#__init__,Method lib.cuckoo.common.objects.URL.__init__()=lib.cuckoo.common.objects.URL-class.html#__init__,Method lib.cuckoo.common.utils.TimeoutServer.__init__()=lib.cuckoo.common.utils.TimeoutServer-class.html#__init__,Method lib.cuckoo.common.utils.TimeoutTransport.__init__()=lib.cuckoo.common.utils.TimeoutTransport-class.html#__init__,Method lib.cuckoo.core.database.Database.__init__()=lib.cuckoo.core.database.Database-class.html#__init__,Method lib.cuckoo.core.database.Error.__init__()=lib.cuckoo.core.database.Error-class.html#__init__,Method lib.cuckoo.core.database.Guest.__init__()=lib.cuckoo.core.database.Guest-class.html#__init__,Method lib.cuckoo.core.database.Machine.__init__()=lib.cuckoo.core.database.Machine-class.html#__init__,Method lib.cuckoo.core.database.Sample.__init__()=lib.cuckoo.core.database.Sample-class.html#__init__,Method lib.cuckoo.core.database.Tag.__init__()=lib.cuckoo.core.database.Tag-class.html#__init__,Method lib.cuckoo.core.database.Task.__init__()=lib.cuckoo.core.database.Task-class.html#__init__,Method lib.cuckoo.core.guest.GuestManager.__init__()=lib.cuckoo.core.guest.GuestManager-class.html#__init__,Method lib.cuckoo.core.plugins.RunAuxiliary.__init__()=lib.cuckoo.core.plugins.RunAuxiliary-class.html#__init__,Method lib.cuckoo.core.plugins.RunProcessing.__init__()=lib.cuckoo.core.plugins.RunProcessing-class.html#__init__,Method lib.cuckoo.core.plugins.RunReporting.__init__()=lib.cuckoo.core.plugins.RunReporting-class.html#__init__,Method lib.cuckoo.core.plugins.RunSignatures.__init__()=lib.cuckoo.core.plugins.RunSignatures-class.html#__init__,Method lib.cuckoo.core.resultserver.FileUpload.__init__()=lib.cuckoo.core.resultserver.FileUpload-class.html#__init__,Method lib.cuckoo.core.resultserver.LogHandler.__init__()=lib.cuckoo.core.resultserver.LogHandler-class.html#__init__,Method lib.cuckoo.core.resultserver.Resultserver.__init__()=lib.cuckoo.core.resultserver.Resultserver-class.html#__init__,Method lib.cuckoo.core.scheduler.AnalysisManager.__init__()=lib.cuckoo.core.scheduler.AnalysisManager-class.html#__init__,Method lib.cuckoo.core.scheduler.Scheduler.__init__()=lib.cuckoo.core.scheduler.Scheduler-class.html#__init__,Method lib.hpfeeds.FeedUnpack.__init__()=lib.hpfeeds.FeedUnpack-class.html#__init__,Method lib.hpfeeds.HPC.__init__()=lib.hpfeeds.HPC-class.html#__init__,Method lib.maec.maec11.APICallType.__init__()=lib.maec.maec11.APICallType-class.html#__init__,Method lib.maec.maec11.APICall_ParameterType.__init__()=lib.maec.maec11.APICall_ParameterType-class.html#__init__,Method lib.maec.maec11.ASNObject.__init__()=lib.maec.maec11.ASNObject-class.html#__init__,Method lib.maec.maec11.ActionCollectionType.__init__()=lib.maec.maec11.ActionCollectionType-class.html#__init__,Method lib.maec.maec11.ActionImplementationType.__init__()=lib.maec.maec11.ActionImplementationType-class.html#__init__,Method lib.maec.maec11.ActionReferenceType.__init__()=lib.maec.maec11.ActionReferenceType-class.html#__init__,Method lib.maec.maec11.ActionType.__init__()=lib.maec.maec11.ActionType-class.html#__init__,Method lib.maec.maec11.Action_Collection_PoolType.__init__()=lib.maec.maec11.Action_Collection_PoolType-class.html#__init__,Method lib.maec.maec11.Action_InitiatorType.__init__()=lib.maec.maec11.Action_InitiatorType-class.html#__init__,Method lib.maec.maec11.Action_PoolType.__init__()=lib.maec.maec11.Action_PoolType-class.html#__init__,Method lib.maec.maec11.ActionsType.__init__()=lib.maec.maec11.ActionsType-class.html#__init__,Method lib.maec.maec11.ActionsType1.__init__()=lib.maec.maec11.ActionsType1-class.html#__init__,Method lib.maec.maec11.Affected_ObjectType.__init__()=lib.maec.maec11.Affected_ObjectType-class.html#__init__,Method lib.maec.maec11.Affected_ObjectsType.__init__()=lib.maec.maec11.Affected_ObjectsType-class.html#__init__,Method lib.maec.maec11.AnalysesType.__init__()=lib.maec.maec11.AnalysesType-class.html#__init__,Method lib.maec.maec11.AnalysisType.__init__()=lib.maec.maec11.AnalysisType-class.html#__init__,Method lib.maec.maec11.Analysis_EnvironmentType.__init__()=lib.maec.maec11.Analysis_EnvironmentType-class.html#__init__,Method lib.maec.maec11.AnalystsType.__init__()=lib.maec.maec11.AnalystsType-class.html#__init__,Method lib.maec.maec11.Associated_CodeType.__init__()=lib.maec.maec11.Associated_CodeType-class.html#__init__,Method lib.maec.maec11.Associated_Code_SnippetType.__init__()=lib.maec.maec11.Associated_Code_SnippetType-class.html#__init__,Method lib.maec.maec11.Attempted_Vulnerability_ExploitType.__init__()=lib.maec.maec11.Attempted_Vulnerability_ExploitType-class.html#__init__,Method lib.maec.maec11.BehaviorCollectionType.__init__()=lib.maec.maec11.BehaviorCollectionType-class.html#__init__,Method lib.maec.maec11.BehaviorReferenceType.__init__()=lib.maec.maec11.BehaviorReferenceType-class.html#__init__,Method lib.maec.maec11.BehaviorType.__init__()=lib.maec.maec11.BehaviorType-class.html#__init__,Method lib.maec.maec11.Behavior_Collection_PoolType.__init__()=lib.maec.maec11.Behavior_Collection_PoolType-class.html#__init__,Method lib.maec.maec11.Behavior_PoolType.__init__()=lib.maec.maec11.Behavior_PoolType-class.html#__init__,Method lib.maec.maec11.BehaviorsType.__init__()=lib.maec.maec11.BehaviorsType-class.html#__init__,Method lib.maec.maec11.Block.__init__()=lib.maec.maec11.Block-class.html#__init__,Method lib.maec.maec11.BundleType.__init__()=lib.maec.maec11.BundleType-class.html#__init__,Method lib.maec.maec11.CPESpecificationType.__init__()=lib.maec.maec11.CPESpecificationType-class.html#__init__,Method lib.maec.maec11.CVEVulnerabilityType.__init__()=lib.maec.maec11.CVEVulnerabilityType-class.html#__init__,Method lib.maec.maec11.CertificateType.__init__()=lib.maec.maec11.CertificateType-class.html#__init__,Method lib.maec.maec11.Child_ProcessesType.__init__()=lib.maec.maec11.Child_ProcessesType-class.html#__init__,Method lib.maec.maec11.ClassificationsType.__init__()=lib.maec.maec11.ClassificationsType-class.html#__init__,Method lib.maec.maec11.CodeType.__init__()=lib.maec.maec11.CodeType-class.html#__init__,Method lib.maec.maec11.Constituent_EffectsType.__init__()=lib.maec.maec11.Constituent_EffectsType-class.html#__init__,Method lib.maec.maec11.Custom_AttributeType.__init__()=lib.maec.maec11.Custom_AttributeType-class.html#__init__,Method lib.maec.maec11.Custom_Object_AttributesType.__init__()=lib.maec.maec11.Custom_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.DOS_HeaderType.__init__()=lib.maec.maec11.DOS_HeaderType-class.html#__init__,Method lib.maec.maec11.Daemon_Action_AttributesType.__init__()=lib.maec.maec11.Daemon_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.Daemon_Object_AttributesType.__init__()=lib.maec.maec11.Daemon_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.DataType.__init__()=lib.maec.maec11.DataType-class.html#__init__,Method lib.maec.maec11.Data_DirectoryType.__init__()=lib.maec.maec11.Data_DirectoryType-class.html#__init__,Method lib.maec.maec11.Data_HashesType.__init__()=lib.maec.maec11.Data_HashesType-class.html#__init__,Method lib.maec.maec11.Data_SizeType.__init__()=lib.maec.maec11.Data_SizeType-class.html#__init__,Method lib.maec.maec11.Digital_CertificatesType.__init__()=lib.maec.maec11.Digital_CertificatesType-class.html#__init__,Method lib.maec.maec11.DiscoveryMethod.__init__()=lib.maec.maec11.DiscoveryMethod-class.html#__init__,Method lib.maec.maec11.EffectCollectionType.__init__()=lib.maec.maec11.EffectCollectionType-class.html#__init__,Method lib.maec.maec11.EffectReferenceType.__init__()=lib.maec.maec11.EffectReferenceType-class.html#__init__,Method lib.maec.maec11.EffectType.__init__()=lib.maec.maec11.EffectType-class.html#__init__,Method lib.maec.maec11.Effect_PoolType.__init__()=lib.maec.maec11.Effect_PoolType-class.html#__init__,Method lib.maec.maec11.EffectsType.__init__()=lib.maec.maec11.EffectsType-class.html#__init__,Method lib.maec.maec11.EffectsType1.__init__()=lib.maec.maec11.EffectsType1-class.html#__init__,Method lib.maec.maec11.EffectsType2.__init__()=lib.maec.maec11.EffectsType2-class.html#__init__,Method lib.maec.maec11.EffectsType3.__init__()=lib.maec.maec11.EffectsType3-class.html#__init__,Method lib.maec.maec11.Enivironment_VariablesType.__init__()=lib.maec.maec11.Enivironment_VariablesType-class.html#__init__,Method lib.maec.maec11.Enumerated_DaemonsType.__init__()=lib.maec.maec11.Enumerated_DaemonsType-class.html#__init__,Method lib.maec.maec11.Environment_VariableType.__init__()=lib.maec.maec11.Environment_VariableType-class.html#__init__,Method lib.maec.maec11.Event_Type.__init__()=lib.maec.maec11.Event_Type-class.html#__init__,Method lib.maec.maec11.ExportsType.__init__()=lib.maec.maec11.ExportsType-class.html#__init__,Method lib.maec.maec11.File_HeaderType.__init__()=lib.maec.maec11.File_HeaderType-class.html#__init__,Method lib.maec.maec11.File_System_Action_AttributesType.__init__()=lib.maec.maec11.File_System_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.File_System_Object_AttributesType.__init__()=lib.maec.maec11.File_System_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.File_TypeType.__init__()=lib.maec.maec11.File_TypeType-class.html#__init__,Method lib.maec.maec11.File_Type_AttributesType.__init__()=lib.maec.maec11.File_Type_AttributesType-class.html#__init__,Method lib.maec.maec11.GUI_Object_AttributesType.__init__()=lib.maec.maec11.GUI_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.HandleType.__init__()=lib.maec.maec11.HandleType-class.html#__init__,Method lib.maec.maec11.HandlesType.__init__()=lib.maec.maec11.HandlesType-class.html#__init__,Method lib.maec.maec11.HashType.__init__()=lib.maec.maec11.HashType-class.html#__init__,Method lib.maec.maec11.HashesType.__init__()=lib.maec.maec11.HashesType-class.html#__init__,Method lib.maec.maec11.HashesType1.__init__()=lib.maec.maec11.HashesType1-class.html#__init__,Method lib.maec.maec11.HashesType2.__init__()=lib.maec.maec11.HashesType2-class.html#__init__,Method lib.maec.maec11.HashesType3.__init__()=lib.maec.maec11.HashesType3-class.html#__init__,Method lib.maec.maec11.HashesType4.__init__()=lib.maec.maec11.HashesType4-class.html#__init__,Method lib.maec.maec11.HashesType5.__init__()=lib.maec.maec11.HashesType5-class.html#__init__,Method lib.maec.maec11.HashesType6.__init__()=lib.maec.maec11.HashesType6-class.html#__init__,Method lib.maec.maec11.HashesType7.__init__()=lib.maec.maec11.HashesType7-class.html#__init__,Method lib.maec.maec11.Header_HashesType.__init__()=lib.maec.maec11.Header_HashesType-class.html#__init__,Method lib.maec.maec11.HeadersType.__init__()=lib.maec.maec11.HeadersType-class.html#__init__,Method lib.maec.maec11.IPAddress.__init__()=lib.maec.maec11.IPAddress-class.html#__init__,Method lib.maec.maec11.IPC_Action_AttributesType.__init__()=lib.maec.maec11.IPC_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.IPC_Object_AttributesType.__init__()=lib.maec.maec11.IPC_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.IPObject.__init__()=lib.maec.maec11.IPObject-class.html#__init__,Method lib.maec.maec11.ImageType.__init__()=lib.maec.maec11.ImageType-class.html#__init__,Method lib.maec.maec11.ImageType1.__init__()=lib.maec.maec11.ImageType1-class.html#__init__,Method lib.maec.maec11.ImageType2.__init__()=lib.maec.maec11.ImageType2-class.html#__init__,Method lib.maec.maec11.ImagesType.__init__()=lib.maec.maec11.ImagesType-class.html#__init__,Method lib.maec.maec11.ImagesType1.__init__()=lib.maec.maec11.ImagesType1-class.html#__init__,Method lib.maec.maec11.ImagesType2.__init__()=lib.maec.maec11.ImagesType2-class.html#__init__,Method lib.maec.maec11.Imported_FunctionType.__init__()=lib.maec.maec11.Imported_FunctionType-class.html#__init__,Method lib.maec.maec11.Imported_FunctionsType.__init__()=lib.maec.maec11.Imported_FunctionsType-class.html#__init__,Method lib.maec.maec11.ImportsType.__init__()=lib.maec.maec11.ImportsType-class.html#__init__,Method lib.maec.maec11.Internet_Action_AttributesType.__init__()=lib.maec.maec11.Internet_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.Internet_Object_AttributesType.__init__()=lib.maec.maec11.Internet_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.Library_Type.__init__()=lib.maec.maec11.Library_Type-class.html#__init__,Method lib.maec.maec11.MemberSpec_.__init__()=lib.maec.maec11.MemberSpec_-class.html#__init__,Method lib.maec.maec11.Memory_Action_AttributesType.__init__()=lib.maec.maec11.Memory_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.Memory_Object_AttributesType.__init__()=lib.maec.maec11.Memory_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.MixedContainer.__init__()=lib.maec.maec11.MixedContainer-class.html#__init__,Method lib.maec.maec11.Module_Action_AttributesType.__init__()=lib.maec.maec11.Module_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.Module_Object_AttributesType.__init__()=lib.maec.maec11.Module_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.Nature_Of_Relationship.__init__()=lib.maec.maec11.Nature_Of_Relationship-class.html#__init__,Method lib.maec.maec11.Nature_of_Relationship.__init__()=lib.maec.maec11.Nature_of_Relationship-class.html#__init__,Method lib.maec.maec11.Network_Action_AttributesType.__init__()=lib.maec.maec11.Network_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.Network_Object_AttributesType.__init__()=lib.maec.maec11.Network_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.NotesType.__init__()=lib.maec.maec11.NotesType-class.html#__init__,Method lib.maec.maec11.ObjectCollectionType.__init__()=lib.maec.maec11.ObjectCollectionType-class.html#__init__,Method lib.maec.maec11.ObjectReferenceType.__init__()=lib.maec.maec11.ObjectReferenceType-class.html#__init__,Method lib.maec.maec11.ObjectType.__init__()=lib.maec.maec11.ObjectType-class.html#__init__,Method lib.maec.maec11.Object_Collection_PoolType.__init__()=lib.maec.maec11.Object_Collection_PoolType-class.html#__init__,Method lib.maec.maec11.Object_PoolType.__init__()=lib.maec.maec11.Object_PoolType-class.html#__init__,Method lib.maec.maec11.Object_SizeType.__init__()=lib.maec.maec11.Object_SizeType-class.html#__init__,Method lib.maec.maec11.ObjectsType.__init__()=lib.maec.maec11.ObjectsType-class.html#__init__,Method lib.maec.maec11.ObjectsType1.__init__()=lib.maec.maec11.ObjectsType1-class.html#__init__,Method lib.maec.maec11.Optional_HeaderType.__init__()=lib.maec.maec11.Optional_HeaderType-class.html#__init__,Method lib.maec.maec11.PEDataDirectoryStruct.__init__()=lib.maec.maec11.PEDataDirectoryStruct-class.html#__init__,Method lib.maec.maec11.PEExportType.__init__()=lib.maec.maec11.PEExportType-class.html#__init__,Method lib.maec.maec11.PEImportType.__init__()=lib.maec.maec11.PEImportType-class.html#__init__,Method lib.maec.maec11.PEResourceType.__init__()=lib.maec.maec11.PEResourceType-class.html#__init__,Method lib.maec.maec11.PESectionHeaderStruct.__init__()=lib.maec.maec11.PESectionHeaderStruct-class.html#__init__,Method lib.maec.maec11.PESectionType.__init__()=lib.maec.maec11.PESectionType-class.html#__init__,Method lib.maec.maec11.PEStringType.__init__()=lib.maec.maec11.PEStringType-class.html#__init__,Method lib.maec.maec11.PE_Binary_AttributesType.__init__()=lib.maec.maec11.PE_Binary_AttributesType-class.html#__init__,Method lib.maec.maec11.PE_HeaderType.__init__()=lib.maec.maec11.PE_HeaderType-class.html#__init__,Method lib.maec.maec11.Packer_TypeType.__init__()=lib.maec.maec11.Packer_TypeType-class.html#__init__,Method lib.maec.maec11.PackingType.__init__()=lib.maec.maec11.PackingType-class.html#__init__,Method lib.maec.maec11.PathType.__init__()=lib.maec.maec11.PathType-class.html#__init__,Method lib.maec.maec11.PoolsType.__init__()=lib.maec.maec11.PoolsType-class.html#__init__,Method lib.maec.maec11.Process_Action_AttributesType.__init__()=lib.maec.maec11.Process_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.Process_Object_AttributesType.__init__()=lib.maec.maec11.Process_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.PurposeType.__init__()=lib.maec.maec11.PurposeType-class.html#__init__,Method lib.maec.maec11.Registry_Action_AttributesType.__init__()=lib.maec.maec11.Registry_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.Registry_Object_AttributesType.__init__()=lib.maec.maec11.Registry_Object_AttributesType-class.html#__init__,Method lib.maec.maec11.Related_ActionType.__init__()=lib.maec.maec11.Related_ActionType-class.html#__init__,Method lib.maec.maec11.Related_ActionsType.__init__()=lib.maec.maec11.Related_ActionsType-class.html#__init__,Method lib.maec.maec11.Related_BehaviorType.__init__()=lib.maec.maec11.Related_BehaviorType-class.html#__init__,Method lib.maec.maec11.Related_BehaviorsType.__init__()=lib.maec.maec11.Related_BehaviorsType-class.html#__init__,Method lib.maec.maec11.Related_ObjectType.__init__()=lib.maec.maec11.Related_ObjectType-class.html#__init__,Method lib.maec.maec11.Related_ObjectsType.__init__()=lib.maec.maec11.Related_ObjectsType-class.html#__init__,Method lib.maec.maec11.ResourcesType.__init__()=lib.maec.maec11.ResourcesType-class.html#__init__,Method lib.maec.maec11.Section_TableType.__init__()=lib.maec.maec11.Section_TableType-class.html#__init__,Method lib.maec.maec11.SectionsType.__init__()=lib.maec.maec11.SectionsType-class.html#__init__,Method lib.maec.maec11.Service_Type.__init__()=lib.maec.maec11.Service_Type-class.html#__init__,Method lib.maec.maec11.Socket_Type.__init__()=lib.maec.maec11.Socket_Type-class.html#__init__,Method lib.maec.maec11.SourceType.__init__()=lib.maec.maec11.SourceType-class.html#__init__,Method lib.maec.maec11.StringsType.__init__()=lib.maec.maec11.StringsType-class.html#__init__,Method lib.maec.maec11.StructuredTextType.__init__()=lib.maec.maec11.StructuredTextType-class.html#__init__,Method lib.maec.maec11.SubjectType.__init__()=lib.maec.maec11.SubjectType-class.html#__init__,Method lib.maec.maec11.System_Action_AttributesType.__init__()=lib.maec.maec11.System_Action_AttributesType-class.html#__init__,Method lib.maec.maec11.TitleType.__init__()=lib.maec.maec11.TitleType-class.html#__init__,Method lib.maec.maec11.ToolType.__init__()=lib.maec.maec11.ToolType-class.html#__init__,Method lib.maec.maec11.Tools_UsedType.__init__()=lib.maec.maec11.Tools_UsedType-class.html#__init__,Method lib.maec.maec11.TrID_TypeType.__init__()=lib.maec.maec11.TrID_TypeType-class.html#__init__,Method lib.maec.maec11.ValueType.__init__()=lib.maec.maec11.ValueType-class.html#__init__,Method lib.maec.maec11.Version_BlockType.__init__()=lib.maec.maec11.Version_BlockType-class.html#__init__,Method lib.maec.maec11.Vulnerability_ExploitType.__init__()=lib.maec.maec11.Vulnerability_ExploitType-class.html#__init__,Method lib.maec.maec11.classificationDetailsType.__init__()=lib.maec.maec11.classificationDetailsType-class.html#__init__,Method lib.maec.maec11.classificationObject.__init__()=lib.maec.maec11.classificationObject-class.html#__init__,Method lib.maec.maec11.domainObject.__init__()=lib.maec.maec11.domainObject-class.html#__init__,Method lib.maec.maec11.entityObject.__init__()=lib.maec.maec11.entityObject-class.html#__init__,Method lib.maec.maec11.extraHashType.__init__()=lib.maec.maec11.extraHashType-class.html#__init__,Method lib.maec.maec11.fieldDataEntry.__init__()=lib.maec.maec11.fieldDataEntry-class.html#__init__,Method lib.maec.maec11.fieldDataType.__init__()=lib.maec.maec11.fieldDataType-class.html#__init__,Method lib.maec.maec11.fileObject.__init__()=lib.maec.maec11.fileObject-class.html#__init__,Method lib.maec.maec11.locationType.__init__()=lib.maec.maec11.locationType-class.html#__init__,Method lib.maec.maec11.malwareMetaData.__init__()=lib.maec.maec11.malwareMetaData-class.html#__init__,Method lib.maec.maec11.meta_item_metadataType.__init__()=lib.maec.maec11.meta_item_metadataType-class.html#__init__,Method lib.maec.maec11.objectPropertiesType.__init__()=lib.maec.maec11.objectPropertiesType-class.html#__init__,Method lib.maec.maec11.objectProperty.__init__()=lib.maec.maec11.objectProperty-class.html#__init__,Method lib.maec.maec11.objectsType.__init__()=lib.maec.maec11.objectsType-class.html#__init__,Method lib.maec.maec11.property.__init__()=lib.maec.maec11.property-class.html#__init__,Method lib.maec.maec11.reference.__init__()=lib.maec.maec11.reference-class.html#__init__,Method lib.maec.maec11.referencesType.__init__()=lib.maec.maec11.referencesType-class.html#__init__,Method lib.maec.maec11.referencesType1.__init__()=lib.maec.maec11.referencesType1-class.html#__init__,Method lib.maec.maec11.registryObject.__init__()=lib.maec.maec11.registryObject-class.html#__init__,Method lib.maec.maec11.relationship.__init__()=lib.maec.maec11.relationship-class.html#__init__,Method lib.maec.maec11.relationshipsType.__init__()=lib.maec.maec11.relationshipsType-class.html#__init__,Method lib.maec.maec11.sourceType.__init__()=lib.maec.maec11.sourceType-class.html#__init__,Method lib.maec.maec11.targetType.__init__()=lib.maec.maec11.targetType-class.html#__init__,Method lib.maec.maec11.uriObject.__init__()=lib.maec.maec11.uriObject-class.html#__init__,Method lib.maec.maec11.volumeType.__init__()=lib.maec.maec11.volumeType-class.html#__init__,Method modules.processing.behavior.Enhanced.__init__()=modules.processing.behavior.Enhanced-class.html#__init__,Method modules.processing.behavior.ParseProcessLog.__init__()=modules.processing.behavior.ParseProcessLog-class.html#__init__,Method modules.processing.behavior.ProcessTree.__init__()=modules.processing.behavior.ProcessTree-class.html#__init__,Method modules.processing.behavior.Processes.__init__()=modules.processing.behavior.Processes-class.html#__init__,Method modules.processing.behavior.Summary.__init__()=modules.processing.behavior.Summary-class.html#__init__,Method modules.processing.memory.VolatilityAPI.__init__()=modules.processing.memory.VolatilityAPI-class.html#__init__,Method modules.processing.memory.VolatilityManager.__init__()=modules.processing.memory.VolatilityManager-class.html#__init__,Method modules.processing.network.Pcap.__init__()=modules.processing.network.Pcap-class.html#__init__,Method modules.processing.static.PortableExecutable.__init__()=modules.processing.static.PortableExecutable-class.html#__init__"><a title="lib.cuckoo.common.abstracts.Auxiliary.__init__
+lib.cuckoo.common.abstracts.LibVirtMachinery.__init__
+lib.cuckoo.common.abstracts.Machinery.__init__
+lib.cuckoo.common.abstracts.Processing.__init__
+lib.cuckoo.common.abstracts.Report.__init__
+lib.cuckoo.common.abstracts.Signature.__init__
+lib.cuckoo.common.config.Config.__init__
+lib.cuckoo.common.irc.ircMessage.__init__
+lib.cuckoo.common.netlog.BsonParser.__init__
+lib.cuckoo.common.netlog.NetlogParser.__init__
+lib.cuckoo.common.objects.File.__init__
+lib.cuckoo.common.objects.URL.__init__
+lib.cuckoo.common.utils.TimeoutServer.__init__
+lib.cuckoo.common.utils.TimeoutTransport.__init__
+lib.cuckoo.core.database.Database.__init__
+lib.cuckoo.core.database.Error.__init__
+lib.cuckoo.core.database.Guest.__init__
+lib.cuckoo.core.database.Machine.__init__
+lib.cuckoo.core.database.Sample.__init__
+lib.cuckoo.core.database.Tag.__init__
+lib.cuckoo.core.database.Task.__init__
+lib.cuckoo.core.guest.GuestManager.__init__
+lib.cuckoo.core.plugins.RunAuxiliary.__init__
+lib.cuckoo.core.plugins.RunProcessing.__init__
+lib.cuckoo.core.plugins.RunReporting.__init__
+lib.cuckoo.core.plugins.RunSignatures.__init__
+lib.cuckoo.core.resultserver.FileUpload.__init__
+lib.cuckoo.core.resultserver.LogHandler.__init__
+lib.cuckoo.core.resultserver.Resultserver.__init__
+lib.cuckoo.core.scheduler.AnalysisManager.__init__
+lib.cuckoo.core.scheduler.Scheduler.__init__
+lib.hpfeeds.FeedUnpack.__init__
+lib.hpfeeds.HPC.__init__
+lib.maec.maec11.APICallType.__init__
+lib.maec.maec11.APICall_ParameterType.__init__
+lib.maec.maec11.ASNObject.__init__
+lib.maec.maec11.ActionCollectionType.__init__
+lib.maec.maec11.ActionImplementationType.__init__
+lib.maec.maec11.ActionReferenceType.__init__
+lib.maec.maec11.ActionType.__init__
+lib.maec.maec11.Action_Collection_PoolType.__init__
+lib.maec.maec11.Action_InitiatorType.__init__
+lib.maec.maec11.Action_PoolType.__init__
+lib.maec.maec11.ActionsType.__init__
+lib.maec.maec11.ActionsType1.__init__
+lib.maec.maec11.Affected_ObjectType.__init__
+lib.maec.maec11.Affected_ObjectsType.__init__
+lib.maec.maec11.AnalysesType.__init__
+lib.maec.maec11.AnalysisType.__init__
+lib.maec.maec11.Analysis_EnvironmentType.__init__
+lib.maec.maec11.AnalystsType.__init__
+lib.maec.maec11.Associated_CodeType.__init__
+lib.maec.maec11.Associated_Code_SnippetType.__init__
+lib.maec.maec11.Attempted_Vulnerability_ExploitType.__init__
+lib.maec.maec11.BehaviorCollectionType.__init__
+lib.maec.maec11.BehaviorReferenceType.__init__
+lib.maec.maec11.BehaviorType.__init__
+lib.maec.maec11.Behavior_Collection_PoolType.__init__
+lib.maec.maec11.Behavior_PoolType.__init__
+lib.maec.maec11.BehaviorsType.__init__
+lib.maec.maec11.Block.__init__
+lib.maec.maec11.BundleType.__init__
+lib.maec.maec11.CPESpecificationType.__init__
+lib.maec.maec11.CVEVulnerabilityType.__init__
+lib.maec.maec11.CertificateType.__init__
+lib.maec.maec11.Child_ProcessesType.__init__
+lib.maec.maec11.ClassificationsType.__init__
+lib.maec.maec11.CodeType.__init__
+lib.maec.maec11.Constituent_EffectsType.__init__
+lib.maec.maec11.Custom_AttributeType.__init__
+lib.maec.maec11.Custom_Object_AttributesType.__init__
+lib.maec.maec11.DOS_HeaderType.__init__
+lib.maec.maec11.Daemon_Action_AttributesType.__init__
+lib.maec.maec11.Daemon_Object_AttributesType.__init__
+lib.maec.maec11.DataType.__init__
+lib.maec.maec11.Data_DirectoryType.__init__
+lib.maec.maec11.Data_HashesType.__init__
+lib.maec.maec11.Data_SizeType.__init__
+lib.maec.maec11.Digital_CertificatesType.__init__
+lib.maec.maec11.DiscoveryMethod.__init__
+lib.maec.maec11.EffectCollectionType.__init__
+lib.maec.maec11.EffectReferenceType.__init__
+lib.maec.maec11.EffectType.__init__
+lib.maec.maec11.Effect_PoolType.__init__
+lib.maec.maec11.EffectsType.__init__
+lib.maec.maec11.EffectsType1.__init__
+lib.maec.maec11.EffectsType2.__init__
+lib.maec.maec11.EffectsType3.__init__
+lib.maec.maec11.Enivironment_VariablesType.__init__
+lib.maec.maec11.Enumerated_DaemonsType.__init__
+lib.maec.maec11.Environment_VariableType.__init__
+lib.maec.maec11.Event_Type.__init__
+lib.maec.maec11.ExportsType.__init__
+lib.maec.maec11.File_HeaderType.__init__
+lib.maec.maec11.File_System_Action_AttributesType.__init__
+lib.maec.maec11.File_System_Object_AttributesType.__init__
+lib.maec.maec11.File_TypeType.__init__
+lib.maec.maec11.File_Type_AttributesType.__init__
+lib.maec.maec11.GUI_Object_AttributesType.__init__
+lib.maec.maec11.HandleType.__init__
+lib.maec.maec11.HandlesType.__init__
+lib.maec.maec11.HashType.__init__
+lib.maec.maec11.HashesType.__init__
+lib.maec.maec11.HashesType1.__init__
+lib.maec.maec11.HashesType2.__init__
+lib.maec.maec11.HashesType3.__init__
+lib.maec.maec11.HashesType4.__init__
+lib.maec.maec11.HashesType5.__init__
+lib.maec.maec11.HashesType6.__init__
+lib.maec.maec11.HashesType7.__init__
+lib.maec.maec11.Header_HashesType.__init__
+lib.maec.maec11.HeadersType.__init__
+lib.maec.maec11.IPAddress.__init__
+lib.maec.maec11.IPC_Action_AttributesType.__init__
+lib.maec.maec11.IPC_Object_AttributesType.__init__
+lib.maec.maec11.IPObject.__init__
+lib.maec.maec11.ImageType.__init__
+lib.maec.maec11.ImageType1.__init__
+lib.maec.maec11.ImageType2.__init__
+lib.maec.maec11.ImagesType.__init__
+lib.maec.maec11.ImagesType1.__init__
+lib.maec.maec11.ImagesType2.__init__
+lib.maec.maec11.Imported_FunctionType.__init__
+lib.maec.maec11.Imported_FunctionsType.__init__
+lib.maec.maec11.ImportsType.__init__
+lib.maec.maec11.Internet_Action_AttributesType.__init__
+lib.maec.maec11.Internet_Object_AttributesType.__init__
+lib.maec.maec11.Library_Type.__init__
+lib.maec.maec11.MemberSpec_.__init__
+lib.maec.maec11.Memory_Action_AttributesType.__init__
+lib.maec.maec11.Memory_Object_AttributesType.__init__
+lib.maec.maec11.MixedContainer.__init__
+lib.maec.maec11.Module_Action_AttributesType.__init__
+lib.maec.maec11.Module_Object_AttributesType.__init__
+lib.maec.maec11.Nature_Of_Relationship.__init__
+lib.maec.maec11.Nature_of_Relationship.__init__
+lib.maec.maec11.Network_Action_AttributesType.__init__
+lib.maec.maec11.Network_Object_AttributesType.__init__
+lib.maec.maec11.NotesType.__init__
+lib.maec.maec11.ObjectCollectionType.__init__
+lib.maec.maec11.ObjectReferenceType.__init__
+lib.maec.maec11.ObjectType.__init__
+lib.maec.maec11.Object_Collection_PoolType.__init__
+lib.maec.maec11.Object_PoolType.__init__
+lib.maec.maec11.Object_SizeType.__init__
+lib.maec.maec11.ObjectsType.__init__
+lib.maec.maec11.ObjectsType1.__init__
+lib.maec.maec11.Optional_HeaderType.__init__
+lib.maec.maec11.PEDataDirectoryStruct.__init__
+lib.maec.maec11.PEExportType.__init__
+lib.maec.maec11.PEImportType.__init__
+lib.maec.maec11.PEResourceType.__init__
+lib.maec.maec11.PESectionHeaderStruct.__init__
+lib.maec.maec11.PESectionType.__init__
+lib.maec.maec11.PEStringType.__init__
+lib.maec.maec11.PE_Binary_AttributesType.__init__
+lib.maec.maec11.PE_HeaderType.__init__
+lib.maec.maec11.Packer_TypeType.__init__
+lib.maec.maec11.PackingType.__init__
+lib.maec.maec11.PathType.__init__
+lib.maec.maec11.PoolsType.__init__
+lib.maec.maec11.Process_Action_AttributesType.__init__
+lib.maec.maec11.Process_Object_AttributesType.__init__
+lib.maec.maec11.PurposeType.__init__
+lib.maec.maec11.Registry_Action_AttributesType.__init__
+lib.maec.maec11.Registry_Object_AttributesType.__init__
+lib.maec.maec11.Related_ActionType.__init__
+lib.maec.maec11.Related_ActionsType.__init__
+lib.maec.maec11.Related_BehaviorType.__init__
+lib.maec.maec11.Related_BehaviorsType.__init__
+lib.maec.maec11.Related_ObjectType.__init__
+lib.maec.maec11.Related_ObjectsType.__init__
+lib.maec.maec11.ResourcesType.__init__
+lib.maec.maec11.Section_TableType.__init__
+lib.maec.maec11.SectionsType.__init__
+lib.maec.maec11.Service_Type.__init__
+lib.maec.maec11.Socket_Type.__init__
+lib.maec.maec11.SourceType.__init__
+lib.maec.maec11.StringsType.__init__
+lib.maec.maec11.StructuredTextType.__init__
+lib.maec.maec11.SubjectType.__init__
+lib.maec.maec11.System_Action_AttributesType.__init__
+lib.maec.maec11.TitleType.__init__
+lib.maec.maec11.ToolType.__init__
+lib.maec.maec11.Tools_UsedType.__init__
+lib.maec.maec11.TrID_TypeType.__init__
+lib.maec.maec11.ValueType.__init__
+lib.maec.maec11.Version_BlockType.__init__
+lib.maec.maec11.Vulnerability_ExploitType.__init__
+lib.maec.maec11.classificationDetailsType.__init__
+lib.maec.maec11.classificationObject.__init__
+lib.maec.maec11.domainObject.__init__
+lib.maec.maec11.entityObject.__init__
+lib.maec.maec11.extraHashType.__init__
+lib.maec.maec11.fieldDataEntry.__init__
+lib.maec.maec11.fieldDataType.__init__
+lib.maec.maec11.fileObject.__init__
+lib.maec.maec11.locationType.__init__
+lib.maec.maec11.malwareMetaData.__init__
+lib.maec.maec11.meta_item_metadataType.__init__
+lib.maec.maec11.objectPropertiesType.__init__
+lib.maec.maec11.objectProperty.__init__
+lib.maec.maec11.objectsType.__init__
+lib.maec.maec11.property.__init__
+lib.maec.maec11.reference.__init__
+lib.maec.maec11.referencesType.__init__
+lib.maec.maec11.referencesType1.__init__
+lib.maec.maec11.registryObject.__init__
+lib.maec.maec11.relationship.__init__
+lib.maec.maec11.relationshipsType.__init__
+lib.maec.maec11.sourceType.__init__
+lib.maec.maec11.targetType.__init__
+lib.maec.maec11.uriObject.__init__
+lib.maec.maec11.volumeType.__init__
+modules.processing.behavior.Enhanced.__init__
+modules.processing.behavior.ParseProcessLog.__init__
+modules.processing.behavior.ProcessTree.__init__
+modules.processing.behavior.Processes.__init__
+modules.processing.behavior.Summary.__init__
+modules.processing.memory.VolatilityAPI.__init__
+modules.processing.memory.VolatilityManager.__init__
+modules.processing.network.Pcap.__init__
+modules.processing.static.PortableExecutable.__init__" class="py-name" href="#" onclick="return doclink('link-22', '__init__', 'link-22');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="TimeoutServer._set_timeout"></a><div id="TimeoutServer._set_timeout-def"><a name="L152"></a><tt class="py-lineno">152</tt> <a class="py-toggle" href="#" id="TimeoutServer._set_timeout-toggle" onclick="return toggle('TimeoutServer._set_timeout');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils.TimeoutServer-class.html#_set_timeout">_set_timeout</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">timeout</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TimeoutServer._set_timeout-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TimeoutServer._set_timeout-expanded"><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_ServerProxy__transport</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-name">t</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-23', 'timeout', 'link-18');">timeout</a></tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-24', 'timeout', 'link-18');">timeout</a></tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-comment"># If we still have a socket we need to update that as well.</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">,</tt> <tt class="py-string">"_connection"</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">_connection</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">_connection</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">sock</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">            <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">_connection</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">sock</tt><tt class="py-op">.</tt><tt class="py-name">settimeout</tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-25', 'timeout', 'link-18');">timeout</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="TimeoutTransport"></a><div id="TimeoutTransport-def"><a name="L159"></a><tt class="py-lineno">159</tt> <a class="py-toggle" href="#" id="TimeoutTransport-toggle" onclick="return toggle('TimeoutTransport');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.cuckoo.common.utils.TimeoutTransport-class.html">TimeoutTransport</a><tt class="py-op">(</tt><tt class="py-base-class">xmlrpclib</tt><tt class="py-op">.</tt><tt class="py-base-class">Transport</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TimeoutTransport-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TimeoutTransport-expanded"><a name="TimeoutTransport.__init__"></a><div id="TimeoutTransport.__init__-def"><a name="L160"></a><tt class="py-lineno">160</tt> <a class="py-toggle" href="#" id="TimeoutTransport.__init__-toggle" onclick="return toggle('TimeoutTransport.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils.TimeoutTransport-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TimeoutTransport.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TimeoutTransport.__init__-expanded"><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-26', 'timeout', 'link-18');">timeout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">kwargs</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-string">"timeout"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-name">xmlrpclib</tt><tt class="py-op">.</tt><tt class="py-name">Transport</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="lib.cuckoo.common.abstracts.Auxiliary.__init__
+lib.cuckoo.common.abstracts.LibVirtMachinery.__init__
+lib.cuckoo.common.abstracts.Machinery.__init__
+lib.cuckoo.common.abstracts.Processing.__init__
+lib.cuckoo.common.abstracts.Report.__init__
+lib.cuckoo.common.abstracts.Signature.__init__
+lib.cuckoo.common.config.Config.__init__
+lib.cuckoo.common.irc.ircMessage.__init__
+lib.cuckoo.common.netlog.BsonParser.__init__
+lib.cuckoo.common.netlog.NetlogParser.__init__
+lib.cuckoo.common.objects.File.__init__
+lib.cuckoo.common.objects.URL.__init__
+lib.cuckoo.common.utils.TimeoutServer.__init__
+lib.cuckoo.common.utils.TimeoutTransport.__init__
+lib.cuckoo.core.database.Database.__init__
+lib.cuckoo.core.database.Error.__init__
+lib.cuckoo.core.database.Guest.__init__
+lib.cuckoo.core.database.Machine.__init__
+lib.cuckoo.core.database.Sample.__init__
+lib.cuckoo.core.database.Tag.__init__
+lib.cuckoo.core.database.Task.__init__
+lib.cuckoo.core.guest.GuestManager.__init__
+lib.cuckoo.core.plugins.RunAuxiliary.__init__
+lib.cuckoo.core.plugins.RunProcessing.__init__
+lib.cuckoo.core.plugins.RunReporting.__init__
+lib.cuckoo.core.plugins.RunSignatures.__init__
+lib.cuckoo.core.resultserver.FileUpload.__init__
+lib.cuckoo.core.resultserver.LogHandler.__init__
+lib.cuckoo.core.resultserver.Resultserver.__init__
+lib.cuckoo.core.scheduler.AnalysisManager.__init__
+lib.cuckoo.core.scheduler.Scheduler.__init__
+lib.hpfeeds.FeedUnpack.__init__
+lib.hpfeeds.HPC.__init__
+lib.maec.maec11.APICallType.__init__
+lib.maec.maec11.APICall_ParameterType.__init__
+lib.maec.maec11.ASNObject.__init__
+lib.maec.maec11.ActionCollectionType.__init__
+lib.maec.maec11.ActionImplementationType.__init__
+lib.maec.maec11.ActionReferenceType.__init__
+lib.maec.maec11.ActionType.__init__
+lib.maec.maec11.Action_Collection_PoolType.__init__
+lib.maec.maec11.Action_InitiatorType.__init__
+lib.maec.maec11.Action_PoolType.__init__
+lib.maec.maec11.ActionsType.__init__
+lib.maec.maec11.ActionsType1.__init__
+lib.maec.maec11.Affected_ObjectType.__init__
+lib.maec.maec11.Affected_ObjectsType.__init__
+lib.maec.maec11.AnalysesType.__init__
+lib.maec.maec11.AnalysisType.__init__
+lib.maec.maec11.Analysis_EnvironmentType.__init__
+lib.maec.maec11.AnalystsType.__init__
+lib.maec.maec11.Associated_CodeType.__init__
+lib.maec.maec11.Associated_Code_SnippetType.__init__
+lib.maec.maec11.Attempted_Vulnerability_ExploitType.__init__
+lib.maec.maec11.BehaviorCollectionType.__init__
+lib.maec.maec11.BehaviorReferenceType.__init__
+lib.maec.maec11.BehaviorType.__init__
+lib.maec.maec11.Behavior_Collection_PoolType.__init__
+lib.maec.maec11.Behavior_PoolType.__init__
+lib.maec.maec11.BehaviorsType.__init__
+lib.maec.maec11.Block.__init__
+lib.maec.maec11.BundleType.__init__
+lib.maec.maec11.CPESpecificationType.__init__
+lib.maec.maec11.CVEVulnerabilityType.__init__
+lib.maec.maec11.CertificateType.__init__
+lib.maec.maec11.Child_ProcessesType.__init__
+lib.maec.maec11.ClassificationsType.__init__
+lib.maec.maec11.CodeType.__init__
+lib.maec.maec11.Constituent_EffectsType.__init__
+lib.maec.maec11.Custom_AttributeType.__init__
+lib.maec.maec11.Custom_Object_AttributesType.__init__
+lib.maec.maec11.DOS_HeaderType.__init__
+lib.maec.maec11.Daemon_Action_AttributesType.__init__
+lib.maec.maec11.Daemon_Object_AttributesType.__init__
+lib.maec.maec11.DataType.__init__
+lib.maec.maec11.Data_DirectoryType.__init__
+lib.maec.maec11.Data_HashesType.__init__
+lib.maec.maec11.Data_SizeType.__init__
+lib.maec.maec11.Digital_CertificatesType.__init__
+lib.maec.maec11.DiscoveryMethod.__init__
+lib.maec.maec11.EffectCollectionType.__init__
+lib.maec.maec11.EffectReferenceType.__init__
+lib.maec.maec11.EffectType.__init__
+lib.maec.maec11.Effect_PoolType.__init__
+lib.maec.maec11.EffectsType.__init__
+lib.maec.maec11.EffectsType1.__init__
+lib.maec.maec11.EffectsType2.__init__
+lib.maec.maec11.EffectsType3.__init__
+lib.maec.maec11.Enivironment_VariablesType.__init__
+lib.maec.maec11.Enumerated_DaemonsType.__init__
+lib.maec.maec11.Environment_VariableType.__init__
+lib.maec.maec11.Event_Type.__init__
+lib.maec.maec11.ExportsType.__init__
+lib.maec.maec11.File_HeaderType.__init__
+lib.maec.maec11.File_System_Action_AttributesType.__init__
+lib.maec.maec11.File_System_Object_AttributesType.__init__
+lib.maec.maec11.File_TypeType.__init__
+lib.maec.maec11.File_Type_AttributesType.__init__
+lib.maec.maec11.GUI_Object_AttributesType.__init__
+lib.maec.maec11.HandleType.__init__
+lib.maec.maec11.HandlesType.__init__
+lib.maec.maec11.HashType.__init__
+lib.maec.maec11.HashesType.__init__
+lib.maec.maec11.HashesType1.__init__
+lib.maec.maec11.HashesType2.__init__
+lib.maec.maec11.HashesType3.__init__
+lib.maec.maec11.HashesType4.__init__
+lib.maec.maec11.HashesType5.__init__
+lib.maec.maec11.HashesType6.__init__
+lib.maec.maec11.HashesType7.__init__
+lib.maec.maec11.Header_HashesType.__init__
+lib.maec.maec11.HeadersType.__init__
+lib.maec.maec11.IPAddress.__init__
+lib.maec.maec11.IPC_Action_AttributesType.__init__
+lib.maec.maec11.IPC_Object_AttributesType.__init__
+lib.maec.maec11.IPObject.__init__
+lib.maec.maec11.ImageType.__init__
+lib.maec.maec11.ImageType1.__init__
+lib.maec.maec11.ImageType2.__init__
+lib.maec.maec11.ImagesType.__init__
+lib.maec.maec11.ImagesType1.__init__
+lib.maec.maec11.ImagesType2.__init__
+lib.maec.maec11.Imported_FunctionType.__init__
+lib.maec.maec11.Imported_FunctionsType.__init__
+lib.maec.maec11.ImportsType.__init__
+lib.maec.maec11.Internet_Action_AttributesType.__init__
+lib.maec.maec11.Internet_Object_AttributesType.__init__
+lib.maec.maec11.Library_Type.__init__
+lib.maec.maec11.MemberSpec_.__init__
+lib.maec.maec11.Memory_Action_AttributesType.__init__
+lib.maec.maec11.Memory_Object_AttributesType.__init__
+lib.maec.maec11.MixedContainer.__init__
+lib.maec.maec11.Module_Action_AttributesType.__init__
+lib.maec.maec11.Module_Object_AttributesType.__init__
+lib.maec.maec11.Nature_Of_Relationship.__init__
+lib.maec.maec11.Nature_of_Relationship.__init__
+lib.maec.maec11.Network_Action_AttributesType.__init__
+lib.maec.maec11.Network_Object_AttributesType.__init__
+lib.maec.maec11.NotesType.__init__
+lib.maec.maec11.ObjectCollectionType.__init__
+lib.maec.maec11.ObjectReferenceType.__init__
+lib.maec.maec11.ObjectType.__init__
+lib.maec.maec11.Object_Collection_PoolType.__init__
+lib.maec.maec11.Object_PoolType.__init__
+lib.maec.maec11.Object_SizeType.__init__
+lib.maec.maec11.ObjectsType.__init__
+lib.maec.maec11.ObjectsType1.__init__
+lib.maec.maec11.Optional_HeaderType.__init__
+lib.maec.maec11.PEDataDirectoryStruct.__init__
+lib.maec.maec11.PEExportType.__init__
+lib.maec.maec11.PEImportType.__init__
+lib.maec.maec11.PEResourceType.__init__
+lib.maec.maec11.PESectionHeaderStruct.__init__
+lib.maec.maec11.PESectionType.__init__
+lib.maec.maec11.PEStringType.__init__
+lib.maec.maec11.PE_Binary_AttributesType.__init__
+lib.maec.maec11.PE_HeaderType.__init__
+lib.maec.maec11.Packer_TypeType.__init__
+lib.maec.maec11.PackingType.__init__
+lib.maec.maec11.PathType.__init__
+lib.maec.maec11.PoolsType.__init__
+lib.maec.maec11.Process_Action_AttributesType.__init__
+lib.maec.maec11.Process_Object_AttributesType.__init__
+lib.maec.maec11.PurposeType.__init__
+lib.maec.maec11.Registry_Action_AttributesType.__init__
+lib.maec.maec11.Registry_Object_AttributesType.__init__
+lib.maec.maec11.Related_ActionType.__init__
+lib.maec.maec11.Related_ActionsType.__init__
+lib.maec.maec11.Related_BehaviorType.__init__
+lib.maec.maec11.Related_BehaviorsType.__init__
+lib.maec.maec11.Related_ObjectType.__init__
+lib.maec.maec11.Related_ObjectsType.__init__
+lib.maec.maec11.ResourcesType.__init__
+lib.maec.maec11.Section_TableType.__init__
+lib.maec.maec11.SectionsType.__init__
+lib.maec.maec11.Service_Type.__init__
+lib.maec.maec11.Socket_Type.__init__
+lib.maec.maec11.SourceType.__init__
+lib.maec.maec11.StringsType.__init__
+lib.maec.maec11.StructuredTextType.__init__
+lib.maec.maec11.SubjectType.__init__
+lib.maec.maec11.System_Action_AttributesType.__init__
+lib.maec.maec11.TitleType.__init__
+lib.maec.maec11.ToolType.__init__
+lib.maec.maec11.Tools_UsedType.__init__
+lib.maec.maec11.TrID_TypeType.__init__
+lib.maec.maec11.ValueType.__init__
+lib.maec.maec11.Version_BlockType.__init__
+lib.maec.maec11.Vulnerability_ExploitType.__init__
+lib.maec.maec11.classificationDetailsType.__init__
+lib.maec.maec11.classificationObject.__init__
+lib.maec.maec11.domainObject.__init__
+lib.maec.maec11.entityObject.__init__
+lib.maec.maec11.extraHashType.__init__
+lib.maec.maec11.fieldDataEntry.__init__
+lib.maec.maec11.fieldDataType.__init__
+lib.maec.maec11.fileObject.__init__
+lib.maec.maec11.locationType.__init__
+lib.maec.maec11.malwareMetaData.__init__
+lib.maec.maec11.meta_item_metadataType.__init__
+lib.maec.maec11.objectPropertiesType.__init__
+lib.maec.maec11.objectProperty.__init__
+lib.maec.maec11.objectsType.__init__
+lib.maec.maec11.property.__init__
+lib.maec.maec11.reference.__init__
+lib.maec.maec11.referencesType.__init__
+lib.maec.maec11.referencesType1.__init__
+lib.maec.maec11.registryObject.__init__
+lib.maec.maec11.relationship.__init__
+lib.maec.maec11.relationshipsType.__init__
+lib.maec.maec11.sourceType.__init__
+lib.maec.maec11.targetType.__init__
+lib.maec.maec11.uriObject.__init__
+lib.maec.maec11.volumeType.__init__
+modules.processing.behavior.Enhanced.__init__
+modules.processing.behavior.ParseProcessLog.__init__
+modules.processing.behavior.ProcessTree.__init__
+modules.processing.behavior.Processes.__init__
+modules.processing.behavior.Summary.__init__
+modules.processing.memory.VolatilityAPI.__init__
+modules.processing.memory.VolatilityManager.__init__
+modules.processing.network.Pcap.__init__
+modules.processing.static.PortableExecutable.__init__" class="py-name" href="#" onclick="return doclink('link-27', '__init__', 'link-22');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="TimeoutTransport.make_connection"></a><div id="TimeoutTransport.make_connection-def"><a name="L164"></a><tt class="py-lineno">164</tt> <a class="py-toggle" href="#" id="TimeoutTransport.make_connection-toggle" onclick="return toggle('TimeoutTransport.make_connection');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils.TimeoutTransport-class.html#make_connection">make_connection</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TimeoutTransport.make_connection-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TimeoutTransport.make_connection-expanded"><a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt class="py-name">xmlrpclib</tt><tt class="py-op">.</tt><tt class="py-name">Transport</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method lib.cuckoo.common.utils.TimeoutTransport.make_connection()=lib.cuckoo.common.utils.TimeoutTransport-class.html#make_connection"><a title="lib.cuckoo.common.utils.TimeoutTransport.make_connection" class="py-name" href="#" onclick="return doclink('link-28', 'make_connection', 'link-28');">make_connection</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-29', 'timeout', 'link-18');">timeout</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">            <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-30', 'timeout', 'link-18');">timeout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-31', 'timeout', 'link-18');">timeout</a></tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">conn</tt> </tt>
+</div></div><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
+<a name="Singleton"></a><div id="Singleton-def"><a name="L170"></a><tt class="py-lineno">170</tt> <a class="py-toggle" href="#" id="Singleton-toggle" onclick="return toggle('Singleton');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.cuckoo.common.utils.Singleton-class.html">Singleton</a><tt class="py-op">(</tt><tt class="py-base-class">type</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Singleton-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Singleton-expanded"><a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-docstring">"""Singleton.</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">    @see: http://stackoverflow.com/questions/6760685/creating-a-singleton-in-python</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">    <tt id="link-32" class="py-name" targets="Variable lib.cuckoo.common.utils.Singleton._instances=lib.cuckoo.common.utils.Singleton-class.html#_instances"><a title="lib.cuckoo.common.utils.Singleton._instances" class="py-name" href="#" onclick="return doclink('link-32', '_instances', 'link-32');">_instances</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="Singleton.__call__"></a><div id="Singleton.__call__-def"><a name="L175"></a><tt class="py-lineno">175</tt> <a class="py-toggle" href="#" id="Singleton.__call__-toggle" onclick="return toggle('Singleton.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils.Singleton-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Singleton.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Singleton.__call__-expanded"><a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">cls</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="lib.cuckoo.common.utils.Singleton._instances" class="py-name" href="#" onclick="return doclink('link-33', '_instances', 'link-32');">_instances</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">            <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="lib.cuckoo.common.utils.Singleton._instances" class="py-name" href="#" onclick="return doclink('link-34', '_instances', 'link-32');">_instances</a></tt><tt class="py-op">[</tt><tt class="py-name">cls</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-35" class="py-name" targets="Class lib.cuckoo.common.utils.Singleton=lib.cuckoo.common.utils.Singleton-class.html"><a title="lib.cuckoo.common.utils.Singleton" class="py-name" href="#" onclick="return doclink('link-35', 'Singleton', 'link-35');">Singleton</a></tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method lib.cuckoo.common.utils.Singleton.__call__()=lib.cuckoo.common.utils.Singleton-class.html#__call__"><a title="lib.cuckoo.common.utils.Singleton.__call__" class="py-name" href="#" onclick="return doclink('link-36', '__call__', 'link-36');">__call__</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="lib.cuckoo.common.utils.Singleton._instances" class="py-name" href="#" onclick="return doclink('link-37', '_instances', 'link-32');">_instances</a></tt><tt class="py-op">[</tt><tt class="py-name">cls</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="logtime"></a><div id="logtime-def"><a name="L180"></a><tt class="py-lineno">180</tt> <a class="py-toggle" href="#" id="logtime-toggle" onclick="return toggle('logtime');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#logtime">logtime</a><tt class="py-op">(</tt><tt class="py-param">dt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="logtime-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="logtime-expanded"><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-docstring">"""Formats time like a logger does, for the csv output</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">       (e.g. "2013-01-25 13:21:44,590")</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring">    @param dt: datetime object</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">    @return: time string</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">    <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">strftime</tt><tt class="py-op">(</tt><tt class="py-string">"%Y-%m-%d %H:%M:%S"</tt><tt class="py-op">,</tt> <tt class="py-name">dt</tt><tt class="py-op">.</tt><tt class="py-name">timetuple</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-string">"%s,%03d"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">,</tt> <tt class="py-name">dt</tt><tt class="py-op">.</tt><tt class="py-name">microsecond</tt><tt class="py-op">/</tt><tt class="py-number">1000</tt><tt class="py-op">)</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+</div><a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"> </tt>
+<a name="time_from_cuckoomon"></a><div id="time_from_cuckoomon-def"><a name="L190"></a><tt class="py-lineno">190</tt> <a class="py-toggle" href="#" id="time_from_cuckoomon-toggle" onclick="return toggle('time_from_cuckoomon');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#time_from_cuckoomon">time_from_cuckoomon</a><tt class="py-op">(</tt><tt class="py-param">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="time_from_cuckoomon-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="time_from_cuckoomon-expanded"><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-docstring">"""Parse time string received from cuckoomon via netlog</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">    @param s: time string</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">    @return: datetime object</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">strptime</tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">,</tt> <tt class="py-string">"%Y-%m-%d %H:%M:%S,%f"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"> </tt>
+<a name="to_unicode"></a><div id="to_unicode-def"><a name="L197"></a><tt class="py-lineno">197</tt> <a class="py-toggle" href="#" id="to_unicode-toggle" onclick="return toggle('to_unicode');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#to_unicode">to_unicode</a><tt class="py-op">(</tt><tt class="py-param">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="to_unicode-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="to_unicode-expanded"><a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">    <tt class="py-docstring">"""Attempt to fix non uft-8 string into utf-8. It tries to guess input encoding,</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">    if fail retry with a replace strategy (so undetectable chars will be escaped).</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">    @see: fuller list of encodings at http://docs.python.org/library/codecs.html#standard-encodings</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">brute_enc</tt><tt class="py-op">(</tt><tt class="py-param">s2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-docstring">"""Trying to decode via simple brute forcing."""</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-name">encodings</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">"ascii"</tt><tt class="py-op">,</tt> <tt class="py-string">"utf8"</tt><tt class="py-op">,</tt> <tt class="py-string">"latin1"</tt><tt class="py-op">)</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">enc</tt> <tt class="py-keyword">in</tt> <tt class="py-name">encodings</tt><tt class="py-op">:</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">unicode</tt><tt class="py-op">(</tt><tt class="py-name">s2</tt><tt class="py-op">,</tt> <tt class="py-name">enc</tt><tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">UnicodeDecodeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line"> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">chardet_enc</tt><tt class="py-op">(</tt><tt class="py-param">s2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-docstring">"""Guess encoding via chardet."""</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-name">enc</tt> <tt class="py-op">=</tt> <tt class="py-name">chardet</tt><tt class="py-op">.</tt><tt class="py-name">detect</tt><tt class="py-op">(</tt><tt class="py-name">s2</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"encoding"</tt><tt class="py-op">]</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">unicode</tt><tt class="py-op">(</tt><tt class="py-name">s2</tt><tt class="py-op">,</tt> <tt class="py-name">enc</tt><tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">UnicodeDecodeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">    <tt class="py-comment"># If already in unicode, skip.</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">,</tt> <tt class="py-name">unicode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">    <tt class="py-comment"># First try to decode against a little set of common encodings.</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">brute_enc</tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">    <tt class="py-comment"># Try via chardet.</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt class="py-name">result</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt id="link-38" class="py-name"><a title="lib.cuckoo.common.utils.HAVE_CHARDET" class="py-name" href="#" onclick="return doclink('link-38', 'HAVE_CHARDET', 'link-5');">HAVE_CHARDET</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">chardet_enc</tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">    <tt class="py-comment"># If not possible to convert the input string, try again with</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">    <tt class="py-comment"># a replace strategy.</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">result</tt><tt class="py-op">:</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">unicode</tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">,</tt> <tt id="link-39" class="py-name" targets="Variable lib.cuckoo.core.database.Task.errors=lib.cuckoo.core.database.Task-class.html#errors"><a title="lib.cuckoo.core.database.Task.errors" class="py-name" href="#" onclick="return doclink('link-39', 'errors', 'link-39');">errors</a></tt><tt class="py-op">=</tt><tt class="py-string">"replace"</tt><tt class="py-op">)</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line"> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line"> </tt>
+<a name="cleanup_value"></a><div id="cleanup_value-def"><a name="L241"></a><tt class="py-lineno">241</tt> <a class="py-toggle" href="#" id="cleanup_value-toggle" onclick="return toggle('cleanup_value');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#cleanup_value">cleanup_value</a><tt class="py-op">(</tt><tt class="py-param">v</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cleanup_value-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="cleanup_value-expanded"><a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-docstring">"""Cleanup utility function, strips some unwanted parts from values."""</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">    <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">v</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">"\\??\\"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">        <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt><tt class="py-op">[</tt><tt class="py-number">4</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">v</tt> </tt>
+</div><a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"> </tt>
+<a name="sanitize_filename"></a><div id="sanitize_filename-def"><a name="L248"></a><tt class="py-lineno">248</tt> <a class="py-toggle" href="#" id="sanitize_filename-toggle" onclick="return toggle('sanitize_filename');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.common.utils-module.html#sanitize_filename">sanitize_filename</a><tt class="py-op">(</tt><tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="sanitize_filename-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="sanitize_filename-expanded"><a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">    <tt class="py-docstring">"""Kind of awful but necessary sanitizing of filenames to </tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"><tt class="py-docstring">    get rid of unicode problems."""</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">    <tt class="py-name">out</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">string</tt><tt class="py-op">.</tt><tt class="py-name">letters</tt> <tt class="py-op">+</tt> <tt class="py-name">string</tt><tt class="py-op">.</tt><tt class="py-name">digits</tt> <tt class="py-op">+</tt> <tt class="py-string">" _-."</tt><tt class="py-op">:</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">            <tt class="py-name">out</tt> <tt class="py-op">+=</tt> <tt class="py-name">c</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">            <tt class="py-name">out</tt> <tt class="py-op">+=</tt> <tt class="py-string">"_"</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">out</tt> </tt>
+</div><a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jan  9 16:03:54 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

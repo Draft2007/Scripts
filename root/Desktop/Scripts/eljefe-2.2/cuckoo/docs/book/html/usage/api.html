@@ -1,0 +1,661 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>REST API &mdash; Cuckoo Sandbox v1.0 Book</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Cuckoo Sandbox v1.0 Book" href="../index.html" />
+    <link rel="up" title="Usage" href="index.html" />
+    <link rel="next" title="Analysis Packages" href="packages.html" />
+    <link rel="prev" title="Web interface" href="web.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="packages.html" title="Analysis Packages"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="web.html" title="Web interface"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Cuckoo Sandbox v1.0 Book</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rest-api">
+<h1>REST API<a class="headerlink" href="#rest-api" title="Permalink to this headline">¶</a></h1>
+<p>As mentioned in <a class="reference internal" href="submit.html"><em>Submit an Analysis</em></a>, Cuckoo provides a simple and lightweight REST
+API server implemented in <a class="reference external" href="http://www.bottlepy.org">Bottle.py</a>, therefore in order to make the service
+work you&#8217;ll need it installed, Bottle release must be 0.10 or above.</p>
+<p>On Debian/Ubuntu:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install python-bottle</pre>
+</div>
+<p>With Pip:</p>
+<div class="highlight-python"><pre>$ pip install bottle</pre>
+</div>
+<div class="section" id="starting-the-api-server">
+<h2>Starting the API server<a class="headerlink" href="#starting-the-api-server" title="Permalink to this headline">¶</a></h2>
+<p>In order to start the API server you can simply do:</p>
+<div class="highlight-python"><pre>$ ./utils/api.py</pre>
+</div>
+<p>By default it will bind the service on <strong>localhost:8090</strong>. If you want to change those values, you can for example with:</p>
+<div class="highlight-python"><pre>$ ./utils/api.py --host 0.0.0.0 --port 1337</pre>
+</div>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>Following is a list of currently available resources and a brief description. For details click on the resource name.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Resource</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">POST</span></tt> <a class="reference internal" href="#tasks-create-file"><em>/tasks/create/file</em></a></td>
+<td>Adds a file to the list of pending tasks to be processed and analyzed.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">POST</span></tt> <a class="reference internal" href="#tasks-create-url"><em>/tasks/create/url</em></a></td>
+<td>Adds an URL to the list of pending tasks to be processed and analyzed.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#tasks-list"><em>/tasks/list</em></a></td>
+<td>Returns the list of tasks stored in the internal Cuckoo database.
+You can optionally specify a limit of entries to return.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#tasks-view"><em>/tasks/view</em></a></td>
+<td>Returns the details on the task assigned to the specified ID.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#tasks-delete"><em>/tasks/delete</em></a></td>
+<td>Removes the given task from the database and deletes the results.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#tasks-report"><em>/tasks/report</em></a></td>
+<td>Returns the report generated out of the analysis of the task associated with the specified ID.
+You can optionally specify which report format to return, if none is specified the JSON report will be returned.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#files-view"><em>/files/view</em></a></td>
+<td>Search the analyzed binaries by MD5 hash, SHA256 hash or internal ID (referenced by the tasks details).</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#files-get"><em>/files/get</em></a></td>
+<td>Returns the content of the binary with the specified SHA256 hash.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#machines-list"><em>/machines/list</em></a></td>
+<td>Returns the list of analysis machines available to Cuckoo.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#machines-view"><em>/machines/view</em></a></td>
+<td>Returns details on the analysis machine associated with the specified name.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">GET</span></tt> <a class="reference internal" href="#cuckoo-status"><em>/cuckoo/status</em></a></td>
+<td>Returns the basic cuckoo status, including version and tasks overview</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="tasks-create-file">
+<span id="id1"></span><h3>/tasks/create/file<a class="headerlink" href="#tasks-create-file" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>POST /tasks/create/file</strong></p>
+<blockquote>
+<div><p>Adds a file to the list of pending tasks. Returns the ID of the newly created task.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl -F file=@/path/to/file http://localhost:8090/tasks/create/file</pre>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;task_id&quot;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Form parameters</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">file</span></tt> <em>(required)</em> - path to the file to submit</li>
+<li><tt class="docutils literal"><span class="pre">package</span></tt> <em>(optional)</em> - analysis package to be used for the analysis</li>
+<li><tt class="docutils literal"><span class="pre">timeout</span></tt> <em>(optional)</em> <em>(int)</em> - analysis timeout (in seconds)</li>
+<li><tt class="docutils literal"><span class="pre">priority</span></tt> <em>(optional)</em> <em>(int)</em> - priority to assign to the task (1-3)</li>
+<li><tt class="docutils literal"><span class="pre">options</span></tt> <em>(optional)</em> - options to pass to the analysis package</li>
+<li><tt class="docutils literal"><span class="pre">machine</span></tt> <em>(optional)</em> - ID of the analysis machine to use for the analysis</li>
+<li><tt class="docutils literal"><span class="pre">platform</span></tt> <em>(optional)</em> - name of the platform to select the analysis machine from (e.g. &#8220;windows&#8221;)</li>
+<li><tt class="docutils literal"><span class="pre">tags</span></tt> <em>(optional)</em> - define machine to start by tags. Platform must be set to use that. Tags are comma separated</li>
+<li><tt class="docutils literal"><span class="pre">custom</span></tt> <em>(optional)</em> - custom string to pass over the analysis and the processing/reporting modules</li>
+<li><tt class="docutils literal"><span class="pre">memory</span></tt> <em>(optional)</em> - enable the creation of a full memory dump of the analysis machine</li>
+<li><tt class="docutils literal"><span class="pre">enforce_timeout</span></tt> <em>(optional)</em> - enable to enforce the execution for the full timeout value</li>
+<li><tt class="docutils literal"><span class="pre">clock</span></tt> <em>(optional)</em> - set virtual machine clock (format %m-%d-%Y %H:%M:%S)</li>
+</ul>
+</dd>
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="tasks-create-url">
+<span id="id2"></span><h3>/tasks/create/url<a class="headerlink" href="#tasks-create-url" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>POST /tasks/create/url</strong></p>
+<blockquote>
+<div><p>Adds a file to the list of pending tasks. Returns the ID of the newly created task.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl -F url="http://www.malicious.site" http://localhost:8090/tasks/create/url</pre>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;task_id&quot;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Form parameters</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">url</span></tt> <em>(required)</em> - URL to analyze</li>
+<li><tt class="docutils literal"><span class="pre">package</span></tt> <em>(optional)</em> - analysis package to be used for the analysis</li>
+<li><tt class="docutils literal"><span class="pre">timeout</span></tt> <em>(optional)</em> <em>(int)</em> - analysis timeout (in seconds)</li>
+<li><tt class="docutils literal"><span class="pre">priority</span></tt> <em>(optional)</em> <em>(int)</em> - priority to assign to the task (1-3)</li>
+<li><tt class="docutils literal"><span class="pre">options</span></tt> <em>(optional)</em> - options to pass to the analysis package</li>
+<li><tt class="docutils literal"><span class="pre">machine</span></tt> <em>(optional)</em> - ID of the analysis machine to use for the analysis</li>
+<li><tt class="docutils literal"><span class="pre">platform</span></tt> <em>(optional)</em> - name of the platform to select the analysis machine from (e.g. &#8220;windows&#8221;)</li>
+<li><tt class="docutils literal"><span class="pre">tags</span></tt> <em>(optional)</em> - define machine to start by tags. Platform must be set to use that. Tags are comma separated</li>
+<li><tt class="docutils literal"><span class="pre">custom</span></tt> <em>(optional)</em> - custom string to pass over the analysis and the processing/reporting modules</li>
+<li><tt class="docutils literal"><span class="pre">memory</span></tt> <em>(optional)</em> - enable the creation of a full memory dump of the analysis machine</li>
+<li><tt class="docutils literal"><span class="pre">enforce_timeout</span></tt> <em>(optional)</em> - enable to enforce the execution for the full timeout value</li>
+<li><tt class="docutils literal"><span class="pre">clock</span></tt> <em>(optional)</em> - set virtual machine clock (format %m-%d-%Y %H:%M:%S)</li>
+</ul>
+</dd>
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="tasks-list">
+<span id="id3"></span><h3>/tasks/list<a class="headerlink" href="#tasks-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /tasks/list/</strong> <em>(int: limit)</em> <strong>/</strong> <em>(int: offset)</em></p>
+<blockquote>
+<div><p>Returns list of tasks.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/tasks/list</pre>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-python"><pre>{
+    "tasks": [
+        {
+            "category": "url",
+            "machine": null,
+            "errors": [],
+            "target": "http://www.malicious.site",
+            "package": null,
+            "sample_id": null,
+            "guest": {},
+            "custom": null,
+            "priority": 1,
+            "platform": null,
+            "options": null,
+            "status": "pending",
+            "enforce_timeout": false,
+            "timeout": 0,
+            "memory": false,
+            "tags": []
+            "id": 1,
+            "added_on": "2012-12-19 14:18:25",
+            "completed_on": null
+        },
+        {
+            "category": "file",
+            "machine": null,
+            "errors": [],
+            "target": "/tmp/malware.exe",
+            "package": null,
+            "sample_id": 1,
+            "guest": {},
+            "custom": null,
+            "priority": 1,
+            "platform": null,
+            "options": null,
+            "status": "pending",
+            "enforce_timeout": false,
+            "timeout": 0,
+            "memory": false,
+            "tags": [
+                        "32bit",
+                        "acrobat_6",
+                    ],
+            "id": 2,
+            "added_on": "2012-12-19 14:18:25",
+            "completed_on": null
+        }
+    ]
+}</pre>
+</div>
+<dl class="docutils">
+<dt><strong>Parameters</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">limit</span></tt> <em>(optional)</em> <em>(int)</em> - maximum number of returned tasks</li>
+<li><tt class="docutils literal"><span class="pre">offset</span></tt> <em>(optional)</em> <em>(int)</em> - data offset</li>
+</ul>
+</dd>
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="tasks-view">
+<span id="id4"></span><h3>/tasks/view<a class="headerlink" href="#tasks-view" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /tasks/view/</strong> <em>(int: id)</em></p>
+<blockquote>
+<div><p>Returns details on the task associated with the specified ID.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/tasks/view/1</pre>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;task&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;category&quot;</span><span class="p">:</span> <span class="s">&quot;url&quot;</span><span class="p">,</span>
+        <span class="s">&quot;machine&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;errors&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s">&quot;target&quot;</span><span class="p">:</span> <span class="s">&quot;http://www.malicious.site&quot;</span><span class="p">,</span>
+        <span class="s">&quot;package&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;sample_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;guest&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s">&quot;custom&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">&quot;platform&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;options&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;status&quot;</span><span class="p">:</span> <span class="s">&quot;pending&quot;</span><span class="p">,</span>
+        <span class="s">&quot;enforce_timeout&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s">&quot;timeout&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s">&quot;memory&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s">&quot;32bit&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;acrobat_6&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+        <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">&quot;added_on&quot;</span><span class="p">:</span> <span class="s">&quot;2012-12-19 14:18:25&quot;</span><span class="p">,</span>
+        <span class="s">&quot;completed_on&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Parameters</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">id</span></tt> <em>(required)</em> <em>(int)</em> - ID of the task to lookup</li>
+</ul>
+</dd>
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+<li><tt class="docutils literal"><span class="pre">404</span></tt> - task not found</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="tasks-delete">
+<span id="id5"></span><h3>/tasks/delete<a class="headerlink" href="#tasks-delete" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /tasks/delete/</strong> <em>(int: id)</em></p>
+<blockquote>
+<div><p>Removes the given task from the database and deletes the results.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/tasks/delete/1</pre>
+</div>
+<dl class="docutils">
+<dt><strong>Parameters</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">id</span></tt> <em>(required)</em> <em>(int)</em> - ID of the task to delete</li>
+</ul>
+</dd>
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+<li><tt class="docutils literal"><span class="pre">404</span></tt> - task not found</li>
+<li><tt class="docutils literal"><span class="pre">500</span></tt> - unable to delete the task</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="tasks-report">
+<span id="id6"></span><h3>/tasks/report<a class="headerlink" href="#tasks-report" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /tasks/report/</strong> <em>(int: id)</em> <strong>/</strong> <em>(str: format)</em></p>
+<blockquote>
+<div><p>Returns the report associated with the specified task ID.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/tasks/report/1</pre>
+</div>
+<dl class="docutils">
+<dt><strong>Parameters</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">id</span></tt> <em>(required)</em> <em>(int)</em> - ID of the task to get the report for</li>
+<li><tt class="docutils literal"><span class="pre">format</span></tt> <em>(optional)</em> - format of the report to retrieve [json/html/maec/metadata/all/dropped]. If none is specified the JSON report will be returned. <tt class="docutils literal"><span class="pre">all</span></tt> returns all the result files as tar.bz2, <tt class="docutils literal"><span class="pre">dropped</span></tt> the dropped files as tar.bz2</li>
+</ul>
+</dd>
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+<li><tt class="docutils literal"><span class="pre">400</span></tt> - invalid report format</li>
+<li><tt class="docutils literal"><span class="pre">404</span></tt> - report not found</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="files-view">
+<span id="id7"></span><h3>/files/view<a class="headerlink" href="#files-view" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /files/view/md5/</strong> <em>(str: md5)</em></p>
+<p><strong>GET /files/view/sha256/</strong> <em>(str: sha256)</em></p>
+<p><strong>GET /files/view/id/</strong> <em>(int: id)</em></p>
+<blockquote>
+<div><p>Returns details on the file matching either the specified MD5 hash, SHA256 hash or ID.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/files/view/id/1</pre>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;sample&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;sha1&quot;</span><span class="p">:</span> <span class="s">&quot;da39a3ee5e6b4b0d3255bfef95601890afd80709&quot;</span><span class="p">,</span>
+        <span class="s">&quot;file_type&quot;</span><span class="p">:</span> <span class="s">&quot;empty&quot;</span><span class="p">,</span>
+        <span class="s">&quot;file_size&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s">&quot;crc32&quot;</span><span class="p">:</span> <span class="s">&quot;00000000&quot;</span><span class="p">,</span>
+        <span class="s">&quot;ssdeep&quot;</span><span class="p">:</span> <span class="s">&quot;3::&quot;</span><span class="p">,</span>
+        <span class="s">&quot;sha256&quot;</span><span class="p">:</span> <span class="s">&quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;</span><span class="p">,</span>
+        <span class="s">&quot;sha512&quot;</span><span class="p">:</span> <span class="s">&quot;cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e&quot;</span><span class="p">,</span>
+        <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">&quot;md5&quot;</span><span class="p">:</span> <span class="s">&quot;d41d8cd98f00b204e9800998ecf8427e&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Parameters</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">md5</span></tt> <em>(optional)</em> - MD5 hash of the file to lookup</li>
+<li><tt class="docutils literal"><span class="pre">sha256</span></tt> <em>(optional)</em> - SHA256 hash of the file to lookup</li>
+<li><tt class="docutils literal"><span class="pre">id</span></tt> <em>(optional)</em> <em>(int)</em> - ID of the file to lookup</li>
+</ul>
+</dd>
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+<li><tt class="docutils literal"><span class="pre">400</span></tt> - invalid lookup term</li>
+<li><tt class="docutils literal"><span class="pre">404</span></tt> - file not found</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="files-get">
+<span id="id8"></span><h3>/files/get<a class="headerlink" href="#files-get" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /files/get/</strong> <em>(str: sha256)</em></p>
+<blockquote>
+<div><p>Returns the binary content of the file matching the specified SHA256 hash.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/files/get/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 &gt; sample.exe</pre>
+</div>
+<dl class="docutils">
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+<li><tt class="docutils literal"><span class="pre">404</span></tt> - file not found</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="machines-list">
+<span id="id9"></span><h3>/machines/list<a class="headerlink" href="#machines-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /machines/list</strong></p>
+<blockquote>
+<div><p>Returns a list with details on the analysis machines available to Cuckoo.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/machines/list</pre>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;machines&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s">&quot;locked&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;cuckoo1&quot;</span><span class="p">,</span>
+            <span class="s">&quot;resultserver_ip&quot;</span><span class="p">:</span> <span class="s">&quot;192.168.56.1&quot;</span><span class="p">,</span>
+            <span class="s">&quot;ip&quot;</span><span class="p">:</span> <span class="s">&quot;192.168.56.101&quot;</span><span class="p">,</span>
+            <span class="s">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s">&quot;32bit&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;acrobat_6&quot;</span><span class="p">,</span>
+                    <span class="p">],</span>
+            <span class="s">&quot;label&quot;</span><span class="p">:</span> <span class="s">&quot;cuckoo1&quot;</span><span class="p">,</span>
+            <span class="s">&quot;locked_changed_on&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s">&quot;platform&quot;</span><span class="p">:</span> <span class="s">&quot;windows&quot;</span><span class="p">,</span>
+            <span class="s">&quot;snapshot&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s">&quot;interface&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s">&quot;status_changed_on&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s">&quot;resultserver_port&quot;</span><span class="p">:</span> <span class="s">&quot;2042&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="machines-view">
+<span id="id10"></span><h3>/machines/view<a class="headerlink" href="#machines-view" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /machines/view/</strong> <em>(str: name)</em></p>
+<blockquote>
+<div><p>Returns details on the analysis machine associated with the given name.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/machines/view/cuckoo1</pre>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;machine&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;locked&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;cuckoo1&quot;</span><span class="p">,</span>
+        <span class="s">&quot;resultserver_ip&quot;</span><span class="p">:</span> <span class="s">&quot;192.168.56.1&quot;</span><span class="p">,</span>
+        <span class="s">&quot;ip&quot;</span><span class="p">:</span> <span class="s">&quot;192.168.56.101&quot;</span><span class="p">,</span>
+        <span class="s">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s">&quot;32bit&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;acrobat_6&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+        <span class="s">&quot;label&quot;</span><span class="p">:</span> <span class="s">&quot;cuckoo1&quot;</span><span class="p">,</span>
+        <span class="s">&quot;locked_changed_on&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;platform&quot;</span><span class="p">:</span> <span class="s">&quot;windows&quot;</span><span class="p">,</span>
+        <span class="s">&quot;snapshot&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;interface&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;status_changed_on&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">&quot;resultserver_port&quot;</span><span class="p">:</span> <span class="s">&quot;2042&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+<li><tt class="docutils literal"><span class="pre">404</span></tt> - machine not found</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="cuckoo-status">
+<span id="id11"></span><h3>/cuckoo/status<a class="headerlink" href="#cuckoo-status" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>GET /cuckoo/status/</strong></p>
+<blockquote>
+<div><p>Returns status of the cuckoo server.</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-python"><pre>curl http://localhost:8090/cuckoo/status</pre>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-python"><pre>{
+    "tasks": {
+        "reported": 165,
+        "running": 2,
+        "total": 167,
+        "completed": 0,
+        "pending": 0
+    },
+    "version": "1.0",
+    "protocol_version": 1,
+    "hostname": "Patient0",
+    "machines": {
+        "available": 4,
+        "total": 5
+    }
+    "tools":["vanilla"]
+}</pre>
+</div>
+<dl class="docutils">
+<dt><strong>Status codes</strong>:</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">200</span></tt> - no error</li>
+<li><tt class="docutils literal"><span class="pre">404</span></tt> - machine not found</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">REST API</a><ul>
+<li><a class="reference internal" href="#starting-the-api-server">Starting the API server</a></li>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#tasks-create-file">/tasks/create/file</a></li>
+<li><a class="reference internal" href="#tasks-create-url">/tasks/create/url</a></li>
+<li><a class="reference internal" href="#tasks-list">/tasks/list</a></li>
+<li><a class="reference internal" href="#tasks-view">/tasks/view</a></li>
+<li><a class="reference internal" href="#tasks-delete">/tasks/delete</a></li>
+<li><a class="reference internal" href="#tasks-report">/tasks/report</a></li>
+<li><a class="reference internal" href="#files-view">/files/view</a></li>
+<li><a class="reference internal" href="#files-get">/files/get</a></li>
+<li><a class="reference internal" href="#machines-list">/machines/list</a></li>
+<li><a class="reference internal" href="#machines-view">/machines/view</a></li>
+<li><a class="reference internal" href="#cuckoo-status">/cuckoo/status</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="web.html"
+                        title="previous chapter">Web interface</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="packages.html"
+                        title="next chapter">Analysis Packages</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/usage/api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="packages.html" title="Analysis Packages"
+             >next</a></li>
+        <li class="right" >
+          <a href="web.html" title="Web interface"
+             >previous</a> |</li>
+        <li><a href="../index.html">Cuckoo Sandbox v1.0 Book</a> &raquo;</li>
+          <li><a href="index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2014, Cuckoo Sandbox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+*1*)Creating .exe for x32 with pyexe
+
+We need a Windows x32 with Python x32 and the following depedencies:
+
+pyexe
+pycrypto
+pywin32
+WMI
+requests
+
+Where setup.py is in with the rest of the client python files:
+
+C:\Python27\python.exe setup.py build
+
+this creates /build and /dist folders and we can find ElJefeService32.exe in /dist
+
+
+*2*)Creating .exe for x64  with pyinstaller
+
+We need a Windows x64 with Python x64 and the following depedencies:
+
+pyinstaller
+pycrypto (x64)
+pywin32 (x64)
+WMI (We must copy the WMI Files on PATH_PYTHONX64\Lib\site-packages)
+requests (We must copy the requests Files on PATH_PYTHONX64\Lib\site-packages)
+
+Where the client python files are:
+
+C:\Python27\python.exe C:\PyInstaller-2.1\PyInstaller-2.1\pyinstaller.py -F ElJefeService.py -n ElJefeService64
+
+This creates /dist/ElJefeService64.exe
+
+*3*)Move ElJefeService32.exe and ElJefeService64.exe to /installer to generate El Jefe installer.
+
+*4*)Creating the installer with NSIS
+
+At this point we have two new files:
+
+ElJefeService32.exe
+ElJefeService64.exe
+
+We need these other files :
+config.ini    		           # The configuration file for ElJefe Client (used only by eljefeinstalldeployable.nsi)
+default.ini    		           # Template for the configuration file for ElJefe Client (used only by eljefeinstall.nsi)
+ServiceInstall32.exe 	           # Install ElJefeService on x32 
+ServiceInstall64.exe 	           # Install ElJefeService on x64
+msvcr100.dll                       # Dll needed for execute the service (C++ redistributable package)
+cacert.pem                         # CA fake Certificate 
+server.pem                         # XML Server fake Certificate 
+client.pem                         # Client fake Certificate 
+client.key                         # Client fake private key 
+eljefeinstall.nsi                  # This is the nsis script file for the installer's creation
+
+All this files are in /installer folder.
+
+NSIS needs the following plugins:
+Simple Service Plugin
+nsprocess-modified 
+
+Their files are in the repo (in "dependencies" folder).Stock nsprocess will not work as it cannot terminate 
+SYSTEM processes.
+
+-To install plugins-
+Copy the SimpleSC.dll into the NSIS Plugins directory. 
+Copy the nsprocess.dll to the plugins directory, and nsprocess.nsh to the includes directory.
+
+Assuming you have all your binaries in place now, just run eljefeinstall nsis script (eljefeinstall.nsi).
+
+If everything goes right you can find ElJefeInstaller.exe in /installer.
+
+
+
+
+ 
+
+NOTES:
+
+(1) Don't forget the msvcr100.dll or El Jefe will fail.
+(2) The ServiceInstall files are both in C, they read from the registry to find out what .exe to install as a service. 
+The only difference between the 64 bit version and the 32 bit version is the registry key, as it changes between them.
+(3) Due to pyinstaller's nature, it may screw up on what would normally be valid python. It will also create two services instead of one.
+(4) Finally, the uninstaller will break if any files that were not placed by the installer are added to that directory.
+(5) Dependencies for build the exe files (x32 and x64) can be found in the "dependencies" folder
+
+

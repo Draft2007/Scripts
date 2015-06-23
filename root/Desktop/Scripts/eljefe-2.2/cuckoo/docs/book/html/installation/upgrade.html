@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Upgrade from a previous release &mdash; Cuckoo Sandbox v1.0 Book</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Cuckoo Sandbox v1.0 Book" href="../index.html" />
+    <link rel="up" title="Installation" href="index.html" />
+    <link rel="next" title="Usage" href="../usage/index.html" />
+    <link rel="prev" title="Cloning the Virtual Machine" href="guest/cloning.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../usage/index.html" title="Usage"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="guest/cloning.html" title="Cloning the Virtual Machine"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Cuckoo Sandbox v1.0 Book</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Installation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="upgrade-from-a-previous-release">
+<h1>Upgrade from a previous release<a class="headerlink" href="#upgrade-from-a-previous-release" title="Permalink to this headline">¶</a></h1>
+<p>Cuckoo Sandbox grows really fast and in every release new features are added and
+some others are fixed or removed.
+If not otherwise specified in the release documentation, the suggested way to
+upgrade your Cuckoo instance is to perform a fresh setup as described in
+<a class="reference internal" href="index.html"><em>Installation</em></a>.</p>
+<p>The following steps are suggested:</p>
+<ol class="arabic simple">
+<li>Backup your installation.</li>
+<li>Read the documentation shipped with the new release.</li>
+<li>Make sure to have installed all required dependencies, otherwise install them.</li>
+<li>Do a Cuckoo fresh installation of the Host components.</li>
+<li>Reconfigure Cuckoo as explained in this book (copying old configuration files
+is not safe because options can change between releases).</li>
+<li>If you are using an external database instead of default or you are using
+MongoDb reporting module is suggested to start all databases from scratch, due
+to possible schema changes between Cuckoo&#8217;s releases.</li>
+<li>Test it!</li>
+</ol>
+<p>If something goes wrong you probably failed some steps during the fresh
+installation or reconfiguration. Check again the procedure explained in this
+book.</p>
+<p>It&#8217;s not recommended to rewrite an old Cuckoo installation with the latest
+release files, as it might raise some problems because:</p>
+<ul class="simple">
+<li>You are overwriting Python source files (.py) but Python bytecode files (.pyc)
+are still in place.</li>
+<li>There are configuration files changes across the two versions, check our
+CHANGELOG file for added or removed configuration options.</li>
+<li>The part of Cuckoo which runs inside guests (agent.py) may change.</li>
+<li>If you are using an external database like the reporting module for MongoDb a
+change in the data schema may screw your database.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="guest/cloning.html"
+                        title="previous chapter">Cloning the Virtual Machine</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../usage/index.html"
+                        title="next chapter">Usage</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/installation/upgrade.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../usage/index.html" title="Usage"
+             >next</a></li>
+        <li class="right" >
+          <a href="guest/cloning.html" title="Cloning the Virtual Machine"
+             >previous</a> |</li>
+        <li><a href="../index.html">Cuckoo Sandbox v1.0 Book</a> &raquo;</li>
+          <li><a href="index.html" >Installation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010-2014, Cuckoo Sandbox.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

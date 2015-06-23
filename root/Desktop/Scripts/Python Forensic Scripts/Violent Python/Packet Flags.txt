@@ -1,0 +1,98 @@
+Ether
+dst	: DestMACField		= (None)
+src	: SourceMACField	= (None)
+type	: XShortEnumField	= (0)
+
+IP
+version	: BitField		= (4)
+ihl	: BitField		= (None)
+tos	: XByteField		= (0)
+len	: ShortField		= (None)
+id	: ShortField		= (1)
+flags	: FlagsField		= (0)
+frag	: BitField		= (0)
+ttl	: ByteField		= (64)
+proto	: ByteEnumField		= (0)
+chksum	: XShortField		= (None)
+src	: Emph			= (None)
+dst	: Emph			= ('127.0.0.1')
+options	: PacketListField	= ([])
+
+TCP
+sport	: ShortEnumField	= (20)
+dport	: ShortEnumField	= (80)
+seq	: IntField		= (0)
+ack	: IntField		= (0)
+dataofs	: BitField		= (None)
+reserved: FlagsField		= (0)
+flags	: FlagsField		= (2)
+window	: ShortField		= (8192)
+chksum	: XShortField		= (None)
+urgptr	: ShortField		= (0)
+options	: TCPOptionsField	= ({})
+
+UDP
+sport	: ShortEnumField	= (53)
+dport	: ShortEnumField	= (53)
+len	: ShortField		= (None)
+chksum	: XShortField		= (None)
+
+ICMP
+type		: ByteEnumField		= (8)
+code		: MultiEnumField	= (0)
+chksum		: XShortField		= (None)
+id		: ConditionalField	= (0)
+seq		: ConditionalField	= (0)
+ts_ori		: ConditionalField	= (53804093)
+ts_rx		: ConditionalField	= (53804093)
+ts_tx		: ConditionalField	= (53804093)
+gw		: ConditionalField	= ('0.0.0.0')
+ptr		: ConditionalField	= (0)
+reserved	: ConditionalField	= (0)	
+addr_mask	: ConditionalField	= ('0.0.0.0')
+unused		: ConditionalField	= (0)
+
+Raw 
+load	: StrField		= ('')
+# Create a rawload layer by searching and extracting
+rawLoad 	= pkt.sprintf('%Raw.load%')
+# To search the load, import re module and use findall function
+rawResults	= re.findall('3[47][0-9]{13}', raw)
+
+Dot11
+subtype	: BitField		= (0)
+type	: BitEnumField		= (0)
+proto	: BitField		= (0)
+FCfield	: FlagsField		= (0)
+ID	: ShortField		= (0)
+addr1	: MACField		= ('00:00:00:00:00:00')
+addr2	: Dot11Addr2MACField	= ('00:00:00:00:00:00')
+addr3	: Dot11Addr3MACField	= ('00:00:00:00:00:00')
+SC	: Dot11SCField		= (0)
+addr4	: Dot11Addr4MACField	= ('00:00:00:00:00:00')
+
+Dot11Beacon
+timestamp	: LELongField	= (0)
+beacon_interval	: LEShortField	= (100)
+cap		: FlagsField	= (0)
+
+Dot11ProbeResp
+timestamp	: LELongField	= (0)
+beacon_interval	: LEShortField	= (100)
+cap		: FlagsField	= (0)
+
+RadioTap
+version		: ByteField	= (0)
+pad		: ByteField	= (0)
+len		: FieldLenField	= (None)
+present		: FlagsField	= (None)
+notdecoded	: StrLenField	= ('')
+
+SNAP
+OUI	: X3BytesField		= (0)
+code	: XShortEnumField	= (0)
+
+LLC
+dsap	: XByteField		= (0)
+ssap	: XByteField		= (0)
+ctrl	: ByteField		= (0)

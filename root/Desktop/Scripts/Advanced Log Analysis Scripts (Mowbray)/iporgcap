@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cat `echo "detail*$1.txt"` | gawk 'BEGIN {FS="\n";RS="\n\n\n"} {print $3}' | gawk '{print $4; print $2}' | gawk -F\: '{print $1}' | gawk '!/192\.168\.1/' | gawk '!/10\.10\.1/' | gawk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/' | sort | uniq > /tmp/alertIPs
+
+while read ip; do whois $ip | gawk -F\: '/OrgName/ {print $2}'; echo '          '$ip; done < /tmp/alertIPs

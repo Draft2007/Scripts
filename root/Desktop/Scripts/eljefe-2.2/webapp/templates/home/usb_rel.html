@@ -1,0 +1,131 @@
+{% extends "base_.html" %}
+{% load tags %}
+{% block initializer %}
+<script src="/imedia/js/springy.js" type="text/javascript"></script>
+<script src="/imedia/js/springyui.js" type="text/javascript"></script>
+    <style>
+        .unselectable {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;   
+        }
+    </style>
+       <script>
+              $(function() {
+                            var springy = jQuery('#springydemo').springy({
+                                          graph: graph,
+                                nodeSelected: function(node){
+                                       console.log('Node selected: ' + JSON.stringify(node.data));
+
+                                },
+                                repulsion: 2 
+                            });
+                        
+                     $('#id_startdate').datetimepicker(
+                     {'format'  : 'yyyy-mm-dd hh:ii',
+                      'minView' : 2,
+                      'maxView' : 2
+                      });
+                     $('#id_enddate').datetimepicker(
+                     {'format'  : 'yyyy-mm-dd hh:ii',
+                      'minView' : 2,
+                      'maxView' : 2
+                      });
+              });
+       </script>
+
+{% endblock %}
+
+{% block title %}
+USB Devices Relationship
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">USB Devices Relationship</h3>
+<!--<a href="/home/graphs/binary_rel/{{ sid }}/1"><img src="/imedia/images/calendar_1day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/7"><img src="/imedia/images/calendar_7day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/31"><img src="/imedia/images/calendar_31day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/8888"><img src="/imedia/images/calendar_all.png"></a><br>
+-->
+<script>
+        $('#springydemo').prop("unselectable", "on").css({ 
+          "moz-user-select" : "none", 
+          "-webkit-user-select" : "none"
+        });
+        $('#springydemo').dblclick(function(){ return false; });
+
+var graph = new Springy.Graph();
+{% for item, id in nodes.items %}
+       
+        {% ifequal id.2 "ms_device"%}
+            var {{ id.1 }} = graph.newNode({ label: 'SN:{{id.3}}',image: {src: '/imedia/images/usb_icon.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'ms_device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "device"%}
+            var {{ id.1 }} = graph.newNode({ label: '{{id.3}}',image: {src: '/imedia/images/big_usb_logo.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "mouse"%}
+            var {{ id.1 }} = graph.newNode({ label: '{{id.3}}',image: {src: '/imedia/images/big_mouse_icon.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "keyboard"%}
+            var {{ id.1 }} = graph.newNode({ label: '{{id.3}}',image: {src: '/imedia/images/big_keyboard_icon.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "camera"%}
+            var {{ id.1 }} = graph.newNode({ label: '{{id.3}}',image: {src: '/imedia/images/big_camera_phone.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "ms_marked_device"%}
+            var {{ id.1 }} = graph.newNode({ label: 'SN:{{id.3}}',image: {src: '/imedia/images/usb_icon_green.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'ms_device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "ms_shared_device"%}
+            var {{ id.1 }} = graph.newNode({ label: 'SN:{{id.3}}',image: {src: '/imedia/images/usb_icon_red.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'ms_device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "station"%}
+            var {{ id.1 }} = graph.newNode({ label: '{{item}} / {{id.3}}',image: {src: '/imedia/images/glyphicons_160_imac_big.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'station' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+{% endfor %}
+
+{% for edge in edges %}
+       graph.newEdge({{ edge.0|get_name|slugify }},{{ edge.1|get_name|slugify }},{});
+{% endfor %}
+</script>
+<span class="unselectable">
+<canvas id="springydemo" width="2000" height="1000" />
+</span>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block quick_links %}
+{% endblock %}

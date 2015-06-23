@@ -1,0 +1,81 @@
+{% extends "base_.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 center">
+
+        <form role="form" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+            
+            <div class="panel" style="margin-top: 20px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a><i class="icon icon-cog"></i> Advanced Options</a>
+                    </div>
+                    <div id="options"  style="text-align: left;">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="form_package">Analysis Package</label>
+                                <select class="form-control" id="form_package" name="package">
+                                    <option value="" active>Detect Automatically</option>
+                                    {% for package in packages %}
+                                    <option value="{{package}}">{{package}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="form_timeout">Timeout</label>
+                                <input type="text" class="form-control" id="form_timeout" name="timeout" />
+                            </div>
+                            <div class="form-group">
+                                <label for="form_options">Options</label>
+                                <input type="text" class="form-control" id="form_options" name="options" />
+                            </div>
+                            <div class="form-group">
+                                <label for="form_priority">Priority</label>
+                                <select class="form-control" id="form_priority" name="priority">
+                                    <option value="1">Low</option>
+                                    <option value="2">Medium</option>
+                                    <option value="3">High</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="form_machine">Machine</label>
+                                <input type="text" class="form-control" id="form_machine" name="machine" />
+                            </div>
+                            <div class="form-group">
+                                <label for="form_custom">Custom</label>
+                                <input type="text" class="form-control" id="form_custom" name="custom" />
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="free" /> No Injection <span class="text-muted"><small>(disable behavioral analysis)</small></span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="process_memory" /> Process Memory Dump
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="memory" /> Full Memory Dump
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="enforce_timeout" /> Enforce Timeout
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="form_tags">Tags</label>
+                                <input type="text" class="form-control" id="form_tags" name="tags" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px;"><button type="submit" class="btn btn-primary btn-lg">Analyze</button></div>
+        </form>
+    </div>
+</div>
+{% endblock %}

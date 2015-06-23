@@ -1,0 +1,36 @@
+{% extends "base_.html" %}
+{% load bootstrap3 %}
+{% load tags %}
+
+{% block initializer %}
+<script>
+
+$(function(){
+    $('#form_data').html($('.arguments[id="'+ $('#selectbasic').val() +'"]').html());
+
+    $('#selectbasic').change(function(){
+                                $('#form_data').html($('.arguments[id="'+ $(this).val() +'"]').html());
+                                });
+  });
+
+</script>
+
+{% endblock %}
+
+{% block title %}
+El Jefe - Filters
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Import Filter</h3>
+    <div class="well well-lg">
+        <form class="form-horizontal" action="{% url "alerts.views.import_filters" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+          <button type="submit" class="btn btn-danger">Add</button>
+        </form>
+    </div>
+
+{% endblock %}
+

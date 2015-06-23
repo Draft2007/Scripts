@@ -1,0 +1,90 @@
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: uuid:upnp-InternetGatewayDevice-1_0-f82fa8a604f3
+USN: uuid:upnp-InternetGatewayDevice-1_0-f82fa8a604f3
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: urn:schemas-upnp-org:device:InternetGatewayDevice:1
+USN: uuid:upnp-InternetGatewayDevice-1_0-f82fa8a604f3::urn:schemas-upnp-org:device:InternetGatewayDevice:1
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: upnp:rootdevice
+USN: uuid:upnp-InternetGatewayDevice-1_0-f82fa8a604f3::upnp:rootdevice
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: uuid:upnp-WANDevice-1_0-f82fa8a604f3
+USN: uuid:upnp-WANDevice-1_0-f82fa8a604f3
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: urn:schemas-upnp-org:device:WANDevice:1
+USN: uuid:upnp-WANDevice-1_0-f82fa8a604f3::urn:schemas-upnp-org:device:WANDevice:1
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: uuid:upnp-WANConnectionDevice-1_0-f82fa8a604f3
+USN: uuid:upnp-WANConnectionDevice-1_0-f82fa8a604f3
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: urn:schemas-upnp-org:device:WANConnectionDevice:1
+USN: uuid:upnp-WANConnectionDevice-1_0-f82fa8a604f3::urn:schemas-upnp-org:device:WANConnectionDevice:1
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: urn:schemas-upnp-org:service:Layer3Forwarding:1
+USN: uuid:upnp-InternetGatewayDevice-1_0-f82fa8a604f3::urn:schemas-upnp-org:service:Layer3Forwarding:1
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1
+USN: uuid:upnp-WANDevice-1_0-f82fa8a604f3::urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+
+NOTIFY * HTTP/1.1
+HOST: 239.255.255.250:1900
+Cache-Control: max-age=1900
+Location: http://192.168.0.1:80/RootDevice.xml
+NT: urn:schemas-upnp-org:service:WANIPConnection:1
+USN: uuid:upnp-WANConnectionDevice-1_0-f82fa8a604f3::urn:schemas-upnp-org:service:WANIPConnection:1
+NTS: ssdp:alive
+Server: UPnP/1.0 UPnP/1.0 UPnP-Device-Host/1.0
+

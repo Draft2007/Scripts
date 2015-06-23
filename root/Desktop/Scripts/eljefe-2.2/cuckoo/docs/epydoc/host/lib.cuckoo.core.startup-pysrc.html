@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.cuckoo.core.startup</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.cuckoo-module.html">Package&nbsp;cuckoo</a> ::
+        <a href="lib.cuckoo.core-module.html">Package&nbsp;core</a> ::
+        Module&nbsp;startup
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.cuckoo.core.startup-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.cuckoo.core.startup-module.html">Module lib.cuckoo.core.startup</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2014 Cuckoo Sandbox Developers.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">copy</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">json</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">urllib</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">urllib2</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">handlers</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package modules=modules-module.html"><a title="modules" class="py-name" href="#" onclick="return doclink('link-0', 'modules', 'link-0');">modules</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package modules.auxiliary=modules.auxiliary-module.html"><a title="modules.auxiliary" class="py-name" href="#" onclick="return doclink('link-1', 'auxiliary', 'link-1');">auxiliary</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name"><a title="modules" class="py-name" href="#" onclick="return doclink('link-2', 'modules', 'link-0');">modules</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package modules.processing=modules.processing-module.html"><a title="modules.processing" class="py-name" href="#" onclick="return doclink('link-3', 'processing', 'link-3');">processing</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-4" class="py-name"><a title="modules" class="py-name" href="#" onclick="return doclink('link-4', 'modules', 'link-0');">modules</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package modules.signatures=modules.signatures-module.html"><a title="modules.signatures" class="py-name" href="#" onclick="return doclink('link-5', 'signatures', 'link-5');">signatures</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-6" class="py-name"><a title="modules" class="py-name" href="#" onclick="return doclink('link-6', 'modules', 'link-0');">modules</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Package modules.reporting=modules.reporting-module.html"><a title="modules.reporting" class="py-name" href="#" onclick="return doclink('link-7', 'reporting', 'link-7');">reporting</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-8', 'lib', 'link-8');">lib</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-9', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-10', 'common', 'link-10');">common</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Module lib.cuckoo.common.colors=lib.cuckoo.common.colors-module.html"><a title="lib.cuckoo.common.colors" class="py-name" href="#" onclick="return doclink('link-11', 'colors', 'link-11');">colors</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Function lib.cuckoo.common.colors.red()=lib.cuckoo.common.colors-module.html#red"><a title="lib.cuckoo.common.colors.red" class="py-name" href="#" onclick="return doclink('link-12', 'red', 'link-12');">red</a></tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name" targets="Function lib.cuckoo.common.colors.green()=lib.cuckoo.common.colors-module.html#green"><a title="lib.cuckoo.common.colors.green" class="py-name" href="#" onclick="return doclink('link-13', 'green', 'link-13');">green</a></tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name" targets="Function lib.cuckoo.common.colors.yellow()=lib.cuckoo.common.colors-module.html#yellow"><a title="lib.cuckoo.common.colors.yellow" class="py-name" href="#" onclick="return doclink('link-14', 'yellow', 'link-14');">yellow</a></tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name" targets="Function lib.cuckoo.common.colors.cyan()=lib.cuckoo.common.colors-module.html#cyan"><a title="lib.cuckoo.common.colors.cyan" class="py-name" href="#" onclick="return doclink('link-15', 'cyan', 'link-15');">cyan</a></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-16" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-16', 'lib', 'link-8');">lib</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-17', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-18', 'common', 'link-10');">common</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Module lib.cuckoo.common.config=lib.cuckoo.common.config-module.html"><a title="lib.cuckoo.common.config" class="py-name" href="#" onclick="return doclink('link-19', 'config', 'link-19');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-20" class="py-name" targets="Class lib.cuckoo.common.config.Config=lib.cuckoo.common.config.Config-class.html"><a title="lib.cuckoo.common.config.Config" class="py-name" href="#" onclick="return doclink('link-20', 'Config', 'link-20');">Config</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-21" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-21', 'lib', 'link-8');">lib</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-22', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-23', 'common', 'link-10');">common</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Module lib.cuckoo.common.constants=lib.cuckoo.common.constants-module.html"><a title="lib.cuckoo.common.constants" class="py-name" href="#" onclick="return doclink('link-24', 'constants', 'link-24');">constants</a></tt> <tt class="py-keyword">import</tt> <tt id="link-25" class="py-name" targets="Variable lib.cuckoo.common.constants.CUCKOO_ROOT=lib.cuckoo.common.constants-module.html#CUCKOO_ROOT"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-25', 'CUCKOO_ROOT', 'link-25');">CUCKOO_ROOT</a></tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name" targets="Variable lib.cuckoo.common.constants.CUCKOO_VERSION=lib.cuckoo.common.constants-module.html#CUCKOO_VERSION"><a title="lib.cuckoo.common.constants.CUCKOO_VERSION" class="py-name" href="#" onclick="return doclink('link-26', 'CUCKOO_VERSION', 'link-26');">CUCKOO_VERSION</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-27" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-27', 'lib', 'link-8');">lib</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-28', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-29', 'common', 'link-10');">common</a></tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-30', 'exceptions', 'link-30');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-31" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooStartupError=lib.cuckoo.common.exceptions.CuckooStartupError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooStartupError" class="py-name" href="#" onclick="return doclink('link-31', 'CuckooStartupError', 'link-31');">CuckooStartupError</a></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-32" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-32', 'lib', 'link-8');">lib</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-33', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-34', 'common', 'link-10');">common</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-35', 'exceptions', 'link-30');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-36" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooOperationalError=lib.cuckoo.common.exceptions.CuckooOperationalError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooOperationalError" class="py-name" href="#" onclick="return doclink('link-36', 'CuckooOperationalError', 'link-36');">CuckooOperationalError</a></tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-37" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-37', 'lib', 'link-8');">lib</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-38', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-39', 'common', 'link-10');">common</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Module lib.cuckoo.common.utils=lib.cuckoo.common.utils-module.html"><a title="lib.cuckoo.common.utils" class="py-name" href="#" onclick="return doclink('link-40', 'utils', 'link-40');">utils</a></tt> <tt class="py-keyword">import</tt> <tt id="link-41" class="py-name" targets="Function lib.cuckoo.common.utils.create_folders()=lib.cuckoo.common.utils-module.html#create_folders,Method lib.cuckoo.core.resultserver.Resulthandler.create_folders()=lib.cuckoo.core.resultserver.Resulthandler-class.html#create_folders"><a title="lib.cuckoo.common.utils.create_folders
+lib.cuckoo.core.resultserver.Resulthandler.create_folders" class="py-name" href="#" onclick="return doclink('link-41', 'create_folders', 'link-41');">create_folders</a></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-42" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-42', 'lib', 'link-8');">lib</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-43', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Package lib.cuckoo.core=lib.cuckoo.core-module.html"><a title="lib.cuckoo.core" class="py-name" href="#" onclick="return doclink('link-44', 'core', 'link-44');">core</a></tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Module lib.cuckoo.core.database=lib.cuckoo.core.database-module.html"><a title="lib.cuckoo.core.database" class="py-name" href="#" onclick="return doclink('link-45', 'database', 'link-45');">database</a></tt> <tt class="py-keyword">import</tt> <tt id="link-46" class="py-name" targets="Class lib.cuckoo.core.database.Database=lib.cuckoo.core.database.Database-class.html"><a title="lib.cuckoo.core.database.Database" class="py-name" href="#" onclick="return doclink('link-46', 'Database', 'link-46');">Database</a></tt><tt class="py-op">,</tt> <tt id="link-47" class="py-name" targets="Variable lib.cuckoo.core.database.TASK_RUNNING=lib.cuckoo.core.database-module.html#TASK_RUNNING"><a title="lib.cuckoo.core.database.TASK_RUNNING" class="py-name" href="#" onclick="return doclink('link-47', 'TASK_RUNNING', 'link-47');">TASK_RUNNING</a></tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-48" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-48', 'lib', 'link-8');">lib</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-49', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="lib.cuckoo.core" class="py-name" href="#" onclick="return doclink('link-50', 'core', 'link-44');">core</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Module lib.cuckoo.core.plugins=lib.cuckoo.core.plugins-module.html"><a title="lib.cuckoo.core.plugins" class="py-name" href="#" onclick="return doclink('link-51', 'plugins', 'link-51');">plugins</a></tt> <tt class="py-keyword">import</tt> <tt id="link-52" class="py-name" targets="Function lib.cuckoo.core.plugins.import_plugin()=lib.cuckoo.core.plugins-module.html#import_plugin"><a title="lib.cuckoo.core.plugins.import_plugin" class="py-name" href="#" onclick="return doclink('link-52', 'import_plugin', 'link-52');">import_plugin</a></tt><tt class="py-op">,</tt> <tt id="link-53" class="py-name" targets="Function lib.cuckoo.core.plugins.import_package()=lib.cuckoo.core.plugins-module.html#import_package"><a title="lib.cuckoo.core.plugins.import_package" class="py-name" href="#" onclick="return doclink('link-53', 'import_package', 'link-53');">import_package</a></tt><tt class="py-op">,</tt> <tt id="link-54" class="py-name" targets="Function lib.cuckoo.core.plugins.list_plugins()=lib.cuckoo.core.plugins-module.html#list_plugins"><a title="lib.cuckoo.core.plugins.list_plugins" class="py-name" href="#" onclick="return doclink('link-54', 'list_plugins', 'link-54');">list_plugins</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt id="link-55" class="py-name" targets="Variable lib.cuckoo.common.abstracts.log=lib.cuckoo.common.abstracts-module.html#log,Variable lib.cuckoo.common.irc.log=lib.cuckoo.common.irc-module.html#log,Variable lib.cuckoo.common.netlog.log=lib.cuckoo.common.netlog-module.html#log,Variable lib.cuckoo.common.objects.log=lib.cuckoo.common.objects-module.html#log,Variable lib.cuckoo.core.database.log=lib.cuckoo.core.database-module.html#log,Variable lib.cuckoo.core.guest.log=lib.cuckoo.core.guest-module.html#log,Variable lib.cuckoo.core.plugins.log=lib.cuckoo.core.plugins-module.html#log,Variable lib.cuckoo.core.resultserver.log=lib.cuckoo.core.resultserver-module.html#log,Variable lib.cuckoo.core.scheduler.log=lib.cuckoo.core.scheduler-module.html#log,Variable lib.cuckoo.core.startup.log=lib.cuckoo.core.startup-module.html#log,Variable modules.auxiliary.sniffer.log=modules.auxiliary.sniffer-module.html#log,Variable modules.machinery.virtualbox.log=modules.machinery.virtualbox-module.html#log,Variable modules.machinery.vmware.log=modules.machinery.vmware-module.html#log,Variable modules.processing.analysisinfo.log=modules.processing.analysisinfo-module.html#log,Variable modules.processing.behavior.log=modules.processing.behavior-module.html#log,Variable modules.processing.memory.log=modules.processing.memory-module.html#log"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-55', 'log', 'link-55');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="check_python_version"></a><div id="check_python_version-def"><a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="check_python_version-toggle" onclick="return toggle('check_python_version');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup-module.html#check_python_version">check_python_version</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="check_python_version-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="check_python_version-expanded"><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-docstring">"""Checks if Python version is supported by Cuckoo.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">    @raise CuckooStartupError: if version is not supported.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">version_info</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> <tt class="py-op">!=</tt> <tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">7</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-56" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooStartupError" class="py-name" href="#" onclick="return doclink('link-56', 'CuckooStartupError', 'link-31');">CuckooStartupError</a></tt><tt class="py-op">(</tt><tt class="py-string">"You are running an incompatible version "</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                                 <tt class="py-string">"of Python, please use 2.7"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="check_working_directory"></a><div id="check_working_directory-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="check_working_directory-toggle" onclick="return toggle('check_working_directory');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup-module.html#check_working_directory">check_working_directory</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="check_working_directory-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="check_working_directory-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-docstring">"""Checks if working directories are ready.</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">    @raise CuckooStartupError: if directories are not properly configured.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt id="link-57" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-57', 'CUCKOO_ROOT', 'link-25');">CUCKOO_ROOT</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-58" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooStartupError" class="py-name" href="#" onclick="return doclink('link-58', 'CuckooStartupError', 'link-31');">CuckooStartupError</a></tt><tt class="py-op">(</tt><tt class="py-string">"You specified a non-existing root "</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                                 <tt class="py-string">"directory: {0}"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt id="link-59" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-59', 'CUCKOO_ROOT', 'link-25');">CUCKOO_ROOT</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-name">cwd</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getcwd</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"cuckoo.py"</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">cwd</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-60" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooStartupError" class="py-name" href="#" onclick="return doclink('link-60', 'CuckooStartupError', 'link-31');">CuckooStartupError</a></tt><tt class="py-op">(</tt><tt class="py-string">"You are not running Cuckoo from it's "</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                                 <tt class="py-string">"root directory"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="check_configs"></a><div id="check_configs-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="check_configs-toggle" onclick="return toggle('check_configs');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup-module.html#check_configs">check_configs</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="check_configs-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="check_configs-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-docstring">"""Checks if config files exist.</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">    @raise CuckooStartupError: if config files do not exist.</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-name">configs</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-61', 'CUCKOO_ROOT', 'link-25');">CUCKOO_ROOT</a></tt><tt class="py-op">,</tt> <tt class="py-string">"conf"</tt><tt class="py-op">,</tt> <tt class="py-string">"cuckoo.conf"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">               <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-62" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-62', 'CUCKOO_ROOT', 'link-25');">CUCKOO_ROOT</a></tt><tt class="py-op">,</tt> <tt class="py-string">"conf"</tt><tt class="py-op">,</tt> <tt class="py-string">"reporting.conf"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">               <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-63', 'CUCKOO_ROOT', 'link-25');">CUCKOO_ROOT</a></tt><tt class="py-op">,</tt> <tt class="py-string">"conf"</tt><tt class="py-op">,</tt> <tt class="py-string">"auxiliary.conf"</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-64" class="py-name"><a title="lib.cuckoo.common.config" class="py-name" href="#" onclick="return doclink('link-64', 'config', 'link-19');">config</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">configs</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt id="link-65" class="py-name"><a title="lib.cuckoo.common.config" class="py-name" href="#" onclick="return doclink('link-65', 'config', 'link-19');">config</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-66" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooStartupError" class="py-name" href="#" onclick="return doclink('link-66', 'CuckooStartupError', 'link-31');">CuckooStartupError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Config file does not exist at "</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                                     <tt class="py-string">"path: {0}"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt id="link-67" class="py-name"><a title="lib.cuckoo.common.config" class="py-name" href="#" onclick="return doclink('link-67', 'config', 'link-19');">config</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="create_structure"></a><div id="create_structure-def"><a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="create_structure-toggle" onclick="return toggle('create_structure');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup-module.html#create_structure">create_structure</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="create_structure-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="create_structure-expanded"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-docstring">"""Creates Cuckoo directories."""</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-name">folders</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-string">"log"</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-string">"storage"</tt><tt class="py-op">,</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-string">"storage"</tt><tt class="py-op">,</tt> <tt class="py-string">"analyses"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-string">"storage"</tt><tt class="py-op">,</tt> <tt class="py-string">"binaries"</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt id="link-68" class="py-name"><a title="lib.cuckoo.common.utils.create_folders
+lib.cuckoo.core.resultserver.Resulthandler.create_folders" class="py-name" href="#" onclick="return doclink('link-68', 'create_folders', 'link-41');">create_folders</a></tt><tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">=</tt><tt id="link-69" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-69', 'CUCKOO_ROOT', 'link-25');">CUCKOO_ROOT</a></tt><tt class="py-op">,</tt> <tt class="py-name">folders</tt><tt class="py-op">=</tt><tt class="py-name">folders</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt id="link-70" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooOperationalError" class="py-name" href="#" onclick="return doclink('link-70', 'CuckooOperationalError', 'link-36');">CuckooOperationalError</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-71" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooStartupError" class="py-name" href="#" onclick="return doclink('link-71', 'CuckooStartupError', 'link-31');">CuckooStartupError</a></tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="check_version"></a><div id="check_version-def"><a name="L82"></a><tt class="py-lineno"> 82</tt> <a class="py-toggle" href="#" id="check_version-toggle" onclick="return toggle('check_version');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup-module.html#check_version">check_version</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="check_version-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="check_version-expanded"><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-docstring">"""Checks version of Cuckoo."""</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-name">cfg</tt> <tt class="py-op">=</tt> <tt id="link-72" class="py-name"><a title="lib.cuckoo.common.config.Config" class="py-name" href="#" onclick="return doclink('link-72', 'Config', 'link-20');">Config</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">cfg</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-73', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt class="py-name">version_check</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">" Checking for updates..."</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-name">url</tt> <tt class="py-op">=</tt> <tt class="py-string">"http://api.cuckoosandbox.org/checkversion.php"</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">urllib</tt><tt class="py-op">.</tt><tt class="py-name">urlencode</tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"version"</tt><tt class="py-op">:</tt> <tt id="link-74" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_VERSION" class="py-name" href="#" onclick="return doclink('link-74', 'CUCKOO_VERSION', 'link-26');">CUCKOO_VERSION</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">request</tt> <tt class="py-op">=</tt> <tt class="py-name">urllib2</tt><tt class="py-op">.</tt><tt class="py-name">Request</tt><tt class="py-op">(</tt><tt class="py-name">url</tt><tt class="py-op">,</tt> <tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">response</tt> <tt class="py-op">=</tt> <tt class="py-name">urllib2</tt><tt class="py-op">.</tt><tt class="py-name">urlopen</tt><tt class="py-op">(</tt><tt class="py-name">request</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">urllib2</tt><tt class="py-op">.</tt><tt class="py-name">URLError</tt><tt class="py-op">,</tt> <tt class="py-name">urllib2</tt><tt class="py-op">.</tt><tt class="py-name">HTTPError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt id="link-75" class="py-name"><a title="lib.cuckoo.common.colors.red" class="py-name" href="#" onclick="return doclink('link-75', 'red', 'link-12');">red</a></tt><tt class="py-op">(</tt><tt class="py-string">" Failed! "</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"Unable to establish connection.\n"</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">response_data</tt> <tt class="py-op">=</tt> <tt class="py-name">json</tt><tt class="py-op">.</tt><tt class="py-name">loads</tt><tt class="py-op">(</tt><tt class="py-name">response</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name" targets="Method lib.cuckoo.core.resultserver.Resulthandler.read()=lib.cuckoo.core.resultserver.Resulthandler-class.html#read,Method modules.processing.behavior.ParseProcessLog.read()=modules.processing.behavior.ParseProcessLog-class.html#read"><a title="lib.cuckoo.core.resultserver.Resulthandler.read
+modules.processing.behavior.ParseProcessLog.read" class="py-name" href="#" onclick="return doclink('link-76', 'read', 'link-76');">read</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">ValueError</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt id="link-77" class="py-name"><a title="lib.cuckoo.common.colors.red" class="py-name" href="#" onclick="return doclink('link-77', 'red', 'link-12');">red</a></tt><tt class="py-op">(</tt><tt class="py-string">" Failed! "</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"Invalid response.\n"</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">response_data</tt><tt class="py-op">[</tt><tt class="py-string">"error"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">response_data</tt><tt class="py-op">[</tt><tt class="py-string">"response"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"NEW_VERSION"</tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt class="py-string">"Cuckoo Sandbox version {0} is available "</tt> \ </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                  <tt class="py-string">"now.\n"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">response_data</tt><tt class="py-op">[</tt><tt class="py-string">"current"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt id="link-78" class="py-name"><a title="lib.cuckoo.common.colors.red" class="py-name" href="#" onclick="return doclink('link-78', 'red', 'link-12');">red</a></tt><tt class="py-op">(</tt><tt class="py-string">" Outdated! "</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt id="link-79" class="py-name"><a title="lib.cuckoo.common.colors.green" class="py-name" href="#" onclick="return doclink('link-79', 'green', 'link-13');">green</a></tt><tt class="py-op">(</tt><tt class="py-string">" Good! "</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"You have the latest version "</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                                     <tt class="py-string">"available.\n"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="DatabaseHandler"></a><div id="DatabaseHandler-def"><a name="L117"></a><tt class="py-lineno">117</tt> <a class="py-toggle" href="#" id="DatabaseHandler-toggle" onclick="return toggle('DatabaseHandler');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.cuckoo.core.startup.DatabaseHandler-class.html">DatabaseHandler</a><tt class="py-op">(</tt><tt class="py-base-class">logging</tt><tt class="py-op">.</tt><tt class="py-base-class">Handler</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DatabaseHandler-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DatabaseHandler-expanded"><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-docstring">"""Logging to database handler."""</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="DatabaseHandler.emit"></a><div id="DatabaseHandler.emit-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="DatabaseHandler.emit-toggle" onclick="return toggle('DatabaseHandler.emit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup.DatabaseHandler-class.html#emit">emit</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">record</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DatabaseHandler.emit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DatabaseHandler.emit-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">record</tt><tt class="py-op">,</tt> <tt class="py-string">"task_id"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">            <tt class="py-name">db</tt> <tt class="py-op">=</tt> <tt id="link-80" class="py-name"><a title="lib.cuckoo.core.database.Database" class="py-name" href="#" onclick="return doclink('link-80', 'Database', 'link-46');">Database</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">            <tt class="py-name">db</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name" targets="Method lib.cuckoo.core.database.Database.add_error()=lib.cuckoo.core.database.Database-class.html#add_error"><a title="lib.cuckoo.core.database.Database.add_error" class="py-name" href="#" onclick="return doclink('link-81', 'add_error', 'link-81');">add_error</a></tt><tt class="py-op">(</tt><tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">record</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name" targets="Variable lib.cuckoo.core.database.Error.task_id=lib.cuckoo.core.database.Error-class.html#task_id,Variable lib.cuckoo.core.database.Guest.task_id=lib.cuckoo.core.database.Guest-class.html#task_id"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-82', 'task_id', 'link-82');">task_id</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="ConsoleHandler"></a><div id="ConsoleHandler-def"><a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="ConsoleHandler-toggle" onclick="return toggle('ConsoleHandler');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.cuckoo.core.startup.ConsoleHandler-class.html">ConsoleHandler</a><tt class="py-op">(</tt><tt class="py-base-class">logging</tt><tt class="py-op">.</tt><tt class="py-base-class">StreamHandler</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ConsoleHandler-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ConsoleHandler-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-docstring">"""Logging to console handler."""</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="ConsoleHandler.emit"></a><div id="ConsoleHandler.emit-def"><a name="L128"></a><tt class="py-lineno">128</tt> <a class="py-toggle" href="#" id="ConsoleHandler.emit-toggle" onclick="return toggle('ConsoleHandler.emit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup.ConsoleHandler-class.html#emit">emit</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">record</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ConsoleHandler.emit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ConsoleHandler.emit-expanded"><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-name">colored</tt> <tt class="py-op">=</tt> <tt class="py-name">copy</tt><tt class="py-op">.</tt><tt class="py-name">copy</tt><tt class="py-op">(</tt><tt class="py-name">record</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">levelname</tt> <tt class="py-op">==</tt> <tt class="py-string">"WARNING"</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-name">colored</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt id="link-83" class="py-name"><a title="lib.cuckoo.common.colors.yellow" class="py-name" href="#" onclick="return doclink('link-83', 'yellow', 'link-14');">yellow</a></tt><tt class="py-op">(</tt><tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">levelname</tt> <tt class="py-op">==</tt> <tt class="py-string">"ERROR"</tt> <tt class="py-keyword">or</tt> <tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">levelname</tt> <tt class="py-op">==</tt> <tt class="py-string">"CRITICAL"</tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">            <tt class="py-name">colored</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt id="link-84" class="py-name"><a title="lib.cuckoo.common.colors.red" class="py-name" href="#" onclick="return doclink('link-84', 'red', 'link-12');">red</a></tt><tt class="py-op">(</tt><tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-string">"analysis procedure completed"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt><tt class="py-op">:</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">                <tt class="py-name">colored</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt id="link-85" class="py-name"><a title="lib.cuckoo.common.colors.cyan" class="py-name" href="#" onclick="return doclink('link-85', 'cyan', 'link-15');">cyan</a></tt><tt class="py-op">(</tt><tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                <tt class="py-name">colored</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt class="py-name">record</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">StreamHandler</tt><tt class="py-op">.</tt><tt id="link-86" class="py-name" targets="Method lib.cuckoo.core.startup.ConsoleHandler.emit()=lib.cuckoo.core.startup.ConsoleHandler-class.html#emit,Method lib.cuckoo.core.startup.DatabaseHandler.emit()=lib.cuckoo.core.startup.DatabaseHandler-class.html#emit"><a title="lib.cuckoo.core.startup.ConsoleHandler.emit
+lib.cuckoo.core.startup.DatabaseHandler.emit" class="py-name" href="#" onclick="return doclink('link-86', 'emit', 'link-86');">emit</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">colored</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="init_logging"></a><div id="init_logging-def"><a name="L143"></a><tt class="py-lineno">143</tt> <a class="py-toggle" href="#" id="init_logging-toggle" onclick="return toggle('init_logging');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup-module.html#init_logging">init_logging</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="init_logging-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="init_logging-expanded"><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-docstring">"""Initializes logging."""</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">    <tt class="py-name">formatter</tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">Formatter</tt><tt class="py-op">(</tt><tt class="py-string">"%(asctime)s [%(name)s] %(levelname)s: %(message)s"</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-name">fh</tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">handlers</tt><tt class="py-op">.</tt><tt class="py-name">WatchedFileHandler</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-87" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-87', 'CUCKOO_ROOT', 'link-25');">CUCKOO_ROOT</a></tt><tt class="py-op">,</tt> <tt class="py-string">"log"</tt><tt class="py-op">,</tt> <tt class="py-string">"cuckoo.log"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">    <tt class="py-name">fh</tt><tt class="py-op">.</tt><tt class="py-name">setFormatter</tt><tt class="py-op">(</tt><tt class="py-name">formatter</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">    <tt id="link-88" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-88', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">addHandler</tt><tt class="py-op">(</tt><tt class="py-name">fh</tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">    <tt class="py-name">ch</tt> <tt class="py-op">=</tt> <tt id="link-89" class="py-name" targets="Class lib.cuckoo.core.startup.ConsoleHandler=lib.cuckoo.core.startup.ConsoleHandler-class.html"><a title="lib.cuckoo.core.startup.ConsoleHandler" class="py-name" href="#" onclick="return doclink('link-89', 'ConsoleHandler', 'link-89');">ConsoleHandler</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-name">ch</tt><tt class="py-op">.</tt><tt class="py-name">setFormatter</tt><tt class="py-op">(</tt><tt class="py-name">formatter</tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">    <tt id="link-90" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-90', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">addHandler</tt><tt class="py-op">(</tt><tt class="py-name">ch</tt><tt class="py-op">)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-name">dh</tt> <tt class="py-op">=</tt> <tt id="link-91" class="py-name" targets="Class lib.cuckoo.core.startup.DatabaseHandler=lib.cuckoo.core.startup.DatabaseHandler-class.html"><a title="lib.cuckoo.core.startup.DatabaseHandler" class="py-name" href="#" onclick="return doclink('link-91', 'DatabaseHandler', 'link-91');">DatabaseHandler</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-name">dh</tt><tt class="py-op">.</tt><tt class="py-name">setLevel</tt><tt class="py-op">(</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name" targets="Variable lib.cuckoo.common.abstracts.LibVirtMachinery.ERROR=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#ERROR,Variable modules.machinery.virtualbox.VirtualBox.ERROR=modules.machinery.virtualbox.VirtualBox-class.html#ERROR"><a title="lib.cuckoo.common.abstracts.LibVirtMachinery.ERROR
+modules.machinery.virtualbox.VirtualBox.ERROR" class="py-name" href="#" onclick="return doclink('link-92', 'ERROR', 'link-92');">ERROR</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt id="link-93" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-93', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">addHandler</tt><tt class="py-op">(</tt><tt class="py-name">dh</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt id="link-94" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-94', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">setLevel</tt><tt class="py-op">(</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">INFO</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"> </tt>
+<a name="init_tasks"></a><div id="init_tasks-def"><a name="L161"></a><tt class="py-lineno">161</tt> <a class="py-toggle" href="#" id="init_tasks-toggle" onclick="return toggle('init_tasks');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup-module.html#init_tasks">init_tasks</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="init_tasks-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="init_tasks-expanded"><a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-docstring">"""Check tasks and reschedule uncompleted ones."""</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-name">db</tt> <tt class="py-op">=</tt> <tt id="link-95" class="py-name"><a title="lib.cuckoo.core.database.Database" class="py-name" href="#" onclick="return doclink('link-95', 'Database', 'link-46');">Database</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">    <tt class="py-name">cfg</tt> <tt class="py-op">=</tt> <tt id="link-96" class="py-name"><a title="lib.cuckoo.common.config.Config" class="py-name" href="#" onclick="return doclink('link-96', 'Config', 'link-20');">Config</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">cfg</tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-97', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-98" class="py-name" targets="Method lib.cuckoo.core.database.Database.reschedule()=lib.cuckoo.core.database.Database-class.html#reschedule"><a title="lib.cuckoo.core.database.Database.reschedule" class="py-name" href="#" onclick="return doclink('link-98', 'reschedule', 'link-98');">reschedule</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">        <tt id="link-99" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-99', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt id="link-100" class="py-name" targets="Module modules.processing.debug=modules.processing.debug-module.html"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-100', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Checking for locked tasks..."</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-name">tasks</tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name" targets="Method lib.cuckoo.core.database.Database.list_tasks()=lib.cuckoo.core.database.Database-class.html#list_tasks"><a title="lib.cuckoo.core.database.Database.list_tasks" class="py-name" href="#" onclick="return doclink('link-101', 'list_tasks', 'link-101');">list_tasks</a></tt><tt class="py-op">(</tt><tt id="link-102" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.status=lib.cuckoo.core.database.Machine-class.html#status,Variable lib.cuckoo.core.database.Task.status=lib.cuckoo.core.database.Task-class.html#status"><a title="lib.cuckoo.core.database.Machine.status
+lib.cuckoo.core.database.Task.status" class="py-name" href="#" onclick="return doclink('link-102', 'status', 'link-102');">status</a></tt><tt class="py-op">=</tt><tt id="link-103" class="py-name"><a title="lib.cuckoo.core.database.TASK_RUNNING" class="py-name" href="#" onclick="return doclink('link-103', 'TASK_RUNNING', 'link-47');">TASK_RUNNING</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">task</tt> <tt class="py-keyword">in</tt> <tt class="py-name">tasks</tt><tt class="py-op">:</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">            <tt class="py-name">db</tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="lib.cuckoo.core.database.Database.reschedule" class="py-name" href="#" onclick="return doclink('link-104', 'reschedule', 'link-98');">reschedule</a></tt><tt class="py-op">(</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-105" class="py-name" targets="Variable lib.cuckoo.core.database.Error.id=lib.cuckoo.core.database.Error-class.html#id,Variable lib.cuckoo.core.database.Guest.id=lib.cuckoo.core.database.Guest-class.html#id,Variable lib.cuckoo.core.database.Machine.id=lib.cuckoo.core.database.Machine-class.html#id,Variable lib.cuckoo.core.database.Sample.id=lib.cuckoo.core.database.Sample-class.html#id,Variable lib.cuckoo.core.database.Tag.id=lib.cuckoo.core.database.Tag-class.html#id,Variable lib.cuckoo.core.database.Task.id=lib.cuckoo.core.database.Task-class.html#id"><a title="lib.cuckoo.core.database.Error.id
+lib.cuckoo.core.database.Guest.id
+lib.cuckoo.core.database.Machine.id
+lib.cuckoo.core.database.Sample.id
+lib.cuckoo.core.database.Tag.id
+lib.cuckoo.core.database.Task.id" class="py-name" href="#" onclick="return doclink('link-105', 'id', 'link-105');">id</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">            <tt id="link-106" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-106', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"Rescheduled task with ID {0} and "</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">                     <tt class="py-string">"target {1}"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-107" class="py-name"><a title="lib.cuckoo.core.database.Error.id
+lib.cuckoo.core.database.Guest.id
+lib.cuckoo.core.database.Machine.id
+lib.cuckoo.core.database.Sample.id
+lib.cuckoo.core.database.Tag.id
+lib.cuckoo.core.database.Task.id" class="py-name" href="#" onclick="return doclink('link-107', 'id', 'link-105');">id</a></tt><tt class="py-op">,</tt> <tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-108" class="py-name" targets="Variable lib.cuckoo.core.database.Task.target=lib.cuckoo.core.database.Task-class.html#target"><a title="lib.cuckoo.core.database.Task.target" class="py-name" href="#" onclick="return doclink('link-108', 'target', 'link-108');">target</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"> </tt>
+<a name="init_modules"></a><div id="init_modules-def"><a name="L177"></a><tt class="py-lineno">177</tt> <a class="py-toggle" href="#" id="init_modules-toggle" onclick="return toggle('init_modules');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.cuckoo.core.startup-module.html#init_modules">init_modules</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="init_modules-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="init_modules-expanded"><a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">    <tt class="py-docstring">"""Initializes plugins."""</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">    <tt id="link-109" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-109', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt id="link-110" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-110', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Importing modules..."</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-comment"># Import all auxiliary modules.</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">    <tt id="link-111" class="py-name"><a title="lib.cuckoo.core.plugins.import_package" class="py-name" href="#" onclick="return doclink('link-111', 'import_package', 'link-53');">import_package</a></tt><tt class="py-op">(</tt><tt id="link-112" class="py-name"><a title="modules" class="py-name" href="#" onclick="return doclink('link-112', 'modules', 'link-0');">modules</a></tt><tt class="py-op">.</tt><tt id="link-113" class="py-name"><a title="modules.auxiliary" class="py-name" href="#" onclick="return doclink('link-113', 'auxiliary', 'link-1');">auxiliary</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">    <tt class="py-comment"># Import all processing modules.</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">    <tt id="link-114" class="py-name"><a title="lib.cuckoo.core.plugins.import_package" class="py-name" href="#" onclick="return doclink('link-114', 'import_package', 'link-53');">import_package</a></tt><tt class="py-op">(</tt><tt id="link-115" class="py-name"><a title="modules" class="py-name" href="#" onclick="return doclink('link-115', 'modules', 'link-0');">modules</a></tt><tt class="py-op">.</tt><tt id="link-116" class="py-name"><a title="modules.processing" class="py-name" href="#" onclick="return doclink('link-116', 'processing', 'link-3');">processing</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">    <tt class="py-comment"># Import all signatures.</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">    <tt id="link-117" class="py-name"><a title="lib.cuckoo.core.plugins.import_package" class="py-name" href="#" onclick="return doclink('link-117', 'import_package', 'link-53');">import_package</a></tt><tt class="py-op">(</tt><tt id="link-118" class="py-name"><a title="modules" class="py-name" href="#" onclick="return doclink('link-118', 'modules', 'link-0');">modules</a></tt><tt class="py-op">.</tt><tt id="link-119" class="py-name"><a title="modules.signatures" class="py-name" href="#" onclick="return doclink('link-119', 'signatures', 'link-5');">signatures</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-comment"># Import all reporting modules.</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">    <tt id="link-120" class="py-name"><a title="lib.cuckoo.core.plugins.import_package" class="py-name" href="#" onclick="return doclink('link-120', 'import_package', 'link-53');">import_package</a></tt><tt class="py-op">(</tt><tt id="link-121" class="py-name"><a title="modules" class="py-name" href="#" onclick="return doclink('link-121', 'modules', 'link-0');">modules</a></tt><tt class="py-op">.</tt><tt id="link-122" class="py-name"><a title="modules.reporting" class="py-name" href="#" onclick="return doclink('link-122', 'reporting', 'link-7');">reporting</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">    <tt class="py-comment"># Import machine manager.</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt id="link-123" class="py-name"><a title="lib.cuckoo.core.plugins.import_plugin" class="py-name" href="#" onclick="return doclink('link-123', 'import_plugin', 'link-52');">import_plugin</a></tt><tt class="py-op">(</tt><tt class="py-string">"modules.machinery."</tt> <tt class="py-op">+</tt> <tt id="link-124" class="py-name"><a title="lib.cuckoo.common.config.Config" class="py-name" href="#" onclick="return doclink('link-124', 'Config', 'link-20');">Config</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-125" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-125', 'cuckoo', 'link-9');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-126" class="py-name" targets="Variable lib.cuckoo.core.scheduler.machinery=lib.cuckoo.core.scheduler-module.html#machinery,Package modules.machinery=modules.machinery-module.html"><a title="lib.cuckoo.core.scheduler.machinery
+modules.machinery" class="py-name" href="#" onclick="return doclink('link-126', 'machinery', 'link-126');">machinery</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-127" class="py-name" targets="Variable lib.cuckoo.core.database.Task.category=lib.cuckoo.core.database.Task-class.html#category"><a title="lib.cuckoo.core.database.Task.category" class="py-name" href="#" onclick="return doclink('link-127', 'category', 'link-127');">category</a></tt><tt class="py-op">,</tt> <tt class="py-name">entries</tt> <tt class="py-keyword">in</tt> <tt id="link-128" class="py-name"><a title="lib.cuckoo.core.plugins.list_plugins" class="py-name" href="#" onclick="return doclink('link-128', 'list_plugins', 'link-54');">list_plugins</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt id="link-129" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-129', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt id="link-130" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-130', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Imported \"%s\" modules:"</tt><tt class="py-op">,</tt> <tt id="link-131" class="py-name"><a title="lib.cuckoo.core.database.Task.category" class="py-name" href="#" onclick="return doclink('link-131', 'category', 'link-127');">category</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">entry</tt> <tt class="py-keyword">in</tt> <tt class="py-name">entries</tt><tt class="py-op">:</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">entry</tt> <tt class="py-op">==</tt> <tt class="py-name">entries</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">                <tt id="link-132" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-132', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt id="link-133" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-133', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"\t `-- %s"</tt><tt class="py-op">,</tt> <tt class="py-name">entry</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">                <tt id="link-134" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.sniffer.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.processing.analysisinfo.log
+modules.processing.behavior.log
+modules.processing.memory.log" class="py-name" href="#" onclick="return doclink('link-134', 'log', 'link-55');">log</a></tt><tt class="py-op">.</tt><tt id="link-135" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-135', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"\t |-- %s"</tt><tt class="py-op">,</tt> <tt class="py-name">entry</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jan  9 16:03:55 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

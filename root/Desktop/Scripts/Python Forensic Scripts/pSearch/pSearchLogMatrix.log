@@ -1,0 +1,14 @@
+2015-05-06 17:00:50,184 p-searchMatrix started
+2015-05-06 17:00:50,214 Search Words
+2015-05-06 17:00:50,214 Input File:search.txt
+2015-05-06 17:00:50,214 set(['NOTIFY'])
+2015-05-06 17:00:50,276 Target of Search:test.pcap
+2015-05-06 17:00:50,276 File Size:18638
+2015-05-06 17:00:50,308 Matrix File Error:matrix.txt
+2015-05-06 17:01:10,433 p-searchMatrix started
+2015-05-06 17:01:10,447 Search Words
+2015-05-06 17:01:10,447 Input File:search.txt
+2015-05-06 17:01:10,447 set(['NOTIFY'])
+2015-05-06 17:01:10,463 Target of Search:test.pcap
+2015-05-06 17:01:10,463 File Size:18638
+2015-05-06 17:01:10,480 Matrix File Error:matrix.txt

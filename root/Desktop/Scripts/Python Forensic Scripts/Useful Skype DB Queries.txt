@@ -1,0 +1,8 @@
+# Prints only the contacts with birthdays in contact list
+SELECT fullname, birthday FROM contacts WHERE birthday > 0;
+
+# Prints a record of conversations with only a specific <SKYPE.PARTNER>
+SELECT datetime(timestamp,'unixepoch'), dialog_partner, author, body_xml
+
+# Deletes a record of conversations with a specific <SKYPE-PARTNER>
+DELETE FROM messages WHERE skypename='<SKYPE-PARTNER>

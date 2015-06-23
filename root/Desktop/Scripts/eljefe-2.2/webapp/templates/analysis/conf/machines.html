@@ -1,0 +1,29 @@
+<section id="information">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">Details</h4>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Machine Id</th>
+                    <th>Platform</th>
+                    <th>File</th>
+                    <th>Snapshot</th>
+                    <th>IP Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for machine in machines %}
+                <tr>
+                    <td>{{machine.id}}</td>
+                    <td>{{machine.platform}}</td>
+                    <td>{{machine.label}}</td>
+                    <td>{{machine.snapshot}}</td>
+                    <td>{{machine.ip}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,221 @@
+{% load tags %}
+{% load version %}
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+
+<title>{% block title %}El Jefe{% endblock %}</title>
+<link rel="stylesheet" href="/imedia/css/select2-bootstrap.css" media="screen"/>
+<link rel="stylesheet" href="/imedia/css/select2.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="/imedia/css/datatables.css">
+
+<link rel="stylesheet" href="/imedia/css/bootstrap-datetimepicker.min.css" media="screen"/>
+<link rel="stylesheet" href="/imedia/css/bootstrap.min.css" media="screen"/>
+
+<script src="/imedia/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="/imedia/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/imedia/js/bootstrap-datetimepicker.min.js"></script>  
+<script type="text/javascript" src="/imedia/js/jquery.loadingdotdotdot.js"></script>  
+
+
+<script src="/imedia/js/extras.js" type="text/javascript"></script>
+
+         
+
+{% block initializer %}
+{% endblock %}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div id="header">
+        <div id="logo">
+            <img src="/imedia/images/logo.png" />
+            {% get_version as ver %}
+            <span style="color:red;font-weight:bold;">Version: {{ ver }}</span>
+        </div>
+    </div>
+        <ul class="nav navbar-nav navbar-right">
+        <li> <a href="#">Welcome, <span style="color:red">{{user.username}}</span></a></li>
+        <li> <a href="{% url "django.contrib.auth.views.logout" %}">Log out</a> </li>
+      </ul>
+        <ul class="nav nav-tabs">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <img src="/imedia/images/glyphicons_160_imac.png"> Stations <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a onclick="return load_content(this, stations)" href="/home/stations/search">
+                            <img src="/imedia/images/glyphicons_027_search.png"> Search
+                        </a>
+                    </li>      
+    
+                    <li>
+                        <a onclick="return load_content(this, stations)" href="/home/stations">
+                            <img src="/imedia/images/glyphicons_157_show_thumbnails_with_lines.png">  Browse
+                        </a>
+                    </li>                 
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <img src="/imedia/images/glyphicons_036_file.png"> Binaries <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a onclick="return load_content(this, binaries)" href="/home/binaries/search">
+                            <img src="/imedia/images/glyphicons_027_search.png"> Search
+                        </a>
+                    </li>        
+                    <li>
+                        <a onclick="return load_content(this, binaries)" href="{% url 'home.views.binaries_page' 1 'All'%}">
+                            <img src="/imedia/images/glyphicons_157_show_thumbnails_with_lines.png">  Browse
+                        </a>
+                    </li>
+                    <li><a onclick="return load_content(this, binaries)" href="/home/binaries/unique">
+                        <img src="/imedia/images/glyphicons_049_star.png">  Unique binaries</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                 <img src="/imedia/images/glyphicons_029_notes_2.png">    Events <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a onclick="return load_content(this, events)" href="/home/events/search">
+                            <img src="/imedia/images/glyphicons_027_search.png"> Search
+                        </a>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                 <img src="/imedia/images/usb_logo_event.png">    USB <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a onclick="return load_content(this, events)" href="/home/usb_events/search">
+                            <img src="/imedia/images/glyphicons_027_search.png"> Search
+                        </a>
+                </ul>
+            </li>            
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                     <img src="/imedia/images/glyphicons_034_old_man.png">  Intrusion <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                <li><a onclick="return load_content(this, events)" href="/home/intrusion">
+                <img src="/imedia/images/glyphicons_185_screenshot.png">  Methods</a></li>         
+                </ul>
+            </li> 
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                     <img src="/imedia/images/glyphicons_042_pie_chart.png"> Data <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a onclick="return load_content(this, events)" href="/home/data/dropall">
+                     <img src="/imedia/images/glyphicons_016_bin.png">  DROP ALL</a></li>
+                    <li><a onclick="return load_content(this, events)" href="/home/dispatch/log">
+                    <img src="/imedia/images/glyphicons_414_disk_save.png">   xml log</a></li>                    
+                </ul>
+            </li>
+
+{% get_cuckoo_status as CUCKOO_FOUND %}
+    {% if CUCKOO_FOUND %}
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                     <img src="/imedia/images/glyphicons_360_bug.png"> Sandbox <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a onclick="return load_content(this, events)" href="{% url "analysis.views.vm_conf" %}">
+                        <img src="/imedia/images/glyphicons_439_wrench.png">  VM Conf
+                    </li>      
+                    <li>
+                        <a onclick="return load_content(this, events)" href="{% url "analysis.views.search" %}">
+                        <img src="/imedia/images/glyphicons_027_search.png">  Search </a>
+                    </li>      
+                    <li>
+                        <a onclick="return load_content(this, events)" href="{% url "analysis.views.index" %}">
+                        <img src="/imedia/images/glyphicons_157_show_thumbnails_with_lines.png">  Browse </a>
+                    </li>      
+                    <li>
+                        <a onclick="return load_content(this, events)" href="{% url "analysis.views.pending" %}">
+                        <img src="/imedia/images/glyphicons_053_alarm.png">  Pending </a>
+                     </li>  
+                    <li>
+                        <a onclick="return load_content(this, events)" href="{% url "analysis.views.remove_pending" %}">
+                        <img src="/imedia/images/glyphicons_053_alarm.png">  Remove Pending </a>
+                     </li>  
+                    <!-- <li>
+                        <a onclick="return load_content(this, events)" href="{% url "analysis.views.drop_all" %}">
+                        <img src="/imedia/images/glyphicons_016_bin.png">  Drop Tasks </a>
+                     </li>-->   
+  
+                </ul>
+            </li>
+    {% endif %}
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                     <img src="/imedia/images/glyphicons_333_bell.png"> Alerts <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a onclick="return load_content(this, events)" href="{% url "alerts.views.add_filter" %}">
+                        <img src="/imedia/images/glyphicons_190_circle_plus.png">  Add </a>
+                    </li>      
+                    <li>
+                        <a onclick="return load_content(this, events)" href="{% url "alerts.views.import_filters" %}">
+                        <img src="/imedia/images/glyphicons_358_file_import.png">  Import </a>
+                    </li>      
+                    <li>
+                        <a onclick="return load_content(this, events)" href="{% url "alerts.views.list_filters" %}">
+                        <img src="/imedia/images/glyphicons_359_file_export.png">  Export </a>
+                    </li>   
+                </ul>
+            </li>            
+            
+            <li>
+                <a href="#"> <img src="/imedia/images/glyphicons_195_circle_info.png">  Docs</a>
+            </li>
+            <li>
+                <a href="{% url "home.views.client_setup" %}"> <img src="/imedia/images/glyphicons_219_circle_arrow_down.png">  Client</a>
+            </li>
+        </ul>
+    </nav>    
+
+    <div id="main_content">
+        {% block main %}
+
+        <div id="content" class="content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+        {% endblock %}
+    </div>
+
+    <div id="footer" style="background-color:white" class="navbar navbar-fixed-bottom">
+        {% block footer %}
+        <center>
+        <p>
+            <a href="/">Home</a> |
+            <a href="#">Contact</a> |
+            <a id="gotop" href="#top">Top</a>
+        </p>
+        <p class="centered">&copy; 2010 El Jefe - <a href="#">Terms</a> - <a href="#">Privacy Policy</a></p>
+        </center>
+        {% endblock footer %}
+    </div>
+
+</body>
+
+</html>

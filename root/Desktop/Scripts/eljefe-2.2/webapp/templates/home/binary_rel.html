@@ -1,0 +1,74 @@
+{% extends "base_.html" %}
+{% load tags %}
+{% block initializer %}
+<script src="/imedia/js/springy.js" type="text/javascript"></script>
+<script src="/imedia/js/springyui.js" type="text/javascript"></script>
+    <style>
+        .unselectable {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;   
+        }
+    </style>
+       <script>
+              $(function() {
+                            var springy = jQuery('#springydemo').springy({
+                                          graph: graph,
+                            });
+                        
+                     $('#id_startdate').datetimepicker(
+                     {'format'  : 'yyyy-mm-dd hh:ii',
+                      'minView' : 2,
+                      'maxView' : 2
+                      });
+                     $('#id_enddate').datetimepicker(
+                     {'format'  : 'yyyy-mm-dd hh:ii',
+                      'minView' : 2,
+                      'maxView' : 2
+                      });
+              });
+       </script>
+
+{% endblock %}
+
+{% block title %}
+Events Relationship
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Events Relationship</h3>
+<a href="/home/graphs/binary_rel/{{ sid }}/1"><img src="/imedia/images/calendar_1day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/7"><img src="/imedia/images/calendar_7day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/31"><img src="/imedia/images/calendar_31day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/8888"><img src="/imedia/images/calendar_all.png"></a><br>
+
+<script>
+                                                        $('#springydemo').prop("unselectable", "on").css({ 
+                                                            "moz-user-select" : "none", 
+                                                            "-webkit-user-select" : "none"
+                                                        });
+                                                        $('#springydemo').dblclick(function(){ return false; });
+var graph = new Springy.Graph();
+{% for binary, id in nodes.items %}
+       var {{ id.1 }} = graph.newNode({ label: '{{binary}}', 
+                                                   id : {{ id.0 }},
+                                                  ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.binary_filter" id.0 %}');
+                                                        }
+                                                 });
+{% endfor %}
+
+{% for edge in edges %}
+       graph.newEdge({{ edge.0|get_name|slugify }},{{ edge.1|get_name|slugify }},{});
+{% endfor %}
+</script>
+<span class="unselectable">
+<canvas id="springydemo" width="2000" height="1000" />
+</span>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block quick_links %}
+{% endblock %}

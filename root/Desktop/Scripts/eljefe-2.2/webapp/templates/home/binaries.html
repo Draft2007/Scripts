@@ -1,0 +1,108 @@
+{% extends "base_.html" %}
+{% load tags %}
+
+{% block initializer %}
+<script src="/imedia/js/select2.min.js" type="text/javascript"></script>
+<script src="/imedia/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" charset="utf-8" language="javascript" src="/imedia/js/datatables.js"></script>
+
+
+<script>
+        $(document).ready(function() {  
+	    var dt = $('#datatables').dataTable({
+	        "iDisplayLength": 25,
+	        "bLengthChange" : false,
+                "aoColumns": ['','Station','Path Binary','SHA1','',''],
+                "bFilter": false,
+		"bSort" : false,
+                "sPaginationType": "bs_full",
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "{% url "home.views.binaries_ajax" %}",
+                "fnInitComplete": function(oSettings, json) {
+					  $('#selector').select2({tags:{{str_tags|jsonify|safe}}});
+					  $('#selector_btn').click(function(){
+									      if ($('#selector').val() == ''){
+										    url = '/home/binaries/{{objlist.number}}/All';
+									      }
+									      else{
+										    url = '/home/binaries/{{objlist.number}}/' + $('#selector').val();
+									      }
+									});
+					  $("input").select2({tags:{{str_tags|jsonify|safe}}})
+						.on("select2-selecting", function(e) { $.ajax({url: "{% url "home.views.handle_tags"%}", data: {'action'    : 'add',
+																		'tag'       : e.val,
+																		'binary_id' : this.id.split('_')[1]
+																		}
+												      });
+										    })
+						.on("select2-removing", function(e) { $.ajax({url: "{% url "home.views.handle_tags" %}", data: {'action'    : 'remove',
+																		'tag'       : e.val,
+																		'binary_id' : this.id.split('_')[1]
+																		}
+												      });
+										    });
+										    
+					  $('.eye').mouseover(function(){
+									      var target = $(this)
+									      $.ajax({url: "{% url "home.views.virustotal" %}", data: {'binary_sha2' : this.id }
+												      }).done(function(result) {
+														  if (result == -1){
+															target.attr('src','/imedia/images/glyphicons_207_remove_2.png');
+														  }
+														  else if (result == 1){
+															target.attr('src','/imedia/images/glyphicons_344_thumbs_down.png');
+														  }
+														  else{
+															target.attr('src','/imedia/images/glyphicons_343_thumbs_up.png');
+														  }
+
+													    });
+									});						                       
+                },
+                "fnServerParams": function ( aoData ) {
+                    aoData.push( { "name": "id", "value": "{{ id }}" }, 
+                                 { "name": "tag_filter", "value": "{{tag_filter}}" }, 
+                                 { "name": "station_id", "value": "{{ sid }}" } );
+                }
+            });
+	    
+	    
+	});
+</script>
+{% endblock %}
+
+{% block title %}
+El Jefe - Binaries
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Browse Binaries</h3>
+
+      <div style="float:right;width:30%;">
+	    <button class="btn btn-danger" id="selector_btn">Filter</button>
+	    {% if tag_filter == 'All'%}
+		  <input type="hidden" id="selector" style="width:60%;"/>
+	    {% else %}
+		  <input type="hidden" id="selector" value="{{tag_filter}}"style="width:60%;"/>
+	    {% endif %}
+      </div>
+          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatables" >
+    <thead>
+     <tr>
+            <th></th>
+            <th>Station</th>
+            <th>Path Binary</th>
+            <th>SHA1</th>
+            <th></th>
+            <th></th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    </tbody>
+    </table>
+      {% endblock %}
+

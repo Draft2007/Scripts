@@ -1,0 +1,2 @@
+#!/bin/bash
+gawk '{FS="\n";RS="\n\n";print $1}' alert

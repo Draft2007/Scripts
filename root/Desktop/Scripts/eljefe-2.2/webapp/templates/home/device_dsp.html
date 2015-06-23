@@ -1,0 +1,213 @@
+{% extends "base_.html" %}
+{% load tags %}
+{% block title %}
+ElJefe
+{% endblock %}
+
+
+{% block extrahead %}
+
+{% endblock %}
+
+{% block initializer %}
+<script>
+</script>
+{% endblock %}
+
+{% block content %}
+{% load tags %}
+
+{% if device %}
+
+    <div class="well well-lg">
+        <h3 class="title"> USB Device Information <a href=""><img id="" class="" src="/imedia/images/usb_logo.png"> </a> </h3>
+    
+        <table class="table">
+        <tbody>
+        {% comment %}
+	<tr>
+        <td><b>Hostname</b></td><td>{{device.station.hostname}}</td>
+        </tr>
+        <tr>
+        <td><b>IP Address</b></td><td>{{device.station.ip_address}}</td>
+        </tr>
+	{% endcomment %}
+
+{% if device.dev_id  %}
+        <tr>
+        <td><b>Model</b></td><td>{{device.model}}</td>
+        </tr>
+
+        <tr>
+        <td><b>Serial Number</b></td><td>{{device.serial_number}}</td>
+        </tr>
+	
+        <tr>
+        <td><b>Signature</b></td><td>{{device.signature}}</td>
+        </tr>
+
+        <tr>
+        <td><b>Manufacturer</b></td><td>{{device.manufacturer}}</td>
+        </tr>
+
+        <tr>
+        <td><b>Media Type</b></td><td>{{device.media_type}}</td>
+        </tr>
+
+        <tr>
+        <td><b>Media Loaded</b></td><td>{{device.media_loaded}}</td>
+        </tr>
+
+        <tr>
+        <td><b>Caption</b></td><td>{{device.caption}}</td>
+        </tr>
+	
+        <tr>
+        <td><b>Name</b></td><td>{{device.name}}</td>
+        </tr>
+
+        <tr>
+        <td><b>Size</b></td><td>{{device.size}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Partitions</b></td><td>{{device.partitions}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Bytes Per Sector</b></td><td>{{device.bytes_per_sector}}</td>
+        </tr>
+        
+	<tr>
+        <td><b>Sectors Per Track</b></td><td>{{device.sectors_per_track}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Total Sectors</b></td><td>{{device.total_sectors}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Total Tracks</b></td><td>{{device.total_tracks}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Total Heads</b></td><td>{{device.total_heads}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Total Cylinders</b></td><td>{{device.total_cylinders}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>DeviceID</b></td><td>{{device.dev_id}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>PNPDeviceID</b></td><td>{{device.pnp_device_id}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Firmware Revision</b></td><td>{{device.firmware_revision}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Capability Descriptions</b></td><td>{{device.capability_descriptions}}</td>
+        </tr>
+{% else %}
+        <tr>
+        <td><b>Vendor</b></td><td>{{vendor}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Product</b></td><td>{{product}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Caption</b></td><td>{{device.caption}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Vendor ID</b></td><td>{{device.vendor_id}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Product ID</b></td><td>{{device.product_id}}</td>
+        </tr>
+        
+<tr>
+        <td>
+            <b>USB Classes</b>
+        </td>
+        <td>
+            <table class="table">
+		<tr>
+			<td> Class </td>
+			<td> SubClass </td>
+			<td> Protocol </td>
+		</tr>
+            {% for usb_info in device.usb_class|split:'|'%}
+                <tr>
+			{% get_usb_data usb_info as usb_data %}
+			<td> 
+			    {{ usb_data.0 }} 
+			</td>
+			<td> 
+			    {{ usb_data.1 }} 
+			</td>
+			<td> 
+			    {{ usb_data.2 }} 
+			</td>
+		</tr>
+		{% endfor %}
+                
+            </table>
+        </td>
+    </tr>
+        
+{% endif %}
+        </tbody>
+        </table>
+    </div>
+    
+	{% comment %}
+    <div class="well well-lg">
+        <h4> Last Connection </h4>
+        <table class="table">
+        <tbody>
+	<tr>
+        <td><b>Date</b></td><td>{{device.last_connection}}</td>
+        </tr>
+	<tr>
+        <td><b>Connected to Hostname</b></td><td>{{device.station.hostname}}</td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
+	{% endcomment %}
+
+        
+    <div class="well well-lg">
+
+        <h4> The USB device has been connected to the following stations :</h4>
+        
+        <table class="table">
+        
+        {%for item in connected_stations%}
+        <tr>
+        <td><a href="/home/display/station/{{item.id}}">{{item.hostname}}</a></td><td>{{item.ip_address}}</td>
+        </tr>
+        {%endfor%}
+        <!-- <tr>
+            <td> -->
+            <!-- <button id="timeline" class="btn btn-danger" type="submit">TimeLine</button>-->
+        <!--     <b> <a href="{% url "home.views.usbConnTimeline" %}">TimeLine</a></b>
+            </td>
+            <td>
+            </td>
+        </tr>-->
+        </table>
+    </div>
+
+{% endif %}
+
+{% endblock %}

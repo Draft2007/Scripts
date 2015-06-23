@@ -1,0 +1,52 @@
+{% extends "base_.html" %}
+{% load bootstrap3 %}
+{% load tags %}
+
+{% block initializer %}
+<script>
+
+$(function(){
+    $('#form_data').html($('.arguments[id="'+ $('#selectbasic').val() +'"]').html());
+
+    $('#selectbasic').change(function(){
+                                $('#form_data').html($('.arguments[id="'+ $(this).val() +'"]').html());
+                                });
+  });
+
+</script>
+
+{% endblock %}
+
+{% block title %}
+El Jefe - Filters
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Add Filter</h3>
+    <div class="well well-lg">
+        <form class="form-horizontal" method="post">      
+            {% csrf_token %}
+
+          <div class="form-group">
+            <label class="control-label" for="selectbasic">Filter Type</label>
+              <select id="selectbasic" name="selectbasic" class="form-control">
+              {% for option in filter_forms.keys %}
+                <option value="{{ option }}">{{ option }}</option>
+              {% endfor %}
+              </select>
+          </div>
+          <span id="form_data"></span>
+          <button type="submit" class="btn btn-danger">Add</button>
+        </form>
+    </div>
+    
+   <div style="display:none">
+           {% for name, form in filter_forms.items %}
+            <span id="{{ name }}" class="arguments">
+                {% bootstrap_form form %}
+            </span>
+        {% endfor %}
+    </div> 
+{% endblock %}
+

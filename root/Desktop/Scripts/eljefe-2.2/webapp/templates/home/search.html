@@ -1,0 +1,37 @@
+{% extends "base_.html" %}
+
+{% block initializer %}
+{% endblock %}
+
+{% block parent %}
+ <a class="current" href="/codeaudit/search">Search</a>
+{% endblock %}
+{% block current_title %}
+Search Bugs
+{% endblock %}
+
+{% block content %}
+    <script type="text/javascript">
+        projects = [{% for project in projects %}{text:'{{project.name}}'}{% if not forloop.last %},{% endif %}{% endfor %}];
+
+    </script>
+
+
+        <h3 class="title">Search bugs</h3>
+
+        <form id="searchform" class="codeaudit_form"
+              action="{% url "codeaudit.views.search_results" %}" method="POST">
+
+        <table>
+        {{ form }}
+
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <input type="submit" name="advanced_search"
+                       class="submit_button" value="Search" />
+            </td>
+        </tr>
+        </table>
+
+        </form>
+{% endblock %}

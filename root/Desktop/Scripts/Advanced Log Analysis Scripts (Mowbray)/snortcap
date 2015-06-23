@@ -1,0 +1,5 @@
+#!/bin/bash
+# Add a parameter like ./snortcap keep -- in order to append to logs
+# By default, daytime logs are deleted to conserve space
+if [$1 -eq ""]; then rm /root/alert /root/snort.log.*; fi
+/usr/local/bin/snort -A full -c /etc/snort/snort.conf -r /root/OVERNIGHT.cap -l /root

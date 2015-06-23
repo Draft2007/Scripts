@@ -1,0 +1,71 @@
+2015-03-04 11:39:54,250 Welcome to pHashAndCollectMeta version 1... New Scan Started
+2015-03-04 11:39:54,270 System:win32
+2015-03-04 11:39:54,280 Version:2.7 (r27:82525, Jul  4 2010, 09:01:59) [MSC v.1500 32 bit (Intel)]
+2015-03-04 11:39:54,280 Root Path:c:\\Users\Brian\
+2015-03-04 11:40:06,328 Open Failed:c:\\Users\Brian\NTUSER.DAT
+2015-03-04 11:40:06,509 Open Failed:c:\\Users\Brian\ntuser.dat.LOG1
+2015-03-04 11:40:06,509 Open Failed:c:\\Users\Brian\ntuser.dat.LOG2
+2015-03-04 11:50:23,759 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\RecoveryStore.{2CE625DC-C10B-11E4-A8C3-87EDBFA656C3}.dat
+2015-03-04 11:50:25,459 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{075A2352-C251-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:50:25,790 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{09BD6B87-C285-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:50:25,950 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{0B5FBF7F-C27D-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:50:29,811 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{23854494-C291-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:50:30,091 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{262B73D7-C288-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:50:30,990 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{2CE625DE-C10B-11E4-A8C3-87EDBFA656C3}.dat
+2015-03-04 11:50:31,891 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{31E4BE0D-C288-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:50:32,950 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{35F4F71D-C121-11E4-A8C3-87EDBFA656C3}.dat
+2015-03-04 11:50:48,164 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{85771125-C143-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:50:48,335 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{85D6CCE4-C22F-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:50:50,285 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{903B088A-C23D-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:51:07,653 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{F38EBCB2-C29E-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:51:09,132 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Internet Explorer\Recovery\High\Active\{FCB46A2A-C290-11E4-A8C3-CFBDF2A4C625}.dat
+2015-03-04 11:52:17,986 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\UsrClass.dat
+2015-03-04 11:52:17,986 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\UsrClass.dat.LOG1
+2015-03-04 11:52:17,986 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\UsrClass.dat.LOG2
+2015-03-04 11:52:18,918 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\WebCacheLock.dat
+2015-03-04 11:56:59,477 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.MSO\87D6D143.jpg
+2015-03-04 11:56:59,888 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.MSO\F5FDB7CA.jpg
+2015-03-04 11:57:01,788 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.Word\~WRS{39DF2F1F-DA0E-4D30-9F43-3367174D7AF6}.tmp
+2015-03-04 11:57:02,832 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.Word\~WRS{59247BE8-7D0D-4B8F-8148-9C6D8F760720}.tmp
+2015-03-04 11:57:03,052 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.Word\~WRS{789F1F2D-B902-45B0-AA08-4D2A753378D2}.tmp
+2015-03-04 11:57:03,072 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.Word\~WRS{78C8605C-9382-4ADD-AB65-0270F5B08F18}.tmp
+2015-03-04 11:57:03,822 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.Word\~WRS{D3521B45-8B7F-4ACA-B726-B04E2005C5CF}.tmp
+2015-03-04 11:57:04,951 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\WebCache\V01.log
+2015-03-04 11:57:05,062 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\WebCache\WebCacheV01.dat
+2015-03-04 11:57:05,072 Open Failed:c:\\Users\Brian\AppData\Local\Microsoft\Windows\WebCache\WebCacheV01.tmp
+2015-03-04 11:59:54,315 Open Failed:c:\\Users\Brian\AppData\Local\Temp\fla4E2F.tmp
+2015-03-04 12:00:36,749 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF0003D19D29123910.TMP
+2015-03-04 12:00:39,779 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF1E46B6FC15C20E8F.TMP
+2015-03-04 12:00:40,009 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF23BE219EBA411CD5.TMP
+2015-03-04 12:00:43,730 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF4ACB6BBBB3723FB3.TMP
+2015-03-04 12:00:44,780 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF5635C8E0B65C8202.TMP
+2015-03-04 12:00:45,381 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF609098DCB03917DF.TMP
+2015-03-04 12:00:46,520 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF63584C26E5B69708.TMP
+2015-03-04 12:00:46,641 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF64F5D6EDE50CB43A.TMP
+2015-03-04 12:00:46,901 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF6A487D69CC2D3194.TMP
+2015-03-04 12:00:50,371 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF9546BDBD3BAA68B5.TMP
+2015-03-04 12:00:50,520 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DF98E4F4BBC6E0E830.TMP
+2015-03-04 12:00:51,980 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFAA54D92DE1C63931.TMP
+2015-03-04 12:00:52,000 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFABA2785B35014E3C.TMP
+2015-03-04 12:00:52,010 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFABB636FA6FE9D158.TMP
+2015-03-04 12:00:52,071 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFADE92B32A964558B.TMP
+2015-03-04 12:00:52,460 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFBC2F4AE81EDA54B7.TMP
+2015-03-04 12:00:52,621 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFC8C91A011071D391.TMP
+2015-03-04 12:00:53,960 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFE8204E90E8581AD7.TMP
+2015-03-04 12:00:54,040 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFEC3F9FB24A4C07CE.TMP
+2015-03-04 12:00:54,061 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFEDADE0E86B1242B0.TMP
+2015-03-04 12:00:54,240 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFF3D1ED9D3F3A89A4.TMP
+2015-03-04 12:00:54,450 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFFA640B9C9DBDCFAA.TMP
+2015-03-04 12:00:54,561 Open Failed:c:\\Users\Brian\AppData\Local\Temp\~DFFD98295CD0BFF2DD.TMP
+2015-03-04 12:06:27,124 ['settings.sol', Skipped Link NOT a File]
+2015-03-04 12:07:05,555 ['settings.sol', Skipped Link NOT a File]
+2015-03-04 12:07:59,486 ['settings.sol', Skipped Link NOT a File]
+2015-03-04 12:08:12,993 ['settings.sol', Skipped Link NOT a File]
+2015-03-04 12:08:42,648 ['__STREMING_CLIENT_ID_COOKIE.sol', Skipped Link NOT a File]
+2015-04-14 16:07:44,776 Welcome to pHashAndCollectMeta version 1... New Scan Started
+2015-04-14 16:07:44,786 System:win32
+2015-04-14 16:07:44,786 Version:2.7 (r27:82525, Jul  4 2010, 09:01:59) [MSC v.1500 32 bit (Intel)]
+2015-04-14 16:07:44,786 Root Path:C:\\Users\Brian\Desktop\Scripts\
+2015-04-14 16:07:52,049 Files Processed:3594
+2015-04-14 16:07:52,049 Elapsed Time:7.27399992943seconds
+2015-04-14 16:07:52,059 Program Terminated Normally

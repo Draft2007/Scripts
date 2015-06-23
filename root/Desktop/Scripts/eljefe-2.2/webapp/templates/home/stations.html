@@ -1,0 +1,45 @@
+{% extends "base_.html" %}
+
+{% block initializer %}
+
+{% endblock %}
+
+{% block title %}
+El Jefe - Stations
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Browse Stations</h3>
+
+<div id="tablecontent">
+</div>
+
+<center>
+<script language="javascript">
+CallWeb('/home/content/{{ sessid }}', 'tablecontent');
+</script>
+</center>
+
+
+
+<div style="display:none">
+<form id="search_inside" action="{% url "home.views.stations_page" %}" method="POST">
+    <input type="hidden" name="configuration__ownerversion__software__name"
+           value="{{configuration.ownerversion.software.name}}" />
+    <input type="hidden" name="configuration__ownerversion__version"
+           value="{{configuration.ownerversion.version}}" />
+    <input type="hidden" name="configuration__name"
+           value="{{configuration.name}}" />
+    <input type="submit" value="Search on this project" />
+</form>
+</div>
+
+
+{% endblock %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block quick_links %}
+{% endblock %}

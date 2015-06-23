@@ -1,0 +1,141 @@
+2015-03-04 13:02:32,118 p-search started
+2015-03-04 13:02:32,118 Search Words
+2015-03-04 13:02:32,128 Input File:search.txt
+2015-03-04 13:02:32,128 set(['NOTIFY'])
+2015-03-04 13:02:32,138 Target of Search:test.pcap
+2015-03-04 13:02:32,138 File Size:18638
+2015-03-04 13:15:30,618 p-search started
+2015-03-04 13:15:30,648 Search Words
+2015-03-04 13:15:30,799 Input File:search.txt
+2015-03-04 13:15:30,809 set(['NOTIFY'])
+2015-03-04 13:15:30,809 Target of Search:test.pcap
+2015-03-04 13:15:30,809 File Size:18638
+2015-03-04 13:16:33,240 p-search started
+2015-03-04 13:16:33,250 Search Words
+2015-03-04 13:16:33,250 Input File:search.txt
+2015-03-04 13:16:33,250 set(['NOTIFY'])
+2015-03-04 13:16:33,259 Target of Search:test.pcap
+2015-03-04 13:16:33,259 File Size:18638
+2015-03-04 13:17:53,895 p-search started
+2015-03-04 13:17:53,895 Search Words
+2015-03-04 13:17:53,895 Input File:search.txt
+2015-03-04 13:17:53,905 set(['NOTIFY'])
+2015-03-04 13:17:53,905 Target of Search:test.pcap
+2015-03-04 13:17:53,926 File Size:18638
+2015-03-04 13:19:32,782 p-search started
+2015-03-04 13:19:32,792 Search Words
+2015-03-04 13:19:32,792 Input File:search.txt
+2015-03-04 13:19:32,792 set(['NOTIFY'])
+2015-03-04 13:19:32,802 Target of Search:test.pcap
+2015-03-04 13:19:32,802 File Size:18638
+2015-03-04 13:19:32,802 Matrix File Error:search.txt
+2015-03-04 13:45:19,351 p-search started
+2015-03-04 13:45:19,361 Search Words
+2015-03-04 13:45:19,371 Input File:search.txt
+2015-03-04 13:45:19,371 set(['NOTIFY'])
+2015-03-04 13:45:19,381 Target of Search:test.pcap
+2015-03-04 13:45:19,381 File Size:18638
+2015-03-04 13:45:19,381 Matrix File Error:search.txt
+2015-03-04 14:09:45,657 p-search started
+2015-03-04 14:09:45,667 Search Words
+2015-03-04 14:09:45,667 Input File:search.txt
+2015-03-04 14:09:45,677 set(['NOTIFY'])
+2015-03-04 14:09:45,687 Target of Search:test
+2015-03-04 14:09:45,687 File Size:3226
+2015-03-04 14:09:45,687 Matrix File Error:search.txt
+2015-03-04 14:14:52,924 p-search started
+2015-03-04 14:14:52,934 Search Words
+2015-03-04 14:14:52,934 Input File:search.txt
+2015-03-04 14:14:52,934 set(['NOTIFY'])
+2015-03-04 14:14:52,944 Target of Search:test.raw
+2015-03-04 14:14:52,944 File Size:3226
+2015-03-04 14:14:52,953 Matrix File Error:search.txt
+2015-03-04 14:33:39,029 p-search started
+2015-03-04 14:33:39,039 Search Words
+2015-03-04 14:33:39,049 Input File:search.txt
+2015-03-04 14:33:39,049 set(['NOTIFY'])
+2015-03-04 14:33:39,059 Target of Search:test.raw
+2015-03-04 14:33:39,059 File Size:3226
+2015-03-04 14:33:39,059 Matrix File Error:matrix.txt
+2015-03-04 14:33:54,000 p-search started
+2015-03-04 14:33:54,009 Search Words
+2015-03-04 14:33:54,009 Input File:search.txt
+2015-03-04 14:33:54,009 set(['NOTIFY'])
+2015-03-04 14:33:54,019 Target of Search:test.raw
+2015-03-04 14:33:54,019 File Size:3226
+2015-03-04 14:35:46,263 p-search started
+2015-03-04 14:35:46,272 Search Words
+2015-03-04 14:35:46,275 Input File:search.txt
+2015-03-04 14:35:46,278 set(['NOTIFY'])
+2015-03-04 14:35:46,290 Target of Search:test.raw
+2015-03-04 14:35:46,305 File Size:3226
+2015-03-04 14:35:46,335 Matrix File Error:matrix.txt
+2015-03-04 14:44:22,487 p-search started
+2015-03-04 14:44:22,497 Search Words
+2015-03-04 14:44:22,497 Input File:search.txt
+2015-03-04 14:44:22,507 set(['NOTIFY'])
+2015-03-04 14:44:22,517 Target of Search:test.raw
+2015-03-04 14:44:22,517 File Size:3226
+2015-03-04 14:45:42,288 p-search started
+2015-03-04 14:45:42,288 Search Words
+2015-03-04 14:45:42,298 Input File:search.txt
+2015-03-04 14:45:42,298 set(['NOTIFY'])
+2015-03-04 14:45:42,308 Target of Search:test.raw
+2015-03-04 14:45:42,308 File Size:3226
+2015-03-04 14:46:15,864 p-search started
+2015-03-04 14:46:15,874 Search Words
+2015-03-04 14:46:15,874 Input File:search.txt
+2015-03-04 14:46:15,884 set(['NOTIFY'])
+2015-03-04 14:46:15,894 Target of Search:test.raw
+2015-03-04 14:46:15,894 File Size:3226
+2015-03-04 15:01:41,489 p-search started
+2015-03-04 15:01:41,500 Search Words
+2015-03-04 15:01:41,510 Input File:search.txt
+2015-03-04 15:01:41,510 set(['NOTIFY'])
+2015-03-04 15:01:41,520 Target of Search:test.raw
+2015-03-04 15:01:41,520 File Size:3226
+2015-03-04 15:04:13,966 p-search started
+2015-03-04 15:04:13,976 Search Words
+2015-03-04 15:04:13,976 Input File:search.txt
+2015-03-04 15:04:13,976 set(['NOTIFY'])
+2015-03-04 15:04:13,996 Target of Search:test.raw
+2015-03-04 15:04:13,996 File Size:3226
+2015-03-04 15:05:40,026 p-search started
+2015-03-04 15:05:40,046 Search Words
+2015-03-04 15:05:40,046 Input File:search.txt
+2015-03-04 15:05:40,046 set(['NOTIFY'])
+2015-03-04 15:05:40,055 Target of Search:test.raw
+2015-03-04 15:05:40,055 File Size:3226
+2015-03-04 15:21:01,950 p-search started
+2015-03-04 15:21:01,960 Search Words
+2015-03-04 15:21:01,970 Input File:search.txt
+2015-03-04 15:21:01,970 set(['NOTIFY'])
+2015-03-04 15:21:01,980 Target of Search:test.raw
+2015-03-04 15:21:01,980 File Size:3226
+2015-03-04 15:24:43,799 p-search started
+2015-03-04 15:24:43,809 Search Words
+2015-03-04 15:24:43,809 Input File:search.txt
+2015-03-04 15:24:43,809 set(['NOTIFY'])
+2015-03-04 15:24:43,819 Target of Search:test.raw
+2015-03-04 15:24:43,819 File Size:3226
+2015-03-04 15:24:47,967 Elapsed Time:4.16799998283seconds
+2015-03-04 15:24:47,967 
+2015-03-04 15:24:47,967 Program Terminated Normally
+2015-03-04 15:25:18,888 p-search started
+2015-03-04 15:25:18,888 Search Words
+2015-03-04 15:25:18,898 Input File:search.txt
+2015-03-04 15:25:18,898 set(['NOTIFY'])
+2015-03-04 15:25:18,907 Target of Search:test.raw
+2015-03-04 15:25:18,907 File Size:3226
+2015-03-04 15:25:18,997 Elapsed Time:0.109999895096seconds
+2015-03-04 15:25:18,997 
+2015-03-04 15:25:18,997 Program Terminated Normally
+2015-03-04 15:26:28,588 p-search started
+2015-03-04 15:26:28,598 Search Words
+2015-03-04 15:26:28,598 Input File:search.txt
+2015-03-04 15:26:28,608 set(['NOTIFY'])
+2015-03-04 15:26:28,618 Target of Search:test.pcap
+2015-03-04 15:26:28,618 File Size:18638
+2015-03-04 15:26:28,709 Elapsed Time:0.110000133514seconds
+2015-03-04 15:26:28,719 
+2015-03-04 15:26:28,719 Program Terminated Normally

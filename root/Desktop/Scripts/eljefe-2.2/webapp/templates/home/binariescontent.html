@@ -1,0 +1,37 @@
+{% extends "home/basecontent.html" %}
+
+   {% block tabledata %}
+   
+      <tr>
+	  <td> Station </td>
+	  <td> Binary Path </td>
+	  <td> Sha1 </td>
+	  <td> </td>
+     </tr>
+     
+     {% for binary in content %}
+      <tr>
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "station" binary.station.id %}"> {{ binary.station }}</a>
+	    </td>
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "binary" binary.id %}">
+		  {%if 'Windows' in binary.file_path %}
+			      <img src="/imedia/images/glyphicons_203_lock.png">
+		  {% else %}
+			      <img src="/imedia/images/glyphicons_043_group.png">
+		  {% endif %}
+
+		  {{ binary.file_path }}
+		  </a>
+	    </td>
+		  <td> 
+			<a href="{% url "home.views.display_obj" "binary" binary.id %}"> {{ binary.binary_sha1 }}</a>
+		  </td>
+		  <td valign=top>&nbsp;
+			<a href="{% url "home.views.eventsbybinary" "events" binary.id %}">Events</a>
+		  </td>
+      {% endfor %}
+{% endblock  %}
+
+      

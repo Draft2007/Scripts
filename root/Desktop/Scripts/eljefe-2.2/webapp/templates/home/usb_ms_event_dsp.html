@@ -1,0 +1,66 @@
+{% extends "base_.html" %}
+
+
+{% block title %}
+ElJefe
+{% endblock %}
+
+
+{% block extrahead %}
+{% endblock %}
+
+
+
+{% block initializer %}
+<script type="text/javascript" src="/imedia/js/dtree.js"></script>  
+{% endblock %}
+
+
+{% block content %}
+
+{% load tags %}
+
+{% if usb_event %}
+
+<div class="well well-lg">
+    <h3 class="title"> USB Event Information </h3>
+
+    <table class="table">
+    
+    <tr>
+    <td><b>Hostname</b></td><td>{{usb_event.station.hostname}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>IP Address</b></td><td>{{usb_event.station.ip_address}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Action</b></td><td>{{usb_event.status}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Timestamp</b></td><td>{{usb_event.event_timestamp}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Device Serial Number</b></td><td>{{usb_event.device.serial_number}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Device Model</b></td><td>{{usb_event.device.model}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Logical Drive</b></td><td>{{usb_event.logical_drive}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Volume Serial Number</b></td><td>{{usb_event.volume_serial_number}}</td>
+    </tr>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

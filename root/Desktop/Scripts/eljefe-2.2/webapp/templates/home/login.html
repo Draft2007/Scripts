@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}">
+
+<head>
+
+<title>El Jefe</title>
+<link rel="stylesheet" href="/imedia/css/bootstrap.min.css" media="screen"/>
+<link rel="stylesheet" href="/imedia/css/signin.css" media="screen"/>
+
+<script src="/imedia/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="/imedia/js/bootstrap.min.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+        $('input[type="text"]').focus(function() {
+            $(this).addClass("focus");
+        });
+        $('input[type="text"]').blur(function() {
+            $(this).removeClass("focus")
+        });
+    });
+
+</script>
+
+</head>
+
+<body>
+
+    <div id="login_logo">
+    </div>
+    
+    <div class="container">
+    <center>
+        <img src="/imedia/images/login_logo.png" />
+</center>
+      <form name="form" method="post" action="." class="form-signin" role="form">{% csrf_token %}
+        <center><h3 class="form-signin-heading">Welcome</h3></center>
+        <center><h4 class="form-signin-heading">Please login first to start using the system.</h4><center>
+        {% if form.errors %}
+            <p class="error">Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        <input id="id_username" name="username" type="username" class="form-control" placeholder="Username" required autofocus>
+        <input id="id_password" name="password" type="password" class="form-control" placeholder="Password" required>
+        <input type="hidden" name="next" value="{{ next }}" />
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+    

@@ -1,0 +1,73 @@
+{% extends "base_.html" %}
+
+
+{% block title %}
+ElJefe
+{% endblock %}
+
+
+{% block extrahead %}
+
+{% endblock %}
+
+
+
+{% block initializer %}
+<script>
+        $(document).ready(function(){
+       
+                $('#send_scanning_time').click(function(){
+                        
+                        var k = $('#id_scanning_time').val();
+                        if (k) {
+                            $.ajax({url: "{% url "home.views.send_scanning_time" station.id %}", data: {'time' : $('#id_scanning_time').val()}
+                                }).done(function(data) {
+                                                $('#change_scanning_time').html('<b> The scanning time was changed <b>') 
+                                                
+                                }).error(function(data){
+                                                $('#change_scanning_time').html('<b>' + data.responseJSON + '</b>');     
+                                                })
+                        }
+                });
+        });
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+    {% if station %}
+    <div class="well well-lg">
+        <h3 class="title"> Station Information </h3>
+        <table class="table">
+        <tr>
+        <td><b>Hostname</b></td><td>{{station.hostname}}</td>
+        </tr>
+        <tr>
+        <td><b>IP Address</b></td><td>{{station.ip_address}}</td>
+        </tr>            
+        </table>
+        <table class="table">
+        <tr>
+        <td><b>View</b> <a href="/home/stations/view/binaries/{{station.id}}">Binaries</a></td><td></td>
+        </tr>
+        <tr>
+        <td><b>View</b> <a href="/home/stations/view/events/{{station.id}}">Events</a></td><td></td>
+        </tr>
+        <tr>
+        <td><b>View</b> <a href="/home/stations/view/processes/{{station.id}}">Running Processes</a></td><td></td>
+        </tr>
+        <tr>
+        <td><b>Scanning time</b> (seconds)
+            <input class="form-control" style="width: auto;" id="id_scanning_time" maxlength="6" name="scanning_time" placeholder="{{station.scanning_time}}" required="required" title="Scanning Time" type="text" />
+            <span id="change_scanning_time">
+                <button id="send_scanning_time" class="btn btn-danger" type="submit">Send</button>
+            </span>
+        </td><td></td> 
+        </tr>
+        </table>
+    </div>
+    {% endif %}
+{% endblock %}

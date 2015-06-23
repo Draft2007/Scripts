@@ -1,0 +1,251 @@
+{% extends "base_.html" %}
+
+
+{% block title %}
+ElJefe
+{% endblock %}
+
+
+{% block extrahead %}
+{% endblock %}
+
+
+
+{% block initializer %}
+<script type="text/javascript" src="/imedia/js/dtree.js"></script>  
+{% endblock %}
+
+
+{% block content %}
+
+{% load tags %}
+
+{% if event %}
+
+<div class="well well-lg">
+    <h3 class="title"> Event Information </h3>
+
+    <table class="table">
+    
+    <tr>
+    <td><b>Hostname</b></td><td>{{event.station.hostname}}</td>
+    </tr>
+    <tr>
+    <td><b>IP Address</b></td><td>{{event.station.ip_address}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Username</b></td><td>{{event.username}}</td>
+    </tr>
+    <tr>
+    <td><b>Timestamp</b></td><td>{{event.event_timestamp}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Binary</b></td><td>{{event.binary.file_path}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Binary PID</b></td><td><table><tr><td>{{event.binary.pid}}</td><td>{% if eventtree %}
+    
+    <div class="dtree">
+    <script type="text/javascript">
+    
+    d = new dTree('d');
+    d.add(0,-1,'PID Tree');
+    
+    {% for ev in eventtree %}
+    d.add({{ev.1}}'{{ev.0.binary.file_path|escape_backslash}} ({{ev.0.binary.pid}})','/home/display/event/{{ev.0.id}}');
+    {% endfor %}
+    d.closeAll();
+    document.write(d);
+    
+    </script>
+    </div>
+    {% endif %}
+    </td></tr></table>
+    </td>
+    </tr>
+    
+    <tr>
+    <td><b>Binary SHA1</b></td><td><a href="/home/display/binary/{{event.binary.id}}">{{event.binary.binary_sha1}}</a></td>
+    </tr>
+    
+    <tr>
+    <td><b>Parent Binary</b></td><td>{{event.parent_binary.file_path}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Parent Binary PID</b></td><td>{{event.parent_binary.pid}}</td>
+    </tr>
+    
+    
+    <tr>
+    <td><b>Parent Binary SHA1</b></td><td><a href="/home/display/binary/{{event.parent_binary.id}}">{{event.parent_binary.binary_sha1}}</a></td>
+    </tr>
+    
+    
+    <tr>
+    <td><b>CmdLine</b></td><td>{{event.cmdline}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Flags</b></td><td>{{event.flags}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Creation Class Name</b></td><td>{{event.creation_class_name}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Handle</b></td><td>{{event.handle}}</td>
+    </tr>
+    
+    <tr>
+    <td><b>Handle Count</b></td><td>{{event.handle_count}}</td>
+    </tr>
+
+    <tr>
+    <td><b>Kernel Mode Time</b></td><td>{{event.kernel_mode_time}}</td>
+    </tr>
+
+    <tr>
+    <td><b>User Mode Time</b></td><td>{{event.user_mode_time}}</td>
+    </tr>
+    
+	<tr>
+    <td><b>Working Set Size</b></td><td>{{event.working_set_size}}</td>
+    </tr>
+    
+	<tr>
+    <td><b>Max Working Set Size</b></td><td>{{event.max_working_set_size}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Min Working Set Size</b></td><td>{{event.min_working_set_size}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>OS Name</b></td><td>{{event.os_name}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>OS Version</b></td><td>{{event.windows_version}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Session ID</b></td><td>{{event.session_id}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Priority</b></td><td>{{event.priority}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Pages Faults</b></td><td>{{event.page_faults}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Page File Usage</b></td><td>{{event.page_file_usage}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Private Page Count:</b></td><td>{{event.private_page_count}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Virtual Size</b></td><td>{{event.virtual_size}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Thread Count</b></td><td>{{event.thread_count}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Peak Working Set Size</b></td><td>{{event.peak_working_set_size}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Peak Page File Usage</b></td><td>{{event.peak_page_file_usage}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Peak Virtual Size</b></td><td>{{event.peak_virtual_size}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Read Operation Count</b></td><td>{{event.read_operation_count}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Write Operation Count</b></td><td>{{event.write_operation_count}}</td>
+    </tr>
+
+	<tr>
+    <td><b>Other Operation Count</b></td><td>{{event.other_operation_count}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Read Transfer Count</b></td><td>{{event.read_transfer_count}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Write Transfer Count</b></td><td>{{event.write_transfer_count}}</td>
+    </tr>
+
+	<tr>
+    <td><b>Other Transfer Count</b></td><td>{{event.other_transfer_count}}</td>
+    </tr>
+
+	<tr>
+    <td><b>Quota Non Paged Pool Usage</b></td><td>{{event.quota_non_paged_pool_usage}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Quota Paged Pool Usage</b></td><td>{{event.quota_paged_pool_usage}}</td>
+    </tr>
+	  
+	<tr>
+    <td><b>Quota Peak Non Paged Pool Usage</b></td><td>{{event.quota_peak_non_paged_pool_usage}}</td>
+    </tr>
+	
+	<tr>
+    <td><b>Quota Peak Paged Pool Usage</b></td><td>{{event.quota_peak_paged_pool_usage}}</td>
+    </tr>
+	
+	</table>
+    </div>
+    
+    <div class="well well-lg">
+
+    <h3> Privileges </h3>
+    <table class="table">
+    {% for priv in event.privileges.all %}
+    <tr>
+    <td onmouseover="return overlib('{{priv.desc}}');" onmouseout="return nd();">
+    {{priv.name}}
+    </td>
+    </tr>
+    {% endfor %}
+    
+    
+    </table class="table">
+    
+    
+    {% if sessid %}           
+                                                                                                                                                                           
+    <h3> Child Processes </h3>
+    <div id="tablecontent">                                                                                                                                                                          
+    </div>                                                                                                                                                                                           
+     <center>                                                                                                                                                                                         
+     <script language="javascript">                                                                                                                                                                   
+     CallWeb('/home/content/{{ sessid }}', 'tablecontent');                                                                                                                                           
+     </script>                                                                                                                                                                                        
+    </center>                                                                                                                                                                                        
+    {% endif %}      
+
+</div>
+
+{% endif %}
+
+{% endblock %}

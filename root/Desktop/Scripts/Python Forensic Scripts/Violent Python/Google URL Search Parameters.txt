@@ -1,0 +1,9 @@
+http://www.google.com/cse/docs/resultsxml.html
+
+q=		Query, what was typed in the search box
+pq=		Previous query, the query prior to the current search
+hl=		Language, default en[glish] defaults, but try xx=hacker for fun
+as_epq=		Exact phrase
+as_filetype=	File Format, restrict to a specific file type such as zip
+as_sitesearch=	Restrict to a specific site such as www.2600.com
+

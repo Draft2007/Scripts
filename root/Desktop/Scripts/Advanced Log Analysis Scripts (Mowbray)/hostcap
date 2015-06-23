@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat alert | gawk '{FS="\n";RS="\n\n"; /TCP/; print $3}' | gawk '{print $2}' | gawk -F\: '{print $1}' | gawk '/[0-9\.]+/'  | sort | uniq -c | sort -rn

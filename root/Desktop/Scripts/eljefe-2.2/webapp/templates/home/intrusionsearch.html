@@ -1,0 +1,81 @@
+{% extends "base_.html" %}
+
+{% block initializer %}
+       <script>
+              $(function() {
+                     $('#id_startdate').datetimepicker(
+                     {'format'  : 'yyyy-mm-dd hh:ii',
+                      'minView' : 2,
+                      'maxView' : 2
+                      });
+                     $('#id_enddate').datetimepicker(
+                     {'format'  : 'yyyy-mm-dd hh:ii',
+                      'minView' : 2,
+                      'maxView' : 2
+                      });
+              });
+       </script>
+{% endblock %}
+
+{% block title %}
+El Jefe - Stations
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Intrusion Search</h3>
+
+{% if searchform %}
+<div class="well well-lg">
+        <div class="input-group">
+              <form action="" method="post">{% csrf_token %}
+                     <input id="id_startdate" name="startdate" type="text" class="form-control" placeholder="From" />
+                     <input id="id_enddate" name="enddate" type="text" class="form-control" placeholder="To"/>
+                     <select id="id_method" name="method" class="form-control">
+                            <option value="PRIVILEGES: NON-SYSTEM to SYSTEM">PRIVILEGES: NON-SYSTEM to SYSTEM</option>
+                            <option value="CALL CHAIN: iexplorer-&gt;java-&gt;cmd">CALL CHAIN: iexplorer-&gt;java-&gt;cmd</option>
+                            <option value="EXECUTING PARENT: LSASS.exe">EXECUTING PARENT: LSASS.exe</option>
+                            <option value="ENTROPY: SUSPICIOUS">ENTROPY: SUSPICIOUS</option>
+                            <option value="FLAGS: SUSPICIOUS">FLAGS: SUSPICIOUS</option>
+                     </select>
+                     <button class="btn btn-danger" "type="submit">Query </button>
+              </form>
+       </div>
+</div>
+{% endif %}
+
+
+{% if sessid %}
+<div id="tablecontent">
+</div>
+
+<center>
+<script language="javascript">
+CallWeb('/home/content/{{ sessid }}', 'tablecontent');
+</script>
+</center>
+{% endif %}
+
+
+
+
+
+<div style="display:none">
+<form id="search_inside" action="{% url "home.views.stations_page" %}" method="POST">
+    <input type="hidden" name="configuration__ownerversion__software__name"
+           value="{{configuration.ownerversion.software.name}}" />
+    <input type="hidden" name="configuration__ownerversion__version"
+           value="{{configuration.ownerversion.version}}" />
+    <input type="hidden" name="configuration__name"
+           value="{{configuration.name}}" />
+    <input type="submit" value="Search on this project" />
+</form>
+</div>
+
+{% endblock %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block quick_links %}
+{% endblock %}

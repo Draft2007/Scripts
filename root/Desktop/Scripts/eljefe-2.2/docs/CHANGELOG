@@ -1,0 +1,21 @@
+** El Jefe 2.2.0 ** 
+
+* USB Modules to detect any USB device connected to the stations
+* Search by USB Events
+* USB Relations graph
+* Shown Version and release in WEBUI and added to the client executable.
+
+
+** El Jefe 2.1.X ** 
+
+- Improved error handling and logging in client and server.
+- Added Cuckoo integration with web ui (so far only to view Cuckoo's configuration and configured machines)
+- Improved Cuckoo reports in webui. More detailed reports.
+- Added a web ui feature to select a specific vm for Cuckoo analysis.
+- Added Camal integration.
+- Added Remote Vmware integration. Now, Vmware Server could be in a different server than Cuckoo Sanbox.
+- Added client verification on server.
+- Improved the web ui interface when listing stations, a last seen column was added.
+- Installer settings (username, password, server and port) are set from the webui, if a new user is entered on this form the user will be created automatically no need to user scripts/addxmluser.py anymore.
+- Added proxy support
+- Added event filters that trigger an email warning or a sandbox analysis of the suspicious binary.

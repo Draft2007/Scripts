@@ -1,0 +1,401 @@
+{% extends "base_.html" %}
+{% load tags %}
+{% block initializer %}
+<script src="/imedia/js/d3.v2.js" type="text/javascript"></script>
+    <style>
+        .unselectable {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;   
+        }
+    </style>
+    <style type="text/css">
+                .chart {
+                        shape-rendering: crispEdges;
+                }
+
+                .mini text {
+                        font: 9px sans-serif;   
+                }
+
+                .main text {
+                        font: 12px sans-serif;  
+                }
+
+                .miniItem0 {
+                        fill: darksalmon;
+                        stroke-width: 6;        
+                }
+
+                .miniItem1 {
+                        fill: darkolivegreen;
+                        fill-opacity: .7;
+                        stroke-width: 6;        
+                }
+
+                .miniItem2 {
+                        fill: slategray;
+                        fill-opacity: .7;
+                        stroke-width: 6;        
+                }
+
+                .brush .extent {
+                        stroke: gray;
+                        fill: dodgerblue;
+                        fill-opacity: .365;
+                } 
+    </style>
+       <script>
+              $(function() {
+                            var springy = jQuery('#springydemo').springy({
+                                          graph: graph,
+                                nodeSelected: function(node){
+                                       console.log('Node selected: ' + JSON.stringify(node.data));
+
+                                },
+                                repulsion: 2 
+                            });
+                        
+                     $('#id_startdate').datetimepicker(
+                     {'format'  : 'yyyy-mm-dd hh:ii',
+                      'minView' : 2,
+                      'maxView' : 2
+                      });
+                     $('#id_enddate').datetimepicker(
+                     {'format'  : 'yyyy-mm-dd hh:ii',
+                      'minView' : 2,
+                      'maxView' : 2
+                      });
+              });
+       </script>
+
+{% endblock %}
+
+{% block title %}
+USB Device Timeline 
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">USB Device Timeline</h3>
+<!--<a href="/home/graphs/binary_rel/{{ sid }}/1"><img src="/imedia/images/calendar_1day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/7"><img src="/imedia/images/calendar_7day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/31"><img src="/imedia/images/calendar_31day.png"></a> <a href="/home/graphs/binary_rel/{{ sid }}/8888"><img src="/imedia/images/calendar_all.png"></a><br>
+-->
+<script>
+                                                       /* $('#springydemo').prop("unselectable", "on").css({ 
+                                                            "moz-user-select" : "none", 
+                                                            "-webkit-user-select" : "none"
+                                                        });
+                                                        $('#springydemo').dblclick(function(){ return false; });i*/
+
+/*var graph = new Springy.Graph();
+{% for item, id in nodes.items %}
+       
+        {% ifequal id.2 "device"%}
+            var {{ id.1 }} = graph.newNode({ label: '{{item}}',image: {src: '/imedia/images/usb_icon.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'usb_device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "marked_device"%}
+            var {{ id.1 }} = graph.newNode({ label: '{{item}}',image: {src: '/imedia/images/usb_icon_red.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('{% url "home.views.display_obj" 'usb_device' id.0 %}');
+                                              },
+                                              });
+        {% endifequal %}
+        {% ifequal id.2 "station"%}
+            var {{ id.1 }} = graph.newNode({ label: '{{item}}',image: {src: '/imedia/images/glyphicons_160_imac_big.png'},  
+                                             ondoubleclick: function() { 
+                                                        window.open('');
+                                              },
+                                              });
+        {% endifequal %}
+{% endfor %}
+
+{% for edge in edges %}
+       graph.newEdge({{ edge.0|get_name|slugify }},{{ edge.1|get_name|slugify }},{});
+{% endfor %}
+*/
+var lanes = ["Station1","Station2","Station3"],
+                        laneLength = lanes.length,
+                        items = [{"lane": 0, "id": "ANIBAL", "start": new Date(2014,10,2,22,30,1,0), "end": new Date(2014,10,2,22,35,1,0)},
+                                 {"lane": 0, "id": "Jin", "start": 265, "end": 420},
+                                 {"lane": 0, "id": "Sui", "start": 580, "end": 615},
+                                        {"lane": 0, "id": "Tang", "start": 620, "end": 900},
+                                        {"lane": 0, "id": "Song", "start": 960, "end": 1265},
+                                        {"lane": 0, "id": "Yuan", "start": 1270, "end": 1365},
+                                        {"lane": 0, "id": "Ming", "start": 1370, "end": 1640},
+                                        {"lane": 0, "id": "Qing", "start": 1645, "end": 1910},
+                                        {"lane": 1, "id": "Yamato", "start": 300, "end": 530},
+                                        {"lane": 1, "id": "Asuka", "start": 550, "end": 700},
+                                        {"lane": 1, "id": "Nara", "start": 710, "end": 790},
+                                        {"lane": 1, "id": "Heian", "start": 800, "end": 1180},
+                                        {"lane": 1, "id": "Kamakura", "start": 1190, "end": 1330},
+                                        {"lane": 1, "id": "Muromachi", "start": 1340, "end": 1560},
+                                        {"lane": 1, "id": "Edo", "start": 1610, "end": 1860},
+                                        {"lane": 1, "id": "Meiji", "start": 1870, "end": 1900},
+                                        {"lane": 1, "id": "Taisho", "start": 1910, "end": 1920},
+                                        {"lane": 1, "id": "Showa", "start": 1925, "end": 1985},
+                                        {"lane": 1, "id": "Heisei", "start": 1990, "end": 1995},
+                                        {"lane": 2, "id": "Three Kingdoms", "start": 10, "end": 670},
+                                        {"lane": 2, "id": "North and South States", "start": 690, "end": 900},
+                                        {"lane": 2, "id": "Goryeo", "start": 920, "end": 1380},
+                                        {"lane": 2, "id": "Joseon", "start": 1390, "end": 1890},
+                                        {"lane": 2, "id": "Korean Empire", "start": 1900, "end": 1945}]
+                        //timeBegin = 0,
+                        //timeEnd = 2000;
+                        timeBegin = new Date(2014,10,2,12,30,1,0),
+                        timeEnd = new Date(2014,10,2,23,34,2,0);
+
+
+</script>
+<script>
+var margin = [10, 15, 15, 120], //top right bottom left
+                        width = 960 - margin[1] - margin[3],
+                        h = 500 - margin[0] - margin[2],
+                        miniHeight = laneLength * 12 + 50,
+                        mainHeight = h - miniHeight - 50;
+
+                //scales
+                var x = d3.time.scale().domain([timeBegin, timeEnd])
+                                .range([0, width]);
+                var x1 = d3.time.scale()
+                                .range([0, width]);
+                var y1 = d3.scale.linear()
+                                .domain([0, laneLength])
+                                .range([0, mainHeight]);
+                var y2 = d3.scale.linear()
+                                .domain([0, laneLength])
+                                .range([0, miniHeight]);
+
+                var chart = d3.select("body")
+                                        .append("svg")
+                                        .attr("width", width + margin[1] + margin[3])
+                                        .attr("height", h + margin[0] + margin[2])
+                                        .attr("class", "chart");
+                
+                chart.append("defs").append("clipPath")
+                        .attr("id", "clip")
+                        .append("rect")
+                        .attr("width", width)
+                        .attr("height", mainHeight);
+
+                var main = chart.append("g")
+                                        .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")")
+                                        .attr("width", width)
+                                        .attr("height", mainHeight)
+                                        .attr("class", "main");
+
+                var mini = chart.append("g")
+                                        .attr("transform", "translate(" + margin[3] + "," + (mainHeight + margin[0]) + ")")
+                                        .attr("width", width)
+                                        .attr("height", miniHeight)
+                                        .attr("class", "mini");
+                // draw the x axis
+                var xDateAxis = d3.svg.axis()
+                        .scale(x)
+                        .orient('bottom')
+                        .ticks(d3.time.days, 2 )
+                        .tickFormat(d3.time.format('%d'))
+                        .tickSize(6, 0, 0);
+
+                var x1DateAxis = d3.svg.axis()
+                        .scale(x1)
+                        .orient('bottom')
+                        .ticks(d3.time.days, 1)
+                        .tickFormat(d3.time.format('%a %d'))
+                        .tickSize(6, 0, 0);
+                
+                /*var xMonthAxis = d3.svg.axis()
+                        .scale(x)
+                        .orient('top')
+                        .ticks(d3.time.months, 1)
+                        .tickFormat(d3.time.format('%b %Y'))
+                        .tickSize(15, 0, 0);
+
+                var x1MonthAxis = d3.svg.axis()
+                        .scale(x1)
+                        .orient('top')
+                        .ticks(d3.time.mondays, 1)
+                        .tickFormat(d3.time.format('%b - Week %W'))
+                        .tickSize(15, 0, 0);
+                */ 
+
+                main.append('g')
+                        .attr('transform', 'translate(0,' + mainHeight + ')')
+                        .attr('class', 'main axis date')
+                        .call(x1DateAxis);
+                mini.append('g')
+                        .attr('transform', 'translate(0,' + miniHeight + ')')
+                        .attr('class', 'axis date')
+                        .call(xDateAxis);
+
+                chart.append("g")
+                     .attr("class", "xaxis")   // give it a class so it can be used to select only xaxis labels  below
+                     .attr("transform", "translate(0," + (mainHeight - 100) + ")")
+                     .call(xDateAxis);
+                                                         
+
+
+
+
+                //main lanes and texts
+                main.append("g").selectAll(".laneLines")
+                        .data(items)
+                        .enter().append("line")
+                        .attr("x1", margin[1])
+                        .attr("y1", function(d) {return y1(d.lane);})
+                        .attr("x2", width)
+                        .attr("y2", function(d) {return y1(d.lane);})
+                        .attr("stroke", "lightgray")
+
+                main.append("g").selectAll(".laneText")
+                        .data(lanes)
+                        .enter().append("text")
+                        .text(function(d) {return d;})
+                        .attr("x", -margin[1])
+                        .attr("y", function(d, i) {return y1(i + .5);})
+                        .attr("dy", ".5ex")
+                        .attr("text-anchor", "end")
+                        .attr("class", "laneText");
+                
+                //mini lanes and texts
+                mini.append("g").selectAll(".laneLines")
+                        .data(items)
+                        .enter().append("line")
+                        .attr("x1", margin[1])
+                        .attr("y1", function(d) {return y2(d.lane);})
+                        .attr("x2", width)
+                        .attr("y2", function(d) {return y2(d.lane);})
+                        .attr("stroke", "lightgray");
+
+                mini.append("g").selectAll(".laneText")
+                        .data(lanes)
+                        .enter().append("text")
+                        .text(function(d) {return d;})
+                        .attr("x", -margin[1])
+                        .attr("y", function(d, i) {return y2(i + .5);})
+                        .attr("dy", ".5ex")
+                        .attr("text-anchor", "end")
+                        .attr("class", "laneText");
+
+                var itemRects = main.append("g")
+                                .attr("clip-path", "url(#clip)");
+                
+                //mini item rects
+                mini.append("g").selectAll("miniItems")
+                        .data(items)
+                        .enter().append("rect")
+                        .attr("class", function(d) {return "miniItem" + d.lane;})
+                        .attr("x", function(d) {return x(d.start);})
+                        .attr("y", function(d) {return y2(d.lane + .5) - 5;})
+                        .attr("width", function(d) {return x(d.end - d.start);})
+                        .attr("height", 10);
+
+                //mini labels
+                mini.append("g").selectAll(".miniLabels")
+                        .data(items)
+                        .enter().append("text")
+                        .text(function(d) {return d.id;})
+                        .attr("x", function(d) {return x(d.start);})
+                        .attr("y", function(d) {return y2(d.lane + .5);})
+                        .attr("dy", ".5ex");
+
+                //brush
+                var brush = d3.svg.brush()
+                                                        .x(x)
+                                                        .on("brush", display);
+
+                mini.append("g")
+                        .attr("class", "x brush")
+                        .call(brush)
+                        .selectAll("rect")
+                        .attr("y", 1)
+                        .attr("height", miniHeight - 1);
+
+                display();
+                
+                function display() {
+                        var rects, labels,
+                                minExtent = d3.time.day(brush.extent()[0]),
+                                maxExtent = d3.time.day(brush.extent()[1]),
+                                visItems = items.filter(function(d) {return d.start < maxExtent && d.end > minExtent;});
+
+                        mini.select(".brush")
+                                .call(brush.extent([minExtent, maxExtent]));
+
+                        x1.domain([minExtent, maxExtent]);
+
+                        if ((maxExtent - minExtent) > 1468800000) {
+                                x1DateAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%a %d'))
+                                //x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))                
+                        }
+                        else if ((maxExtent - minExtent) > 172800000) {
+                                x1DateAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%a %d'))
+                                //x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))
+                        }
+                        else {
+                                x1DateAxis.ticks(d3.time.hours, 4).tickFormat(d3.time.format('%I %p'))
+                                //x1MonthAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%b %e'))
+                        }
+
+                        // shift the today line
+                        //main.select('.main.todayLine')
+                        //        .attr('x1', x1(now) + 0.5)
+                        //        .attr('x2', x1(now) + 0.5);
+
+                        // update the axis
+                        main.select('.main.axis.date').call(x1DateAxis);
+                        //main.select('.main.axis.month').call(x1MonthAxis)
+                        //        .selectAll('text')
+                        //        .attr('dx', 5)
+                        //        .attr('dy', 12);
+
+
+
+                        //update main item rects
+                        rects = itemRects.selectAll("rect")
+                                .data(visItems, function(d) { return d.id; })
+                                .attr("x", function(d) {return x1(d.start);})
+                                .attr("width", function(d) {return x1(d.end) - x1(d.start);});
+                        
+                        rects.enter().append("rect")
+                                .attr("class", function(d) {return "miniItem" + d.lane;})
+                                .attr("x", function(d) {return x1(d.start);})
+                                .attr("y", function(d) {return y1(d.lane) + 10;})
+                                .attr("width", function(d) {return x1(d.end) - x1(d.start);})
+                                .attr("height", function(d) {return .8 * y1(1);});
+
+                        rects.exit().remove();
+
+                        //update the item labels
+                        labels = itemRects.selectAll("text")
+                                .data(visItems, function (d) { return d.id; })
+                                .attr("x", function(d) {return x1(Math.max(d.start, minExtent) + 2);});
+
+                        labels.enter().append("text")
+                                .text(function(d) {return d.id;})
+                                .attr("x", function(d) {return x1(Math.max(d.start, minExtent));})
+                                .attr("y", function(d) {return y1(d.lane + .5);})
+                                .attr("text-anchor", "start");
+
+                        labels.exit().remove();
+
+                }
+
+</script>
+<body>
+</body>
+<!--<span class="unselectable">
+<canvas id="springydemo" width="2000" height="1000" />
+</span>-->
+{% endblock %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block quick_links %}
+{% endblock %}

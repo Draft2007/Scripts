@@ -1,0 +1,15 @@
+doveadm pw -p Password -s sha512 -r 100
+
+INSERT INTO users (
+email,
+password,
+realname,
+maildir
+) VALUES (
+'user@optimuminfosec.com'
+crypt('SHA512 encrypted password',gen_salt('bf',5)),
+'First Last',
+'user/'
+);
+
+UPDATE users SET password = 'sha512 hashed' WHERE email = 'user@optimuminfosec.com';net

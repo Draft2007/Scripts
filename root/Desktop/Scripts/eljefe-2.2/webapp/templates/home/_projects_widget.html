@@ -1,0 +1,36 @@
+    <div class="widget">
+        <h3 class="title">Your projects</h3>
+        <h6 class="subtitle">
+            <a onclick="return load_content(this, listprojects)" href="{% url "codeaudit.views.listprojects" %}">View more</a>
+        </h6>
+
+        {% for config in user.get_profile.get_related_projects|slice:":3" %}
+            <table style="width:100%" class="widget_content">
+                <tr>
+                <td rowspan="2" style="background-color:#ececec;width:100px;text-align:center">
+                <a onclick="return load_content(this, detailproject)"
+                   href="{% url codeaudit.views.detailproject config.ownerversion.software.slug config.ownerversion.version config.id %}">
+                   <span style="color:#7a7a7a;">Version</span> <b>{{config.ownerversion.version}}</b>
+                </a>
+                </td>
+                <td>
+                <span style="color:#666666; letter-spacing:0.1em">{{config.ownerversion.dateadd|date:"m.d.Y"}}</span>
+                </td>
+                </tr>
+                <tr>
+                <td>
+                <a style="color: #000;" onclick="return load_content(this, detailproject)"
+                   href="{% url codeaudit.views.detailproject config.ownerversion.software.slug config.ownerversion.version config.id %}">
+                    {{config.ownerversion.software.name}}
+                </a>
+                </td>
+                </tr>
+            </table>
+            <br/>
+        {% empty %}
+            <p class="widget_content" style="color:#7a7a7a;text-align:center">
+                No projects available
+            </p>
+        {% endfor %}
+
+    </div>

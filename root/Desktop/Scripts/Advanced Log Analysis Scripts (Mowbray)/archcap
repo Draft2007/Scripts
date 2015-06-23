@@ -1,0 +1,5 @@
+#!/bin/bash
+date | gawk '{print $2,$3,$6}' | sed 's/ /-/g' > /tmp/today
+mv alert alert.`cat /tmp/today`
+mv OVERNIGHT.cap full-`cat /tmp/today`.cap
+mv snort.log.* snort-`cat /tmp/today`.cap

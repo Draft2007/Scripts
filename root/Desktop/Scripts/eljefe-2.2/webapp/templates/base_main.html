@@ -1,0 +1,28 @@
+    <div id="breadcrumbs">
+        <a href="/">Home</a>
+        <a class="current" href="#">{% block current_title %}&nbsp;{% endblock current_title %}</a>
+    </div>
+
+    <div id="content">
+        <a href="#top"></a>
+        {% block content %}
+        {% endblock content %}
+
+    </div>
+
+    <div id="sidebar">
+        {% block sidebar %}
+        {% include "home/_projects_widget.html" %}
+        <div class="widget">
+            <h3 class="title">Quick access</h3>
+            <div class="widget_content">
+                <dl class="quicks">
+                {% block quick_links %}
+                    <dd><a onclick="return load_content(this, listprojects)" href="{% url codeaudit.views.listprojects %}">Project list</a><br/><dd>
+                    <dd><a onclick="return load_content(this, logicinit)" href="{% url codeaudit.views.logic_search %}">Search bugs</a></dd>
+                {% endblock quick_links %}
+                </dl>
+            </div>
+        </div>
+        {% endblock sidebar %}
+    </div>

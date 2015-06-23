@@ -1,0 +1,3 @@
+1. Makespec.py --onefile --noconsole <script.py>
+2. Build.py script\script.spec
+3. Exe file will be located in script\dist folder

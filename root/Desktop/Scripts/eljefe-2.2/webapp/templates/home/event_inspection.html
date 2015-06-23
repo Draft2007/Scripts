@@ -1,0 +1,177 @@
+{% extends "base_.html" %}
+{% load tags %}
+{% block initializer %}
+<script src="/imedia/js/d3.min.js"></script>
+<script src="/imedia/js/nv.d3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/imedia/css/nv.d3.css">
+
+{% endblock %}
+
+{% block title %}
+Event Inspection for {{ binname }} on station {{ stationname }} 
+{% endblock %}
+
+{% block content %}
+
+<h3 class="title">Event Inspection for {{ binname }} on station {{ stationname }}
+ </h3>
+<script>
+	$(function() {
+	var margin = {top: 20, right: 200, bottom: 0, left: 20},
+		width = 700,
+		height = 650;
+	
+	
+	var c = d3.scale.category20c();
+	
+	
+	var x = d3.scale.linear()
+		.range([0, width]);
+	
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("top");
+	
+	var formatYears = d3.format("0000");
+	xAxis.tickFormat(formatYears);
+	
+	var svg = d3.select('#chart svg')
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+		.style("margin-left", margin.left + "px")
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+	
+	d3.json("/home/json/event_inspection/{{sid}}/{{binid}}/", function(jdata) {
+		x.domain([1, 10]);
+		
+		var data   = jdata["info"];
+		var ids = jdata['ids'];
+		var xScale = d3.scale.linear()
+			.domain( [1, 10] )
+			.range([0, width]);
+	
+		svg.append("g")
+			.attr("class", "x axis")
+			.attr("transform", "translate(0," + 0 + ")")
+			.call(xAxis);
+	
+		for (var j = 0; j < data.length; j++) {
+			var g = svg.append("g").attr("class","journal");
+	
+			var circles = g.selectAll("circle")
+				.data(data[j]['articles'])
+				.enter()
+				.append("circle");
+	
+			var text = g.selectAll("text")
+				.data(data[j]['articles'])
+				.enter()
+				.append("text");
+	
+			//  ["2014-04-07 10:26:46", 18]
+			var rScale = d3.scale.linear()
+				.domain([0, d3.max(data[j]['articles'], function(d) { return d[1]; })])
+				.range([2, 9]);
+	
+			circles
+				.attr("cx", function(d, i) { return xScale(  d[0] ); })
+				.attr("cy", j*20+20)
+				.attr("r", function(d) { return rScale(d[1]); })
+				.attr("id", function(d) { return ids[d[0]]; })
+				.style("fill", function(d) { return c(j); })
+				.on("click", click_circle);
+	
+			text
+				.attr("y", j*20+25)
+				//.attr("x",function(d, i) { return xScale(new Date(d[0])) -5; })
+				.attr("x",function(d, i) { return xScale( d[0] ); })
+				.attr("class","value")
+				.text(function(d){ return d[1]; })
+				.style("fill", function(d) { return c(j); })
+				.style("display","none");
+	
+			g.append("text")
+				.attr("y", j*20+25)
+				.attr("x",width+20)
+				.attr("class","label")
+				.text(data[j]['name'])
+				.style("fill", function(d) { return c(j); })
+				.on("mouseover", mouseover)
+				.on("mouseout", mouseout)
+				.on("click", click_label);
+	
+		};
+		
+		function click_label(p) {
+			field = d3.select(this)[0][0].textContent;
+			d3.json("{% url "home.views.json_event_graph" sid binid "STR"%}".replace('STR',field), function(data) {
+
+				nv.addGraph(function() {
+					var chart = nv.models.lineChart()
+					  .useInteractiveGuideline(true)
+					  ;
+				      
+					chart.xAxis
+					  .axisLabel('Event')
+					  ;
+				      
+					chart.yAxis
+					  .axisLabel('{{ field }}')
+					  ;
+				      
+					d3.select('#chart2 svg')
+					.attr("height", 300 )
+			
+					  .datum(data)
+					  .transition().duration(500)
+					  .call(chart)
+					  ;
+				      
+					nv.utils.windowResize(chart.update);
+				      
+					return chart;
+					});
+			
+				});
+		}
+		
+		function click_circle(p) {
+			id = d3.select(this)[0][0].id;
+			window.open('{% url "home.views.display_obj" "event" 123456 %}'.replace('123456',id))
+		}
+		
+		function mouseover(p) {
+			var g = d3.select(this).node().parentNode;
+			d3.select(g).selectAll("circle").style("display","none");
+			d3.select(g).selectAll("text.value").style("display","block");
+		}
+	
+		function mouseout(p) {
+			var g = d3.select(this).node().parentNode;
+			d3.select(g).selectAll("circle").style("display","block");
+			d3.select(g).selectAll("text.value").style("display","none");
+		}
+	
+	
+	
+	});
+
+});
+</script>
+<div>
+		<div id="chart">
+		  <svg></svg>
+		</div>
+	<div id="chart2">
+		  <svg></svg>
+		</div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block quick_links %}
+{% endblock %}

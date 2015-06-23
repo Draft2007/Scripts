@@ -1,0 +1,6 @@
+#!/bin/bash
+ps aux | grep tcpdump | grep -v grep | gawk '{print $2}' > /tmp/tcpdumpPID
+kill `cat /tmp/tcpdumpPID`
+ps aux | grep snort | grep -v grep | gawk '{print $2}' > /tmp/tcpdumpPID
+kill `cat /tmp/tcpdumpPID`
+

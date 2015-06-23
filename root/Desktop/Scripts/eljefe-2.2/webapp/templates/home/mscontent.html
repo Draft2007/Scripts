@@ -1,0 +1,46 @@
+{% extends "home/base_usbcontent.html" %}
+
+   {% block tabledata %}
+
+    <tr>
+      <td>Date</td>
+      <td>Device</td>
+      <td>Serial Number</td>
+      <td>Size</td>
+      <td>Logical Drive</td>
+      <td>Station</td>
+      <td></td>
+   </tr>
+   
+   {% for entry in content %}
+    
+      {% ifequal entry.status "Connected" %}
+	    <tr bgcolor="#C7FFD9">
+      {% else%}
+	    <tr bgcolor="#FFADBE">
+      {% endifequal %}
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "usb_ms_event" entry.id %}"> {{ entry.event_timestamp }} </a></td>
+	    </td>
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "ms_device" entry.mass_storage_device.id %}"> {{ entry.mass_storage_device.model }} </a>
+	    </td>
+	    <td>
+		  {{entry.mass_storage_device.serial_number}}
+	    </td>
+	    <td>
+		  {{entry.mass_storage_device.size}}
+	    </td>
+	    <td>
+		  {{entry.logical_drive}}
+	    </td>
+	    <td>
+		  <a href="{% url "home.views.display_obj" "station" entry.station.id %}"> {{entry.station}} </a>
+	    </td>
+	    <td>
+		  <img src="/imedia/images/icon_usb_drive.png">
+	    </td>
+    </tr>
+   {% endfor %}
+   
+      {% endblock %}

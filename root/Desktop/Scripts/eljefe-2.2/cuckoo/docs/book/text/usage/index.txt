@@ -1,0 +1,83 @@
+
+Usage
+*****
+
+This chapter explains how to use Cuckoo.
+
+* Starting Cuckoo
+
+* Submit an Analysis
+
+  * Submission Utility
+
+  * web.py
+
+  * API
+
+  * Python Functions
+
+* Web interface
+
+  * Configuration
+
+  * Usage
+
+* REST API
+
+  * Starting the API server
+
+  * Resources
+
+    * /tasks/create/file
+
+    * /tasks/create/url
+
+    * /tasks/list
+
+    * /tasks/view
+
+    * /tasks/delete
+
+    * /tasks/report
+
+    * /files/view
+
+    * /files/get
+
+    * /machines/list
+
+    * /machines/view
+
+    * /cuckoo/status
+
+* Analysis Packages
+
+* Analysis Results
+
+  * analysis.conf
+
+  * analysis.log
+
+  * dump.pcap
+
+  * memory.dmp
+
+  * files/
+
+  * logs/
+
+  * reports/
+
+  * shots/
+
+* Utilities
+
+  * Cleanup utility
+
+  * Submission Utility
+
+  * Web Utility
+
+  * Processing Utility
+
+  * Community Download Utility

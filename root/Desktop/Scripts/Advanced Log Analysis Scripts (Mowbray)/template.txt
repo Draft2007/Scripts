@@ -1,0 +1,129 @@
+DAILY CAT NET SECURITY REPORT
+
+DateInsertHere
+
+Gross Total Alerts:    InsertHere
+
+SUMMARY OF KEY FINDINGS
+
+InsertHere
+
+
+OVERNIGHT ALERTS
+
+See 24 hour analysis for more in-depth view of these top alerting hosts.
+
+Number of Overnight Alerts 7pm to 7am: 
+
+Top Overnight Alerts
+InsertHere
+
+Top Alerting Hosts - Overnight
+InsertHere
+
+
+PREVIOUS DAYTIME TOP ALERTS
+
+InsertHere
+
+
+DAYTIME TOP ALERTING HOST IPs
+
+InsertHere
+
+
+# ALERTS BY KEY HOSTS
+
+Host: 1.
+InsertHere
+
+ANALYSIS Host 1.
+InsertHere
+
+
+SUSPICIOUS DOMAINS and IPs - INVESTIGATION
+
+InsertHere
+
+
+UNPATCHED or SUSPICIOUS MACHINES
+
+InsertHere
+	
+
+ERADICATION ACTIONS / RECOMMENDATIONS
+
+Applied outgoing firewall block on confirmed suspicious domains.
+
+InsertHere
+
+
+APPENDIX: DOMAIN/IP REPORT - DOMAINS RECIEVING ALERT PACKETS (i.e. Beacons)
+
+InsertHere
+
+
+PREVIOUS WHOIS LOOKUPS
+
+          8.21.24.35 Level 3 *
+          12.120.180.24 AT&T
+          12.129.147.65 Wash Post
+	  12.130.81.249 DYNAMIC LOGIC (ADWARE/SPYWARE)
+          12.18.76.142 PFSweb (benign)
+	  38.118.71.170 PSInet
+          63.116.166.56 Akamai
+	  63.150.154.185 Argo Computers
+          63.215.202.49 VALUECLICK (spyware)
+          64.191.203.30 Digg
+          64.208.138.106 AppNexus (Cloud Computing)
+          64.27.101.173 DataPipe Inc.
+          64.27.101.174 Viddler (online video platform)
+          64.38.207.239 Viddler	 
+          64.77.50.10 Universal Digitech
+	  64.88.164.170 AVG
+          64.94.107.15 QUANCAST (SPYWARE)
+          65.199.63.136 Akamai
+          65.203.229.42 AVENUE A / RAZORFISH (ADWARE)
+          65.216.161.18 Akamai
+          65.222.174.25 Akamai
+          66.235.147.77       Omniture, Inc
+          65.61.163.44      ACH Commerce (e-payments)
+          65.199.63.121 Akamai
+          65.203.229.44 RAZORFiSH (ADWARE) blocked
+          65.216.161.118 Akamai
+          66.128.67.102 Inforonics IT Services *
+          67.201.31.160 Mzima Networks *
+          67.217.236.82 Talisma (CRM s/w)
+          67.221.58.12 Peak Web Hosting
+          67.228.212.202 Client Intellect (ADWARE)
+          65.242.27.34 AVENUE A (ADWARE)
+          68.67.130.70 LAX1 Managed VIPs
+          68.87.38.141 Comcast
+          69.20.32.82 Rackspace Hosting *
+          70.42.128.3 Dotomi (Adware)
+          74.202.67.154 Pluck Content Management
+          74.217.240.80 AUDIENCESCIENCE (SPYWARE)
+          74.84.199.11 Perceiva (Ugov)
+          76.96.58.12 Comcast
+          82.98.86.163 RIPE Network Coordination Center
+	  84.53.146.30 Akamai
+	  88.221.6.125 Akamai
+          89.149.157.180 RIPE network coord center
+          91.189.89.88 RIPE
+          91.209.196.169 RIPE
+          91.189.90.40 RIPE
+	  92.122.212.23 Akamai
+	  92.123.68.138 Akamai
+          95.130.37.131 Level 3 *
+	  166.90.142.38 Level 3 Communications
+          195.24.233.55 RIPE
+          204.2.197.201 NTT
+          204.2.241.160 NTT
+	  205.188.60.175 AOL
+          205.234.175.175 Cache Networks (like Akamai)
+          208.34.21.28 Mark Twain Travel
+          208.96.234.194 CompTIA
+          209.234.234.12 Wall St On Demand
+	  216.1.197.181 XO comm
+          216.34.207.177  VALUECLICK (SPYWARE)
+          239.255.255.250 Administrative Packet

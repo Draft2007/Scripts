@@ -1,0 +1,22 @@
+<div class="pagination">
+    <span class="step-links">
+        <span class="current">
+            Page
+            <select name="page" onchange="window.location='?page=' + this.value">
+                {% for page in qs_page.paginator.page_range %}
+                    <option value="{{page}}" {% ifequal page qs_page.number %}selected{% endifequal %}>{{page}}</option>
+                {% endfor %}
+            </select>
+            of {{ qs_page.paginator.num_pages }}<br/>
+        </span>
+
+        {% if qs_page.has_previous %}
+            <input type="submit" name="previous" value="previous" onclick="window.location='?page={{qs_page.previous_page_number}}'"/>
+        {% endif %}
+
+        {% if qs_page.has_next %}
+            <input type="submit" name="next" value="next" onclick="window.location='?page={{qs_page.next_page_number}}'"/>
+        {% endif %}
+    </span>
+    </form>
+</div>

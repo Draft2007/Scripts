@@ -1,0 +1,18 @@
+for build executables: 
+
+x32 : py2exe
+x64 : pyInstaller
+
+dependencies for builders:
+
+pycrypto
+pywin32
+psutil
+WMI
+requests
+
+dependecies for client python files:
+
+pefile.py
+peutils.py
+process_list.py

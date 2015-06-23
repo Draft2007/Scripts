@@ -1,0 +1,44 @@
+{% extends "home/basecontent.html" %}
+{% load tags %}
+
+   {% block tabledata %}
+   
+      <tr>
+	  <td> Last Seen </td>
+	  <td> Hostname </td>
+	  <td> IP Address </td>
+	  <td> </td>
+          <td> </td>
+	  <td> </td>
+	  <td> </td>
+
+     </tr>
+
+     {% for station in content %}
+      <tr>
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "station" station.id %}"> {{ station|get_last_seen }} minutes ago. </a>
+	    </td>
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "station" station.id %}"> {{ station.hostname }}</a>
+	    </td>
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "station" station.id %}"> {{ station.ip_address }}</a>
+	    </td>
+	    <td> 
+		  <a href="{% url "home.views.stationsview" "binaries" station.id %}">  Binaries </a>
+	    </td>	
+	    <td> 
+		  <a href="{% url "home.views.stationsview" "events" station.id %}">  Events </a>
+	    </td>
+	    <td> 
+		  <a href="{% url "home.views.processUsage" station.id 1 %}"> <img src="/imedia/images/glyphicons_462_basketball.png"> </a>
+	    </td>
+	    <td> 
+		  <a href="{% url "home.views.binaryRel" station.id 1 %}"> <img src="/imedia/images/glyphicons_422_git_branch.png"> </a>
+	    </td>
+	    
+      {% endfor %}
+{% endblock  %}
+
+      

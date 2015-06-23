@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "LOOKING FOR RUNNING SNIFFERS, IDS, and CRON"
+ps aux | grep cron | grep -v grep
+ps aux | grep tcpdump | grep -v grep
+ps aux | grep snort | grep -v grep
+echo "CRONTAB CONTAINS"
+crontab -l

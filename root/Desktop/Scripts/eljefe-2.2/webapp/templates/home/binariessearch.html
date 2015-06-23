@@ -1,0 +1,62 @@
+{% extends "base_.html" %}
+
+{% block initializer %}
+{% endblock %}
+
+{% block title %}
+El Jefe - Binaries
+{% endblock %}
+
+{% block content %}
+<h3 class="title">Search binaries</h3>
+
+<div class="well well-lg">
+        <div class="input-group">
+
+{% if searchform %}
+
+<form action="" method="post">{% csrf_token %}
+    <input id="id_binary_name" maxlength="20" name="binary_name" type="text" class="form-control" placeholder="Binary Name"  autofocus/>
+    <input id="id_binary_md5" maxlength="32" name="binary_md5" type="text" class="form-control" placeholder="Binary MD5"/>
+    <input id="id_binary_sha1" maxlength="40" name="binary_sha1" type="text" class="form-control" placeholder="Binary SHA1"/>
+    <input id="id_binary_sha256" maxlength="64" name="binary_sha256" type="text" class="form-control" placeholder="Binary SHA256"/>
+    <input id="id_code_sha1" maxlength="40" name="code_sha1" type="text" class="form-control" placeholder="Code Section SHA1"/>
+    <button class="btn btn-danger" type="submit">Query</button>
+</form>
+</div>
+</div>
+{% endif %}
+
+
+{% if sessid %}
+<div id="tablecontent">
+</div>
+
+<center>
+<script language="javascript">
+CallWeb('/home/content/{{ sessid }}', 'tablecontent');
+</script>
+</center>
+{% endif %}
+
+
+
+<div style="display:none">
+<form id="search_inside" action="{% url "home.views.stations_page" %}" method="POST">
+    <input type="hidden" name="configuration__ownerversion__software__name"
+           value="{{configuration.ownerversion.software.name}}" />
+    <input type="hidden" name="configuration__ownerversion__version"
+           value="{{configuration.ownerversion.version}}" />
+    <input type="hidden" name="configuration__name"
+           value="{{configuration.name}}" />
+    <input type="submit" value="Search on this project" />
+</form>
+</div>
+
+{% endblock %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block quick_links %}
+{% endblock %}

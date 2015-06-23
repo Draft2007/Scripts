@@ -1,0 +1,70 @@
+{% extends "home/base_usbcontent.html" %}
+{% load tags %}
+
+   {% block tabledata %}
+
+    <tr>
+      <td>Date</td>
+      <td>Device</td>
+      <td>Vendor Id</td>
+      <td>Product Id</td>
+      <td>USB Class</td>
+      <td>Station</td>
+      <td></td>
+   </tr>
+   
+   {% for entry in content %}
+    
+      {% ifequal entry.status "Connected" %}
+	    <tr bgcolor="#C7FFD9">
+      {% else%}
+	    <tr bgcolor="#FFADBE">
+      {% endifequal %}
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "usb_event" entry.id %}"> {{ entry.event_timestamp }} </a></td>
+	    </td>
+	    <td> 
+		  <a href="{% url "home.views.display_obj" "device" entry.device.id %}"> {{ entry.device.caption }} </a>
+	    </td>
+	    {% get_vendor_product_names entry.device.vendor_id entry.device.product_id as vendor_product %}
+	    <td>
+		  {{vendor_product.0}}
+	    </td>
+	    <td>
+		  {{vendor_product.1}}
+	    </td>
+	    <td>
+		  <table>
+		  {% for usb_info in entry.device.usb_class|split:'|'%}
+		  {% get_usb_data usb_info as usb_data %}
+		  <tr>
+			<td>
+		  	      {{ usb_data.0 }}
+			</td>
+		  </tr>
+		  {% endfor %}
+		  </table>
+
+	    </td>
+	    <td>
+		  <a href="{% url "home.views.display_obj" "station" entry.station.id %}"> {{entry.station}} </a>
+	    </td>
+	    <td>
+		<a href="{% url "home.views.usbRel" entry.station.id entry.device.id %}">
+		{% get_device_type entry.device as type %}
+                    {% if type == 'Mouse' %}
+			<img src="/imedia/images/icon_usb_mouse.png">
+                    {% elif type == 'Keyboard' %}
+			<img src="/imedia/images/icon_usb_keyboard.png">
+		    {% elif type == 'Phone' %}
+			<img src="/imedia/images/glyphicons_011_camera.png">
+			<img src="/imedia/images/glyphicons_163_iphone.png">
+                    {% else%}
+			<img src="/imedia/images/usb_logo_event.png">
+                    {% endif %}
+		</a>
+	    </td>
+    </tr>
+   {% endfor %}
+
+   {% endblock %}

@@ -1,0 +1,37 @@
+*1*)Creating .exe for x32 with pyexe
+
+We need a Windows x32 with pythonx32 and the following depedencies:
+
+pyexe
+pycrypto
+pywin32
+WMI
+requests
+
+Where setup.py is in with the rest of the client python files:
+
+C:\Python27\python.exe setup.py py2exe 
+
+this creates /build and /dist folders and we can find ElJefeService32.exe in /dist
+
+
+*2*)Creating .exe for x64  with pyinstaller
+
+We need a Windows x64 with pythonx64 and the following depedencies:
+
+pyInstaller
+pycrypto (x64)
+pywin32 (x64)
+WMI (We must copy the WMI Files on PATH_PYTHONX64\Lib\site-packages)
+requests (We must copy the request Files on PATH_PYTHONX64\Lib\site-packages)
+
+
+Where the client python files are:
+
+C:\Python27\python.exe C:\PyInstaller-2.1\PyInstaller-2.1\pyinstaller.py -F ElJefeService.py -n ElJefeService64
+
+This creates /dist/ElJefeService64.exe
+
+*3*) 
+Move ElJefeService32.exe and ElJefeService64.exe to /installer to generate El Jefe installer.
+Read /installer/ELJEFE_BUILD_INSTALLER.TXT

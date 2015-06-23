@@ -1,0 +1,4 @@
+0 18 * * 1,2,3,4,5 /root/killcap >> /tmp/error 2>&1 
+0 19 * * 1,2,3,4,5 /usr/sbin/tcpdump -s0 -nnXtttt -i eth0 -w /root/OVERNIGHT.cap >> /tmp/error 2>&1 
+0 7 * * 1,2,3,4,5 /root/killcap >> /tmp/error 2>&1 
+2 7 * * 1,2,3,4,5 /root/killcap >> /tmp/error 2>&1 

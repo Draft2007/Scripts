@@ -1,0 +1,255 @@
+{% extends "base_.html" %}
+{% load tags %}
+{% block title %}
+ElJefe
+{% endblock %}
+
+
+{% block extrahead %}
+
+{% endblock %}
+
+{% block initializer %}
+<script>
+	$(document).ready(function(){
+		$("#camal").Loadingdotdotdot({
+		    "speed": 400,
+		    "maxDots": 6,
+		    "word": "Checking if the file exists on the CAMAL sandbox."
+		});
+	$.ajax({url: "{% url "home.views.camal_get_info" %}", data: {'sha256' : '{{ binary.binary_sha256 }}' }	
+	}).done(function(data) {
+			if (data == 'Done'){
+				$('#camal').html('<a href="{% url "home.views.camal_download_report" binary.binary_sha256 %}">Download report</a>');	
+			}
+			else{
+				$('#camal').html('The file is being processed. Please wait a few minutes and try again.');	
+			}
+			
+	}).error(function(data){
+			{% if binary.data %}
+				$('#camal').html('File not found on the CAMAL sandbox service. Click <a id="start_camal_analysis"> here.</a> if you want to send a sample for analysis.');	
+				$('#start_camal_analysis').click(function(){
+					$.ajax({url: "{% url "home.views.camal_upload_binary"%}", data: {'binary_id' : {{ binary.id }}}});
+					$('#camal').html('File submited for analysis sucessfully.');
+				});
+			{% else %}
+				$('#camal').html('File not found on the CAMAL sandbox service. First download the file in order to be able to analyze the binary.');	
+			{% endif %}
+			});
+
+
+	$('#start_analysis').click(function(){
+ 			$.ajax({url: "{% url "home.views.cuckoo_start_analysis"%}", data: {'binary_id' : {{ binary.id }},
+										    'selected_vm' : $('#select_vm').find('option:selected').attr('value')
+										    }	
+				}).done(function(data) {
+						$('#report_info').html('The analysis has been added to the queue. Check the Sandbox tab for more information.')	
+						
+				}).error(function(data){
+						$('#report_info').html('<b>' + data.responseJSON + '</b>');	
+						})
+				});
+						
+					
+		$("#binary_request_button").click(function(){
+			$(this).hide();
+ 			$.ajax({url: "{% url "home.views.binary_request_add"%}", data: { 'binary_id' : {{ binary.id }} }
+                   }).done(function(data) {
+							 $("#download_binary").html('<b> The file has been put on the queue. </b>');
+		   }).error(function(data){
+							$("#download_binary").html('<b>' + data.responseJSON + '</b>');	
+
+		   });
+	    });
+	    $('#comment').donetyping(function(){ 
+							$.ajax({url: "{% url "home.views.comment_setter"%}", data: {'comment'    : $(this).val(),
+														  'binary' : {{binary.id}},
+														  }
+									});					    
+						});
+		$('.eye').mouseover(function(){
+						var target = $(this)
+						$.ajax({url: "{% url "home.views.virustotal" %}", data: {'binary_sha2' : '{{binary.binary_sha256}}' }
+												}).done(function(malware) {
+														  if (malware){
+															target.attr('src','/imedia/images/glyphicons_344_thumbs_down.png');
+														  }
+														  else{
+															target.attr('src','/imedia/images/glyphicons_343_thumbs_up.png');
+														  }
+													    });
+									});						     						
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+{% load tags %}
+
+{% if binary %}
+
+    <div class="well well-lg">
+        <h3 class="title"> Binary Information <a href="https://www.virustotal.com/en/file/{{binary.binary_sha256}}/analysis/"><img id="{{ binary.binary_sha256 }}" class="eye" src="/imedia/images/glyphicons_051_eye_open.png"> </a> </h3>
+    
+        <table class="table">
+        <tbody>
+        <tr>
+        <td><b>Hostname</b></td><td>{{binary.station.hostname}}</td>
+        </tr>
+        <tr>
+        <td><b>IP Address</b></td><td>{{binary.station.ip_address}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Full Path</b></td><td>{{binary.file_path}}</td>
+        </tr>
+	
+	<tr>
+        <td><b>Last Execution</b></td><td>{{binary.last_execution}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Binary MD5</b></td><td>{{binary.binary_md5}}</td>
+        </tr>
+	
+        <tr>
+        <td><b>Binary SHA1</b></td><td>{{binary.binary_sha1}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Binary SHA256</b></td><td>{{binary.binary_sha256}}</td>
+        </tr>
+        
+	<tr>
+        <td><b>Binary Size</b></td><td>{{binary.filesize}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Architecture</b></td><td>{{binary.arch}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Code Section SHA1</b></td><td>{{binary.code_section_sha1}}</td>
+        </tr>
+        
+        <tr>
+        <td><b>Code Entropy</b></td><td>{{binary.entropy}}</td>
+        </tr>
+        
+        
+        <tr>
+        <td><b>Code Section</b></td><td><textarea rows="10" cols="40" style="font-family:monospace" >{{binary.code_section|debug_view }}</textarea></td>
+        </tr>
+	<tr>
+        <td><b>Comment</b></td><td><textarea id="comment"rows="10" cols="40" style="font-family:monospace" >{{binary.comment }}</textarea></td>
+        </tr>  
+	<tr>
+        <td><b>Request Binary</b></td>
+		{% if binary.data %}
+			<td> <a href="{% url "home.views.download_file" binary.id%}"> <b> Download </b></a>
+		{% else %}
+			<td>
+			{% if binary.binary_requests %}
+					<b> File already added to the queue. </b>
+			{% else %}
+					<span id="download_binary"> <button id="binary_request_button" class="btn btn-danger" type="submit">Send Request</button> </span>
+			{% endif %}
+			</td>
+
+		{% endif %}
+
+        </tr>
+	{% get_cuckoo_status as CUCKOO_FOUND %}
+	<tr>
+		<td><b>Cuckoo Sandbox Analysis</b></td>
+	{% if CUCKOO_FOUND %}
+		<td>
+		{% if binary.data %}
+		    {% if reports_count %}
+                        <span>
+		            {% if task_id %}
+			        <b> <a href="{% url "analysis.views.report" task_id %}">View Report</a></b>
+		            {% else %}
+			        <b> <a href="{% url "analysis.views.show_reports" binary.binary_sha1 %}">View Reports</a></b>
+			    {% endif %}
+                        </span>
+			<span id="report_info"></span>
+		    {% else %}
+			<span id="report_info">No sandbox analysis has been done yet. </span>
+		    {% endif %}
+		    {% if machines %}
+			<span>    
+                            <div class="form-group" id="selection">
+				<br>
+				<label>Select VM to analize this binary</label> 
+				<select class="form-control" id="select_vm" name="select_vm">
+					<option value="" active>Detect Automatically</option>
+					{% for machine in machines.keys %}
+					    <option value="{{machine}}">{{machine}}</option>
+					{% endfor %}
+				</select>
+			    </div> 
+			    <button id="start_analysis" class="btn btn-danger" type="submit">Start Analysis</button>
+			</span>
+		     {% else %}
+		        <span><label>No VMs configured.</label></span> 
+		     {% endif %}
+		{% else %}
+		    <b> First download the file in order to be able to analyze the binary. </b>
+		{% endif %}
+		</td>
+	{% else %}
+		<td> <b>Cuckoo doesn't seem to be installed on this machine.</b></td>
+	{% endif %}
+        </tr>
+        </tr>
+		<tr>
+		<td><b>CAMAL Sandbox Analysis</b></td>
+		<td>
+		<b><div id="camal">
+		</div></b>
+		
+		</td>
+        </tr>	
+        </tbody>
+        </table>
+    </div>
+    <div class="well well-lg">
+
+        {%if sha1_base %}
+        <h4> The following stations have executed this binary (Binary SHA1 Based):</h4>
+        
+        <table class="table">
+        
+        {%for item in name_base%}
+        <tr>
+        <td><a href="/home/display/station/{{item.id}}">{{item.hostname}}</a></td><td>{{item.ip_address}}</td>
+        </tr>
+        {%endfor%}
+        
+        </table>
+        {%endif%}
+        </div>
+        
+        <div class="well well-lg">
+
+                {%if name_base %}
+                <h4> The following stations have executed this binary (Binary Name Based):</h4>
+                
+                <table class="table">
+                
+                {%for item in name_base%}
+                <tr>
+                <td><a href="/home/display/station/{{item.id}}">{{item.hostname}}</a></td><td>{{item.ip_address}}</td>
+                </tr>
+                {%endfor%}
+                
+                </table>
+                {%endif%}
+        </div>
+
+
+{% endif %}
+
+{% endblock %}

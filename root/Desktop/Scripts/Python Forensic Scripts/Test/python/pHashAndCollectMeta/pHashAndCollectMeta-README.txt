@@ -1,0 +1,1 @@
+C:\>pfish.py --md5 -d "c:\\TESTDIR\\" -r "c:\\REPORTDIR\\" -v

@@ -1,0 +1,147 @@
+{% extends "home/basecontent.html" %}
+{% load tags %}
+
+   {% block tabledata %}
+	{% if multiple_usb_events %}
+	<tr>
+	  <td> Date </td>
+	  <td> Info </td>
+	  <td>  </td>
+
+	  <td>  </td>
+	  <td>  </td>
+	  <td>  </td>
+	  <td> </td>
+
+     </tr>
+     {% else %}
+      <tr>
+	  <td> Date </td>
+	  <td> Parent Binary </td>
+	  <td> Binary </td>
+
+	  <td> Cmdline </td>
+	  <td> Username </td>
+	  <td> Station </td>
+	  <td> </td>
+
+     </tr>
+    {% endif %}
+
+     {% for event in content %}
+	  {% if event.parent_binary %}
+	  <tr>
+		<td>
+		    <a href="/home/display/{{object_type}}/{{id.2}}"> {{ event.event_timestamp }}</a>
+		</td>
+		{% ifequal event.parent_binary "N/A" %}
+		    <td>
+			<a href=""> {{ event.parent_binary }}</a>
+		    </td>
+		{% else%}
+		    <td>
+			<a href="{% url "home.views.display_obj" "binary" event.parent_binary.id %}"> {{ event.parent_binary.file_path }}</a>
+		    </td>
+		{% endifequal %}
+		
+		<td>
+		    <a href="{% url "home.views.display_obj" "binary" event.binary.id %}"> {{ event.binary.file_path }}</a>
+		</td>
+		
+		<td valign=top>
+		    &nbsp;<a href="{% url "home.views.display_obj" "binary" event.binary.id %}"> {{ event.cmdline|slice:":20" }}</a>
+		</td>
+		<td>
+		    <a href="{% url "home.views.display_obj" "event" event.id %}"> 
+		    {% if 'NETWORK' in event.username %} 
+			<img src="/imedia/images/glyphicons_032_wifi_alt.png">
+		    {% elif 'SYSTEM' in event.username %}
+			<img src="/imedia/images/glyphicons_044_keys.png"> 
+		    {% else%}
+			<img src="/imedia/images/glyphicons_264_vcard.png">  
+		    {% endif %}
+		    {{ event.username }} 
+		</td>
+		<td>
+		    <a href="{% url "home.views.display_obj" "station" event.station.id %}"> {{ event.station }}</a>
+		</td>
+		<td>
+		    <a href="{% url "home.views.eventInspection" event.station.id event.parent_binary.id %}"><img src="/imedia/images/glyphicons_041_charts.png"></a>
+		</td>
+	    </tr>
+	    
+	{% elif event.device  %}
+	
+	    {% ifequal event.status "Connected" %}
+	        <tr bgcolor="#C7FFD9">
+            {% else%}
+	        <tr bgcolor="#FFADBE">
+            {% endifequal %}
+	    
+	    <td>
+		<a href="{% url "home.views.display_obj" "usb_event" event.id %}"> {{ event.event_timestamp }} </a>
+	    </td>
+	    <td colspan=5>
+		<a href="{% url "home.views.display_obj" "device" event.device.id %}">
+                {% if event.device.caption %}   
+                     {{ event.device.caption|split:'|'|last }} 
+                {% else %}
+                     {% get_vendor_product_names event.device.vendor_id event.device.product_id as usb_info %}
+                     USB Device with vid={{ usb_info.0 }} and pid={{ usb_info.1 }}
+                {% endif %}
+                </a>
+
+		{% ifequal event.status "Connected" %}
+		       was {{event.status}} to station 
+		{% else%}
+		    was {{event.status}} from station
+		{% endifequal %}
+		<a href="{% url "home.views.display_obj" "station" event.station.id %}"> {{event.station}} </a>
+	    </td>
+	    <td>
+		<a href="{% url "home.views.usbRel" event.station.id event.device.id %}">
+		{% get_device_type event.device as type %}
+                    {% if type == 'Mouse' %}
+			<img src="/imedia/images/icon_usb_mouse.png">
+                    {% elif type == 'Keyboard' %}
+			<img src="/imedia/images/icon_usb_keyboard.png">
+		    {% elif type == 'Phone' %}
+			<img src="/imedia/images/glyphicons_011_camera.png">
+			<img src="/imedia/images/glyphicons_163_iphone.png">			
+                    {% else%}
+			<img src="/imedia/images/usb_logo_event.png">
+                    {% endif %}
+		</a>
+	    </td>
+	    </tr>
+	{% elif event.mass_storage_device  %}
+	    {% ifequal event.status "Connected" %}
+	        <tr bgcolor="#C7FFD9">
+            {% else%}
+	        <tr bgcolor="#FFADBE">
+            {% endifequal %}
+	    
+	    <td>
+		<a href="{% url "home.views.display_obj" "usb_ms_event" event.id %}"> {{ event.event_timestamp }} </a>
+	    </td>
+	    <td colspan=5>
+		<a href="{% url "home.views.display_obj" "ms_device" event.mass_storage_device.id %}"> {{ event.mass_storage_device.caption }} </a>  with serial number <a href="{% url "home.views.display_obj" "ms_device" event.mass_storage_device.id %}"> {{ event.mass_storage_device.serial_number }}</a> 
+		{% ifequal event.status "Connected" %}
+		    was {{event.status}} to station 
+		{% else%}
+		    was {{event.status}} from station
+		{% endifequal %}		
+		<a href="{% url "home.views.display_obj" "station" event.station.id %}"> {{event.station}} </a>
+		{% ifequal event.status "Connected" %}
+		    and mapped to {{event.logical_drive}} 
+		{% endifequal %}
+	    </td>
+	    <td>
+		<a href="{% url "home.views.usbRel" event.station.id event.mass_storage_device.id %}"> <img src="/imedia/images/icon_usb_drive.png"> </a>
+	    </td>
+	    </tr>
+	{% endif  %}
+    {% endfor %}
+{% endblock  %}
+
+      

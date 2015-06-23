@@ -1,0 +1,68 @@
+REQUIREMENTS:
+
+* postgres + python-psycopg2 + pycrypto + south
+
+  apt-get install postgresql-9.1 pgadmin3 python-psycopg2 pycrypto python-django-south
+
+* python openssl for xmlserver
+
+  apt-get install python-openssl
+  
+* django 1.6.2
+
+  wget http://www.djangoproject.com/download/1.6.2/tarball/
+  tar zxvf Django-1.6.2.tar.gz OR tar xzf index.html as the tarball will save as index.html
+  cd Django-1.6.2
+  sudo python setup.py install
+
+* django-taggit
+
+  sudo pip install django-taggit
+
+* numpy
+
+  sudo pip install python-numpy 
+  or
+  sudo apt-get install python-numpy
+  
+* Cuckoo requirements:
+
+  * sudo apt-get install python-sqlalchemy python-bson 
+  * sudo apt-get install python-dpkt python-jinja2 python-magic python-pymongo python-bottle python-pefile python-chardet
+  * sudo apt-get install mongodb
+
+
+SET UP:
+
+* database
+
+    open up pgadmin3 and:
+                         a) create a new login role, this new login name should be the same
+                            name as the user who will be running the webapp
+                         b) create a new database named 'eljefe' and set the owner to be
+                            the login user you just created
+						 c) create a new database named 'cuckoo'
+
+* webapp
+
+    - untar webapp.tar at /var  (or just copy /svn/uppriv/webapp)
+    - edit database settings at settings.py (/webapp/settings.py) 
+    - edit cuckoo's database settings at cuckoo.conf (/cuckoo/conf/cuckoo.conf) 
+    - sync the database running : python manage.py syncdb
+    
+    
+
+* RUNNING STUFF:
+
+* to run xmlserver:
+
+cd /var/webapp/xmlserver && python ElJefeXMLServer.py
+
+* to run webapp:
+
+cd /var/webapp/ && python manage.py runserver localhost:8000
+
+
+
+
+    
